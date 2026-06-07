@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="CIM station behavior simulation thumbnail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07100F"/>
+      <stop offset=".55" stop-color="#101918"/>
+      <stop offset="1" stop-color="#252113"/>
+    </linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#FFFFFF" stroke-opacity=".08"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <rect width="960" height="600" fill="url(#grid)"/>
+  <rect x="78" y="372" width="760" height="74" rx="12" fill="#101314" stroke="#A9FBD7" stroke-opacity=".3"/>
+  <path d="M132 409h672" stroke="#A9FBD7" stroke-width="10" stroke-linecap="round" stroke-dasharray="24 22" opacity=".7"/>
+  <rect x="118" y="160" width="176" height="144" rx="14" fill="#101314" stroke="#6EE7F9" stroke-opacity=".42"/>
+  <path d="M154 254h68v-34h48" stroke="#A9FBD7" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <circle cx="154" cy="254" r="12" fill="#F8D36A"/>
+  <rect x="360" y="126" width="178" height="210" rx="14" fill="#101314" stroke="#A9FBD7" stroke-opacity=".35"/>
+  <path d="M449 160v126" stroke="#A9FBD7" stroke-width="12" stroke-linecap="round"/>
+  <rect x="410" y="286" width="78" height="42" rx="6" fill="#A9FBD7"/>
+  <circle cx="449" cy="118" r="28" fill="#6EE7F9" fill-opacity=".24" stroke="#6EE7F9" stroke-opacity=".66"/>
+  <rect x="618" y="168" width="196" height="142" rx="14" fill="#101314" stroke="#F8D36A" stroke-opacity=".35"/>
+  <path d="M662 260c38-84 76 30 132-46" stroke="#F8D36A" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <circle cx="794" cy="214" r="12" fill="#A9FBD7"/>
+  <g fill="#6EE7F9" opacity=".75">
+    <circle cx="196" cy="409" r="14"/>
+    <circle cx="456" cy="409" r="14"/>
+    <circle cx="716" cy="409" r="14"/>
+  </g>
+  <path d="M268 352l72-70M538 340l76-64" stroke="#F8D36A" stroke-width="8" stroke-dasharray="12 13" stroke-linecap="round"/>
+</svg>

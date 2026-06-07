@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="Fluid physics experiments thumbnail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071112"/>
+      <stop offset="1" stop-color="#19211D"/>
+    </linearGradient>
+    <linearGradient id="fluid" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6EE7F9"/>
+      <stop offset=".6" stop-color="#A9FBD7"/>
+      <stop offset="1" stop-color="#F8D36A"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <g opacity=".14" stroke="#FFFFFF">
+    <path d="M0 120h960M0 240h960M0 360h960M0 480h960M160 0v600M320 0v600M480 0v600M640 0v600M800 0v600"/>
+  </g>
+  <path d="M94 390c92-116 166 48 254-64 72-91 122 25 201-48 76-70 152-58 248 34v130H94z" fill="url(#fluid)" opacity=".82"/>
+  <path d="M118 326c64-69 122 20 184-34 70-60 129 26 210-39 82-66 165-34 250 26" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#A9FBD7" opacity=".82">
+    <circle cx="260" cy="198" r="18"/>
+    <circle cx="396" cy="250" r="12"/>
+    <circle cx="610" cy="190" r="15"/>
+    <circle cx="720" cy="255" r="10"/>
+  </g>
+  <rect x="86" y="74" width="300" height="58" rx="10" fill="#101314" stroke="#FFFFFF" stroke-opacity=".14"/>
+  <rect x="112" y="95" width="140" height="16" rx="5" fill="#A9FBD7" fill-opacity=".55"/>
+  <rect x="280" y="95" width="58" height="16" rx="5" fill="#F8D36A" fill-opacity=".75"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="PID control station thumbnail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08100F"/>
+      <stop offset="1" stop-color="#1A1B16"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <g stroke="#FFFFFF" stroke-opacity=".1">
+    <path d="M100 120h760M100 220h760M100 320h760M100 420h760M180 70v460M300 70v460M420 70v460M540 70v460M660 70v460M780 70v460"/>
+  </g>
+  <path d="M105 236h755" stroke="#F8D36A" stroke-width="8" stroke-dasharray="16 18" stroke-linecap="round"/>
+  <path d="M105 468c70-18 79-226 172-222 82 4 54 118 138 112 74-5 60-102 142-96 70 5 61 64 127 56 70-8 93-80 154-82" fill="none" stroke="#A9FBD7" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="838" cy="236" r="18" fill="#6EE7F9"/>
+  <rect x="126" y="82" width="214" height="54" rx="10" fill="#101314" stroke="#FFFFFF" stroke-opacity=".15"/>
+  <rect x="150" y="104" width="78" height="12" rx="4" fill="#A9FBD7" fill-opacity=".65"/>
+  <rect x="246" y="104" width="62" height="12" rx="4" fill="#F8D36A" fill-opacity=".78"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="Agri-tech IoT monitoring thumbnail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07100A"/>
+      <stop offset=".55" stop-color="#122015"/>
+      <stop offset="1" stop-color="#202116"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <g opacity=".14" stroke="#FFFFFF">
+    <path d="M0 130h960M0 260h960M0 390h960M0 520h960M190 0v600M380 0v600M570 0v600M760 0v600"/>
+  </g>
+  <path d="M132 440c80-120 170-146 270-54 84-128 178-128 292-5 54-49 104-68 158-56v175H132z" fill="#A9FBD7" fill-opacity=".18"/>
+  <path d="M480 384c-62-104-18-178 78-220-6 110-48 178-78 220z" fill="#A9FBD7" fill-opacity=".82"/>
+  <path d="M480 384c-86-60-94-139-22-225 30 95 29 161 22 225z" fill="#6EE7F9" fill-opacity=".58"/>
+  <path d="M480 384v90" stroke="#F8D36A" stroke-width="10" stroke-linecap="round"/>
+  <rect x="104" y="84" width="260" height="144" rx="14" fill="#101314" stroke="#FFFFFF" stroke-opacity=".14"/>
+  <path d="M132 188c35-48 60 8 95-28 39-39 72 0 108-50" fill="none" stroke="#A9FBD7" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="745" cy="160" r="44" fill="#F8D36A" fill-opacity=".2" stroke="#F8D36A" stroke-opacity=".65"/>
+  <path d="M702 248h88M682 292h128M724 336h76" stroke="#F8D36A" stroke-width="12" stroke-linecap="round" opacity=".68"/>
+</svg>
