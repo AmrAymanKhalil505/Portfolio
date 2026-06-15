@@ -26,7 +26,7 @@ export const experience = [
     role: "Unity and AR Application Developer",
     company: "Ivris",
     location: "Remote / Freelance",
-    period: "Jun 2024 - Present",
+    period: "Jun 2024 - Jun 2026",
     bullets: [
       "Developing a cross-platform Unity app for home interior visualization.",
       "Implementing runtime 3D model loading for furniture and room assets.",

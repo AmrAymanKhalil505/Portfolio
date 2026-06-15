@@ -31,6 +31,21 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+.gallery-filmstrip {
+  scrollbar-width: none;
+}
+
+.gallery-filmstrip::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-caption {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .bg-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),

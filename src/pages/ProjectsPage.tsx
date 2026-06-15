@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import PageShell from "../components/PageShell";
 import ProjectCard from "../components/ProjectCard";
 import SectionHeader from "../components/SectionHeader";
-import { categories, projects, type ProjectCategory } from "../data/projects";
+import { categories, publicProjects, type ProjectCategory } from "../data/projects";
 
 type Filter = "All" | ProjectCategory;
 
@@ -10,7 +10,7 @@ function ProjectsPage() {
   const [filter, setFilter] = useState<Filter>("All");
 
   const filteredProjects = useMemo(
-    () => (filter === "All" ? projects : projects.filter((project) => project.category === filter)),
+    () => (filter === "All" ? publicProjects : publicProjects.filter((project) => project.category === filter)),
     [filter],
   );
 

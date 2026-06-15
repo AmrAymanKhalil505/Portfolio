@@ -1,6 +1,7 @@
 import { ArrowUpRight, MonitorPlay, PlayCircle } from "lucide-react";
 import type { Project } from "../data/projects";
 import ButtonLink from "./ButtonLink";
+import TechBadge from "./TechBadge";
 
 type ProjectCardProps = {
   project: Project;
@@ -61,9 +62,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         <p className="mt-3 flex-1 text-sm leading-6 text-steel">{project.summary}</p>
         <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
           {project.tech.slice(0, 5).map((tech) => (
-            <span key={tech} className="rounded-md border border-white/10 bg-white/6 px-2.5 py-1 text-xs text-steel">
-              {tech}
-            </span>
+            <TechBadge key={tech} tech={tech} compact />
           ))}
         </div>
         <div className="mt-6 flex flex-wrap gap-2">
@@ -72,7 +71,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           </ButtonLink>
           {project.demoUrl && (
             <ButtonLink to={`${project.caseStudyUrl}#demo`} variant="secondary" icon={<PlayCircle size={16} />}>
-              Watch Demo
+              {project.demoLabel ?? "Watch Demo"}
             </ButtonLink>
           )}
           {project.webglAvailable && (
