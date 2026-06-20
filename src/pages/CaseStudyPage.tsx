@@ -165,6 +165,67 @@ const getYouTubeThumbnail = (value: string | undefined) => {
   return youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` : "";
 };
 
+const getStationProductReference = (title: string) => {
+  if (title.startsWith("MR110")) {
+    return {
+      label: "BEDO MR110",
+      url: "https://bedoeg.com/product/mr110/",
+    };
+  }
+
+  if (title.startsWith("MR109")) {
+    return {
+      label: "BEDO MR109",
+      url: "https://bedoeg.com/product/mr109/",
+    };
+  }
+
+  const mpcMatch = title.match(/^MPC(10[0-5])/);
+  if (mpcMatch) {
+    return {
+      label: `BEDO MPC${mpcMatch[1]}`,
+      url: `https://bedoeg.com/product/mpc${mpcMatch[1]}/`,
+    };
+  }
+
+  if (title.startsWith("EV117")) {
+    return {
+      label: "BEDO EV117",
+      url: "https://bedoeg.com/product/ev117-2/",
+    };
+  }
+
+  if (title.includes("Bernoulli")) {
+    return {
+      label: "BEDO FM103",
+      url: "https://bedoeg.com/product/fm103/",
+    };
+  }
+
+  if (title.includes("Laminar Flow")) {
+    return {
+      label: "BEDO FM115",
+      url: "https://bedoeg.com/product/fm115/",
+    };
+  }
+
+  if (title.includes("Collaborative Room Editing") || title.includes("Runtime 3D Content")) {
+    return {
+      label: "Ivris Web",
+      url: "https://www.ivris.ai/collections/customer-design-services",
+    };
+  }
+
+  if (title.includes("AR Preview")) {
+    return {
+      label: "Ivris AR",
+      url: "https://play.google.com/store/apps/details?id=com.Ivris.IvrisArViewer&hl=en",
+    };
+  }
+
+  return null;
+};
+
 function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
   return (
     <PageShell>
@@ -403,20 +464,37 @@ function CimProjectDetails({ project }: { project: ProjectWithCimDetails }) {
         <p className="mb-3 text-sm font-semibold text-scan">Module / Feature Breakdown</p>
         <h2 className="text-3xl font-semibold text-white">What each area covers</h2>
         <div className="mt-7 grid gap-5 lg:grid-cols-2">
-          {project.stationBreakdown?.map((station) => (
-            <section key={station.title} className="rounded-lg border border-white/10 bg-panel p-6">
-              <h3 className="text-xl font-semibold text-white">{station.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-steel">{station.description}</p>
-              <ul className="mt-4 space-y-3">
-                {station.bullets.map((bullet) => (
-                  <li key={bullet} className="flex gap-3 text-sm leading-6 text-steel">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+          {project.stationBreakdown?.map((station) => {
+            const productReference = getStationProductReference(station.title);
+
+            return (
+              <section key={station.title} className="flex flex-col rounded-lg border border-white/10 bg-panel p-6">
+                <h3 className="text-xl font-semibold text-white">{station.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-steel">{station.description}</p>
+                <ul className="mt-4 flex-1 space-y-3">
+                  {station.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-3 text-sm leading-6 text-steel">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                {productReference && (
+                  <div className="mt-5 flex justify-end">
+                    <a
+                      href={productReference.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-9 items-center gap-2 rounded-md border border-scan/35 bg-scan/10 px-3 py-1.5 text-sm font-semibold text-scan transition hover:border-scan/70 hover:bg-scan/15 hover:text-white"
+                    >
+                      {productReference.label}
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </div>
       </section>
 

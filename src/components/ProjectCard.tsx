@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { ArrowUpRight, MonitorPlay, PlayCircle } from "lucide-react";
 import type { Project } from "../data/projects";
 import ButtonLink from "./ButtonLink";
@@ -24,6 +25,7 @@ const getYouTubeId = (value: string) => {
 };
 
 const getPreviewImage = (project: Project) => {
+  if (project.previewVideo) return project.thumbnail;
   if (!project.previewGif) return project.thumbnail;
   const youtubeId = getYouTubeId(project.previewGif);
   if (youtubeId) return `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
@@ -36,8 +38,33 @@ const getFallbackPreviewImage = (project: Project) => {
 };
 
 function ProjectCard({ project }: ProjectCardProps) {
+  const previewVideoRef = useRef<HTMLVideoElement>(null);
+
+  const playPreviewVideo = () => {
+    const video = previewVideoRef.current;
+    if (!video) return;
+
+    video.play().catch(() => {
+      // Browsers can block autoplay in some contexts; the still thumbnail remains as fallback.
+    });
+  };
+
+  const stopPreviewVideo = () => {
+    const video = previewVideoRef.current;
+    if (!video) return;
+
+    video.pause();
+    video.currentTime = 0;
+  };
+
   return (
-    <article className="group overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow transition duration-300 hover:-translate-y-1 hover:border-scan/35">
+    <article
+      className="group overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow transition duration-300 hover:-translate-y-1 hover:border-scan/35"
+      onMouseEnter={playPreviewVideo}
+      onMouseLeave={stopPreviewVideo}
+      onFocus={playPreviewVideo}
+      onBlur={stopPreviewVideo}
+    >
       <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-[#0B0E0D]">
         <img
           src={getPreviewImage(project)}
@@ -48,6 +75,19 @@ function ProjectCard({ project }: ProjectCardProps) {
           }}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
+        {project.previewVideo && (
+          <video
+            ref={previewVideoRef}
+            src={project.previewVideo}
+            poster={project.thumbnail}
+            className="absolute inset-0 h-full w-full object-cover opacity-0 transition duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label={`${project.title} hover preview`}
+          />
+        )}
         <span className="absolute left-3 top-3 rounded-md border border-white/15 bg-ink/78 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur">
           {project.category}
         </span>

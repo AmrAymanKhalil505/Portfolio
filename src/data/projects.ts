@@ -7,6 +7,7 @@ import webglThumb from "../assets/webgl-systems.svg";
 import ivrisThumb from "../assets/ivris-ar-room.svg";
 import vrTrainingThumb from "../assets/vr-training-suite.svg";
 import cimSystemImage from "../assets/projects/cim/thumnail.jpg";
+import cimThumbnailLoop from "../assets/projects/cim/CIM Thumnail gif.mp4";
 import cimLoadingImage from "../assets/projects/cim/Digital-Twin-Loading-Station.png";
 import cimLaserImage from "../assets/projects/cim/CNC Laser thunail .jpg";
 import cimRobotInterpreterImage from "../assets/projects/cim/Inter01.jpg";
@@ -14,12 +15,32 @@ import cimBlockEditorImage from "../assets/projects/cim/Inter02.jpg";
 import cimBlockValidationImage from "../assets/projects/cim/Inter03.jpg";
 import ivrisMobileServicesImage from "../assets/projects/Ivris/ivris app 02.webp";
 import ivrisArPreviewImage from "../assets/projects/Ivris/Ivris app 03.webp";
+import ivrisWebPreviewLoop from "../assets/projects/Ivris/Ivris Web gif.mp4";
+import ivrisWebsiteHomeImage from "../assets/projects/Ivris/Ivris Website HomePage.png";
 import ivrisRoomEditorImage from "../assets/projects/Ivris/Screenshot2025-04-01at8.36.11PM.png";
 import ivrisDollhouseImage from "../assets/projects/Ivris/Screenshot_2025-04-01_at_8.38.02_PM.png";
+import pidPressureImage from "../assets/projects/PID/MPC 100 Pressure Far.png";
+import pidTemperatureImage from "../assets/projects/PID/MPC 101 Temp.png";
+import pidSpeedImage from "../assets/projects/PID/MPC 102 Speed far.png";
+import pidPositionImage from "../assets/projects/PID/MPC 103 DC Motor.png";
+import pidLevelImage from "../assets/projects/PID/MPC104 Level.png";
+import pidFlowImage from "../assets/projects/PID/MPC 105 Flow.png";
+import pidGraphImage from "../assets/projects/PID/graph photo.png";
+import eduLaminarImage from "../assets/projects/EduLab/Laminar.jpg";
+import eduLaminarStreamlinesImage from "../assets/projects/EduLab/Laminar 02.jpg";
+import eduLaminarOpenTrayImage from "../assets/projects/EduLab/Laminar 03.jpg";
+import eduEv117TrainerImage from "../assets/projects/EduLab/EV117 Fuel Outside.jpg";
+import eduEv117ParticlesImage from "../assets/projects/EduLab/EV117 Particles.jpg";
+import eduEv117MonitorImage from "../assets/projects/EduLab/EV117 save screen.jpg";
+import nescafeMenuImage from "../assets/projects/Nescafe/Sand Board Main Menu.jpeg";
+import nescafeSandSurfingImage from "../assets/projects/Nescafe/Nescafe Sand surfing.jpg";
+import nescafeWaterBeachImage from "../assets/projects/Nescafe/Nescafe Water Beach.jpg";
+import nescafeWaterJungleImage from "../assets/projects/Nescafe/Nescafe Water Jungle.jpg";
 import type { MediaItem } from "../components/MediaDemoViewer";
 
 export type ProjectCategory =
   | "Educational Simulations"
+  | "Educational Games / Interactive Learning"
   | "Digital Twin / Industrial Training"
   | "VR & Interactive Booths"
   | "WebGL Experiments"
@@ -39,6 +60,7 @@ export type Project = {
   tech: string[];
   thumbnail: string;
   previewGif?: string;
+  previewVideo?: string;
   media?: MediaItem[];
   articleLayout?: "blog";
   demoUrl?: string;
@@ -73,6 +95,7 @@ export type Project = {
 
 export const categories: ProjectCategory[] = [
   "Educational Simulations",
+  "Educational Games / Interactive Learning",
   "Digital Twin / Industrial Training",
   "VR & Interactive Booths",
   "WebGL Experiments",
@@ -205,6 +228,9 @@ const bedoAttributionNote =
 const ivrisAttributionNote =
   "Ivris product names, service pages, and brand references belong to Ivris. This portfolio page focuses on my Unity, AR, WebGL collaboration, runtime content loading, and integration work for the application.";
 
+const nescafeAttributionNote =
+  "Nescafe, Nestle, and campaign brand references belong to their respective owners. This portfolio page focuses on my Unity VR booth implementation work and uses the media as project presentation context.";
+
 const mr109StationBreakdown = [
   {
     title: "MR109 - Loading Station",
@@ -311,6 +337,7 @@ const pidLabModules = [
   {
     id: "mpc100-pressure-process-control",
     title: "MPC100 Pressure Process Control",
+    image: pidPressureImage,
     caption:
       "Digital shadow of a pressure-control trainer where students tune PID gains, observe pressure response, introduce disturbance, and analyze system performance.",
     controlledVariable: "Pressure",
@@ -335,6 +362,7 @@ const pidLabModules = [
   {
     id: "mpc101-temperature-process-control",
     title: "MPC101 Temperature Process Control",
+    image: pidTemperatureImage,
     caption:
       "Digital shadow of a temperature-control trainer where students tune PID gains, observe heating/cooling behavior, apply fan disturbance, and analyze response curves.",
     controlledVariable: "Temperature",
@@ -358,6 +386,7 @@ const pidLabModules = [
   {
     id: "mpc102-dc-motor-speed-control",
     title: "MPC102 DC Motor Speed Control",
+    image: pidSpeedImage,
     caption:
       "Digital shadow of a DC motor speed-control trainer where students tune PID gains, observe RPM response, apply load disturbance, and compare control behavior.",
     controlledVariable: "Motor speed / RPM",
@@ -381,6 +410,7 @@ const pidLabModules = [
   {
     id: "mpc103-dc-motor-position-control",
     title: "MPC103 DC Motor Position Control",
+    image: pidPositionImage,
     caption:
       "Virtual control lab for DC motor position control with editable motor parameters, PID tuning, real-time response graphs, and guided experiments.",
     controlledVariable: "Motor position",
@@ -405,6 +435,7 @@ const pidLabModules = [
   {
     id: "mpc104-level-process-control",
     title: "MPC104 Level Process Control",
+    image: pidLevelImage,
     caption:
       "Digital shadow of a liquid-level PID trainer where students tune controller gains, observe tank level response, apply valve disturbance, and analyze closed-loop behavior.",
     controlledVariable: "Liquid level",
@@ -428,6 +459,7 @@ const pidLabModules = [
   {
     id: "mpc105-flow-process-control",
     title: "MPC105 Flow Process Control",
+    image: pidFlowImage,
     caption:
       "Digital shadow of a flow-control PID trainer where students tune controller gains, observe flow-rate response, apply valve disturbance, and compare control behavior.",
     controlledVariable: "Liquid flow rate",
@@ -478,6 +510,7 @@ const engineeringEducationModules = [
   {
     id: "laminar-flow-visualization-virtual-lab",
     title: "Laminar Flow Visualization Virtual Lab",
+    image: eduLaminarImage,
     caption:
       "Unity virtual lab for visualizing laminar streamlines, source/sink behavior, obstacle interaction, and flow changes through different channel geometries.",
     domain: "Fluid Mechanics",
@@ -502,6 +535,7 @@ const engineeringEducationModules = [
   {
     id: "ev117-fuel-cell-vehicle-digital-lab",
     title: "EV117 Fuel Cell Vehicle Digital Lab",
+    image: eduEv117TrainerImage,
     caption:
       "Unity educational simulation for a fuel-cell vehicle trainer, visualizing hydrogen supply, fuel-cell power generation, battery support, monitoring data, and vehicle test behavior.",
     domain: "Energy Systems / Automotive Training",
@@ -880,38 +914,69 @@ export const projects: Project[] = [
     role: "Unity Developer",
     platform: ["Unity", "WebGL", "Virtual labs"],
     tech: ["Unity", "C#", "WebGL", "PID Control", "Control Systems", "Digital Shadow", "Virtual Lab", "Data Visualization"],
-    thumbnail: pidThumb,
+    thumbnail: pidPressureImage,
     demoUrl: "#demo",
     demoLabel: "View Lab Modules",
     caseStudyUrl: "/projects/pid-control-virtual-labs-suite",
     productContext: [
-      { label: "BEDO MPC100 Pressure Process Control Trainer" },
-      { label: "BEDO MPC101 Temperature Process Control Trainer" },
-      { label: "BEDO MPC102 DC Motor Speed Control Trainer" },
-      { label: "BEDO MPC103 DC Motor Position Control Trainer" },
-      { label: "BEDO MPC104 Level Process Control Trainer" },
-      { label: "BEDO MPC105 Flow Process Control Trainer" },
+      { label: "BEDO MPC100 Pressure Process Control Trainer", url: "https://bedoeg.com/product/mpc100/" },
+      { label: "BEDO MPC101 Temperature Process Control Trainer", url: "https://bedoeg.com/product/mpc101/" },
+      { label: "BEDO MPC102 DC Motor Speed Control Trainer", url: "https://bedoeg.com/product/mpc102/" },
+      { label: "BEDO MPC103 DC Motor Position Control Trainer", url: "https://bedoeg.com/product/mpc103/" },
+      { label: "BEDO MPC104 Level Process Control Trainer", url: "https://bedoeg.com/product/mpc104/" },
+      { label: "BEDO MPC105 Flow Process Control Trainer", url: "https://bedoeg.com/product/mpc105/" },
     ],
     attributionNote: bedoAttributionNote,
-    media: pidLabModules.map((module) => ({
-      id: module.id,
-      type: "image" as const,
-      title: module.title,
-      src: pidThumb,
-      thumbnail: pidThumb,
-      caption: module.caption,
-      details: {
-        title: `${module.title} Details`,
-        components: module.components,
-        behaviors: module.behaviors,
-        notes: [
-          `Controlled variable: ${module.controlledVariable}.`,
-          `Main actuator: ${module.actuator}.`,
-          `Feedback signal: ${module.feedback}.`,
-          `Disturbance/source of variation: ${module.disturbance}.`,
-        ],
+    media: [
+      ...pidLabModules.map((module) => ({
+        id: module.id,
+        type: "image" as const,
+        title: module.title,
+        src: module.image,
+        thumbnail: module.image,
+        caption: module.caption,
+        details: {
+          title: `${module.title} Details`,
+          components: module.components,
+          behaviors: module.behaviors,
+          notes: [
+            `Controlled variable: ${module.controlledVariable}.`,
+            `Main actuator: ${module.actuator}.`,
+            `Feedback signal: ${module.feedback}.`,
+            `Disturbance/source of variation: ${module.disturbance}.`,
+          ],
+        },
+      })),
+      {
+        id: "pid-response-graph-tuning-view",
+        type: "image" as const,
+        title: "PID Response Graph and Tuning View",
+        src: pidGraphImage,
+        thumbnail: pidGraphImage,
+        caption:
+          "Close-up educational view of the PID response graph, showing set point tracking, process response, error, control signal, and performance metrics used for student tuning feedback.",
+        details: {
+          title: "PID Graph and Feedback Details",
+          components: [
+            "Set point and process response curves",
+            "Error and control-signal visualization",
+            "PID gain controls",
+            "Rise time, settling time, peak time, overshoot, and steady-state error feedback",
+            "Start, reset, save, load, and export-style training controls",
+          ],
+          behaviors: [
+            "Compare response before and after tuning changes",
+            "Visualize overshoot, settling, and error behavior",
+            "Connect PID gain changes with response-curve changes",
+            "Support guided analysis of control-system performance",
+          ],
+          notes: [
+            "Shown as a public portfolio example of graphing and educational feedback, not as internal implementation logic.",
+            "Contains demo tuning values and response metrics only; no source code, file paths, credentials, or private project data are visible.",
+          ],
+        },
       },
-    })),
+    ],
     highlights: [
       "Built Unity digital-shadow modules for pressure, temperature, motor speed, motor position, level, and flow control trainers.",
       "Connected 3D visual feedback with setpoints, response curves, error signals, control outputs, and performance indicators.",
@@ -992,32 +1057,130 @@ export const projects: Project[] = [
     role: "Unity Developer",
     platform: ["Unity", "WebGL", "Educational simulations"],
     tech: ["Unity", "C#", "WebGL", "Virtual Lab", "Educational Simulation", "Data Visualization", "Interactive Learning"],
-    thumbnail: fluidThumb,
+    thumbnail: eduLaminarImage,
     demoUrl: "#demo",
     demoLabel: "View Lab Modules",
     caseStudyUrl: "/projects/engineering-education-virtual-labs",
     productContext: [
-      { label: "BEDO fluid mechanics virtual-lab training context" },
-      { label: "BEDO EV117 Fuel Cell Vehicle training context" },
+      { label: "BEDO FM103 fluid mechanics training context", url: "https://bedoeg.com/product/fm103/" },
+      { label: "BEDO FM115 fluid mechanics training context", url: "https://bedoeg.com/product/fm115/" },
+      { label: "BEDO EV117 Fuel Cell Vehicle training context", url: "https://bedoeg.com/product/ev117-2/" },
     ],
     attributionNote: bedoAttributionNote,
-    media: engineeringEducationModules.map((module) => ({
-      id: module.id,
-      type: "image" as const,
-      title: module.title,
-      src: fluidThumb,
-      thumbnail: fluidThumb,
-      caption: module.caption,
-      details: {
-        title: `${module.title} Details`,
-        components: module.components,
-        behaviors: module.behaviors,
-        notes: [
-          `Domain: ${module.domain}.`,
-          `Learning goal: ${module.learningGoal}`,
-        ],
+    media: [
+      ...engineeringEducationModules.map((module) => ({
+        id: module.id,
+        type: "image" as const,
+        title: module.title,
+        src: module.image ?? fluidThumb,
+        thumbnail: module.image ?? fluidThumb,
+        caption: module.caption,
+        details: {
+          title: `${module.title} Details`,
+          components: module.components,
+          behaviors: module.behaviors,
+          notes: [
+            `Domain: ${module.domain}.`,
+            `Learning goal: ${module.learningGoal}`,
+          ],
+        },
+      })),
+      {
+        id: "laminar-streamline-detail",
+        type: "image" as const,
+        title: "Laminar Streamline Detail View",
+        src: eduLaminarStreamlinesImage,
+        thumbnail: eduLaminarStreamlinesImage,
+        caption:
+          "Close-up laminar flow view showing streamlines bending around an inserted obstacle, making the flow pattern visible for guided explanation.",
+        details: {
+          title: "Laminar Streamline Detail",
+          components: [
+            "Transparent flow table",
+            "Streamline visualization",
+            "Shape insert / obstacle",
+            "Reservoir and flow path",
+          ],
+          behaviors: [
+            "Visualize smooth streamline movement",
+            "Show how obstacle geometry changes the flow path",
+            "Support guided comparison between different inserts",
+          ],
+          notes: [
+            "Shown as a public portfolio view of the educational visualization, without code or internal project files.",
+          ],
+        },
       },
-    })),
+      {
+        id: "laminar-open-tray-detail",
+        type: "image" as const,
+        title: "Laminar Open Tray Setup",
+        src: eduLaminarOpenTrayImage,
+        thumbnail: eduLaminarOpenTrayImage,
+        caption:
+          "Laminar trainer setup view with the top frame open, showing how the visualization area and interchangeable inserts are presented in the virtual lab.",
+        details: {
+          title: "Laminar Setup Detail",
+          components: [
+            "Open visualization tray",
+            "Interchangeable shape insert",
+            "Fluid reservoirs",
+            "Experiment controls",
+          ],
+          behaviors: [
+            "Inspect the experiment setup",
+            "Prepare the flow surface for different demonstration states",
+            "Connect physical trainer structure with the simulated learning workflow",
+          ],
+        },
+      },
+      {
+        id: "ev117-pem-particle-explanation",
+        type: "image" as const,
+        title: "EV117 PEM Particle Explanation",
+        src: eduEv117ParticlesImage,
+        thumbnail: eduEv117ParticlesImage,
+        caption:
+          "Fuel-cell learning view explaining PEM behavior with electrons, hydrogen, protons, oxygen, and water represented as moving particles and labeled flows.",
+        details: {
+          title: "PEM Explanation View",
+          components: [
+            "Exploded fuel-cell module diagram",
+            "Particle legend for electron, hydrogen, proton, oxygen, and water",
+            "Guided explanation overlay",
+            "Layered fuel-cell component visualization",
+          ],
+          behaviors: [
+            "Visualize hydrogen and oxygen flow paths",
+            "Explain proton exchange membrane behavior",
+            "Connect particle movement with fuel-cell energy generation",
+          ],
+        },
+      },
+      {
+        id: "ev117-monitoring-screen",
+        type: "image" as const,
+        title: "EV117 Monitoring Screen",
+        src: eduEv117MonitorImage,
+        thumbnail: eduEv117MonitorImage,
+        caption:
+          "EV117 software-monitor view showing fuel-cell system readings, battery state, motor output, efficiency, and the guided screen-save workflow.",
+        details: {
+          title: "EV117 Monitoring View",
+          components: [
+            "Fuel-cell system diagram",
+            "Hydrogen flow and pressure readings",
+            "Voltage, current, battery, speed, and efficiency indicators",
+            "Guided instruction overlay",
+          ],
+          behaviors: [
+            "Monitor fuel-cell operating values",
+            "Connect system readings to vehicle behavior",
+            "Save or review experiment readings during a guided lab step",
+          ],
+        },
+      },
+    ],
     highlights: [
       "Built Unity virtual labs for Bernoulli principle visualization, laminar flow visualization, and fuel-cell vehicle training.",
       "Created interactive controls, guided experiment steps, measurement feedback, dashboards, and visual cause-and-effect learning flows.",
@@ -1088,6 +1251,138 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    id: "atmosphere-guardian",
+    title: "Atmosphere Guardian",
+    category: "Educational Games / Interactive Learning",
+    summary:
+      "Mobile educational game that teaches children about air pollution and atmosphere protection through airplane movement, pollution collection, atmosphere health, and environmental upgrades.",
+    role: "Unity Developer",
+    platform: ["Unity", "Android", "iOS"],
+    tech: ["Unity", "C#", "Android", "iOS", "Mobile Game", "Educational Game", "Arabic UI", "Environmental Awareness"],
+    thumbnail: agriThumb,
+    caseStudyUrl: "/projects/atmosphere-guardian",
+    highlights: [
+      "Built a mobile-friendly Unity educational game for children.",
+      "Implemented airplane movement, pollution collection, and atmosphere health logic.",
+      "Created Arabic instruction screens for localized learning.",
+      "Added environmental upgrade mechanics connected to air-pollution concepts.",
+      "Designed the gameplay loop around protecting the atmosphere through interactive cleanup.",
+    ],
+    timeline: "Educational mobile game project",
+    problem:
+      "Air pollution can feel abstract for children when it is explained only through text or static lessons.",
+    solution:
+      "Created a simple Unity mobile game where children fly an environmental airplane, collect harmful gas clouds, protect atmosphere health, and learn about cleaner environmental choices through upgrades.",
+    challenges: [
+      "Keeping the gameplay simple enough for younger players while still connected to a learning goal.",
+      "Turning environmental concepts into clear icons, feedback, and upgrade mechanics.",
+      "Creating Arabic instruction screens that explain the rules and environmental message in an accessible way.",
+    ],
+    impact: [
+      "Shows educational game design experience beyond industrial simulations.",
+      "Demonstrates Arabic/localized UI work for young learners.",
+      "Connects simple mobile gameplay mechanics with environmental-awareness content.",
+    ],
+    overview: [
+      "Atmosphere Guardian is a mobile educational game created to teach children about air pollution in a simple and playful way. The player controls an environmental airplane and collects harmful gas clouds to protect the atmosphere.",
+      "The game includes Arabic instruction screens, a health-based atmosphere system, and environmental upgrades such as recycling, filters, magnets, and electric cars. Each mechanic supports the learning goal by connecting gameplay actions with environmental protection concepts.",
+    ],
+    simulatedBehaviors: [
+      {
+        title: "Airplane Cleanup Gameplay",
+        bullets: [
+          "Player-controlled airplane movement.",
+          "Mobile-friendly arcade navigation.",
+          "Collectible harmful gas clouds.",
+          "Immediate feedback when pollution targets are collected.",
+        ],
+      },
+      {
+        title: "Atmosphere Health and Progress",
+        bullets: [
+          "Atmosphere health value shown to the player.",
+          "Health decreases when pollution remains unhandled.",
+          "Cleanup actions protect the atmosphere.",
+          "Clear loss/progress feedback for younger players.",
+        ],
+      },
+      {
+        title: "Arabic Learning Flow",
+        bullets: [
+          "Arabic tutorial and instruction screens.",
+          "Environmental icons for cars, factories, recycling, filters, and upgrades.",
+          "Simple confirmation/check navigation.",
+          "Learning text connected directly to gameplay actions.",
+        ],
+      },
+    ],
+    stationBreakdown: [
+      {
+        title: "Player Movement",
+        description:
+          "A kid-friendly airplane control loop designed for simple mobile play and quick understanding.",
+        bullets: [
+          "Airplane movement.",
+          "Mobile-friendly control behavior.",
+          "Simple arcade-style navigation.",
+          "Readable feedback for younger players.",
+        ],
+      },
+      {
+        title: "Pollution Collection",
+        description:
+          "Harmful gas clouds act as collectible targets that connect the gameplay loop to the environmental lesson.",
+        bullets: [
+          "Harmful gas/cloud objects.",
+          "Object detection and collection logic.",
+          "Score or progress feedback.",
+          "Cleanup action tied to atmosphere protection.",
+        ],
+      },
+      {
+        title: "Atmosphere Health",
+        description:
+          "A health system turns air quality into a visible game state that children can understand while playing.",
+        bullets: [
+          "Atmosphere health bar.",
+          "Health value shown as 100 / 100.",
+          "Health decreases when pollution is not handled.",
+          "Losing condition when atmosphere health reaches zero.",
+        ],
+      },
+      {
+        title: "Environmental Upgrades",
+        description:
+          "Upgrade concepts introduce real-world environmental ideas through playful mechanics.",
+        bullets: [
+          "Recycling upgrade for transforming harmful pollution into something useful.",
+          "Magnet-style upgrade for attracting pollution targets.",
+          "Filter upgrade for reducing factory-related emissions.",
+          "Electric car upgrade for introducing cleaner transportation.",
+        ],
+      },
+      {
+        title: "Localized Instruction Screens",
+        description:
+          "Arabic instruction screens explain the game rules and environmental message for Arabic-speaking children.",
+        bullets: [
+          "Arabic environmental learning text.",
+          "Instruction panels for gameplay rules.",
+          "Visual icons for core learning concepts.",
+          "Check/confirmation button navigation.",
+        ],
+      },
+    ],
+    technicalHighlights: [
+      "Built a mobile-friendly Unity educational game.",
+      "Implemented collectible pollution objects and player interaction.",
+      "Created an atmosphere health system with visual feedback.",
+      "Added Arabic instruction screens for localized learning.",
+      "Designed upgrade mechanics that support the environmental theme.",
+      "Connected gameplay progression with educational messaging.",
+    ],
+  },
+  {
     id: "plc-digital-twin",
     title: "PLC Digital Twin Simulation",
     category: "Digital Twin / Industrial Training",
@@ -1128,14 +1423,15 @@ export const projects: Project[] = [
   },
   {
     id: "ivris-ar-interior-visualization",
-    title: "Ivris Customer Design Services App",
+    title: "Ivris Interior Design App",
     category: "AR / Interior Visualization",
     summary:
       "Cross-platform Unity interior-design app for customer room visualization, runtime furniture/model loading, collaborative WebGL editing, and Android/iOS AR preview.",
     role: "Unity and AR Application Developer",
     platform: ["Unity", "WebGL", "Android", "iOS"],
     tech: ["Unity", "C#", "WebGL", "AR", "Photon", "PlayFab", "Node.js", "Render"],
-    thumbnail: ivrisRoomEditorImage,
+    thumbnail: ivrisWebsiteHomeImage,
+    previewVideo: ivrisWebPreviewLoop,
     demoUrl: "#demo",
     demoLabel: "View App Gallery",
     caseStudyUrl: "/projects/ivris-ar-interior-visualization",
@@ -1151,6 +1447,40 @@ export const projects: Project[] = [
     ],
     attributionNote: ivrisAttributionNote,
     media: [
+      {
+        id: "ivris-public-tutorial-room-workflow",
+        type: "youtube",
+        title: "Public App Tutorial Clip - Room Workflow",
+        youtubeId: "https://youtu.be/EfT0RmH9TT0",
+        thumbnail: "https://i.ytimg.com/vi/EfT0RmH9TT0/hqdefault.jpg",
+        caption:
+          "Public tutorial clip from inside the Ivris app, included to show the customer-facing room visualization workflow in motion.",
+        details: {
+          title: "Public Tutorial Clip",
+          notes: [
+            "Uses public in-app tutorial material rather than private development footage.",
+            "Shows the application experience moving through a visible customer workflow.",
+            "Presented as product-context media for the Unity/WebGL/AR work, without exposing private implementation details.",
+          ],
+        },
+      },
+      {
+        id: "ivris-public-tutorial-visualization-workflow",
+        type: "youtube",
+        title: "Public App Tutorial Clip - Visualization Workflow",
+        youtubeId: "https://youtu.be/RSsFnyzbDvA",
+        thumbnail: "https://i.ytimg.com/vi/RSsFnyzbDvA/hqdefault.jpg",
+        caption:
+          "Public tutorial clip from inside the Ivris app, included to show the visualization experience and interaction flow with motion rather than only static screenshots.",
+        details: {
+          title: "Public Tutorial Clip",
+          notes: [
+            "Uses public in-app tutorial material that can be shown as portfolio evidence.",
+            "Helps visitors understand the interactive app flow before reviewing the still screenshots.",
+            "Keeps the case study focused on visible product behavior and my Unity application contribution.",
+          ],
+        },
+      },
       {
         id: "ivris-customer-services-mobile",
         type: "image",
@@ -1387,32 +1717,223 @@ export const projects: Project[] = [
     id: "nescafe-surfing-vr-booth",
     title: "Nescafe Ice Coffee VR Surfing Experience",
     category: "VR & Interactive Booths",
-    summary: "A short VR surfing experience created for a marketing booth activation.",
+    summary:
+      "A short Unity VR booth game where visitors surf through branded sand and water environments, collect cans, and compete against a timed arcade-style score loop.",
     role: "Unity Developer",
     platform: ["Unity", "VR headset"],
-    tech: ["Unity", "C#", "VR", "Interaction Design"],
-    thumbnail: vrThumb,
+    tech: ["Unity", "C#", "VR", "Arcade Gameplay", "Booth Experience", "Interaction Design"],
+    thumbnail: nescafeMenuImage,
     demoUrl: "#demo",
+    demoLabel: "Watch Booth Demo",
     caseStudyUrl: "/projects/nescafe-surfing-vr-booth",
+    productContext: [{ label: "Nescafe / Nestle booth activation context" }],
+    attributionNote: nescafeAttributionNote,
+    media: [
+      {
+        id: "nescafe-booth-demo",
+        type: "youtube",
+        title: "Booth Gameplay Demo",
+        youtubeId: "https://youtu.be/e25POZ4Ghio",
+        thumbnail: "https://i.ytimg.com/vi/e25POZ4Ghio/hqdefault.jpg",
+        caption:
+          "Video demo of the VR booth gameplay, showing the timed surfing loop, collectible cans, and branded event-style presentation.",
+        details: {
+          title: "VR Booth Demo",
+          notes: [
+            "Shows the short-session flow intended for public booth use.",
+            "Demonstrates timed arcade interaction, collectible targets, and fast visual feedback.",
+            "Presented as portfolio media for the Unity implementation work.",
+          ],
+        },
+      },
+      {
+        id: "nescafe-main-menu",
+        type: "image",
+        title: "Sand Board Main Menu",
+        src: nescafeMenuImage,
+        thumbnail: nescafeMenuImage,
+        caption:
+          "Main menu screen for the branded sand-board booth experience, setting up the playful event tone before visitors enter the VR activity.",
+        details: {
+          title: "Menu and Session Start",
+          components: [
+            "Branded main menu",
+            "Start button",
+            "Event campaign visual style",
+            "Short-session entry point",
+          ],
+          behaviors: [
+            "Introduce the experience quickly for booth visitors",
+            "Start the playable session with minimal onboarding",
+            "Frame the activity as a light arcade challenge",
+          ],
+        },
+      },
+      {
+        id: "nescafe-sand-surfing",
+        type: "image",
+        title: "Sand Surfing Environment",
+        src: nescafeSandSurfingImage,
+        thumbnail: nescafeSandSurfingImage,
+        caption:
+          "Desert/sand surfing gameplay view with collectible targets, timer feedback, and score-style UI designed for a fast booth interaction.",
+        details: {
+          title: "Sand Surfing Gameplay",
+          components: [
+            "Sand/desert traversal environment",
+            "Collectible can targets",
+            "Timer display",
+            "Score/progress feedback",
+          ],
+          behaviors: [
+            "Move through the environment in a short arcade run",
+            "Collect targets while staying oriented in VR",
+            "Use timer and score feedback to create replayable booth energy",
+          ],
+        },
+      },
+      {
+        id: "nescafe-water-beach",
+        type: "image",
+        title: "Water Surfing Beach Route",
+        src: nescafeWaterBeachImage,
+        thumbnail: nescafeWaterBeachImage,
+        caption:
+          "Water-route gameplay view showing collectible targets across a beach environment, adding variety to the VR surfing challenge.",
+        details: {
+          title: "Beach Route Gameplay",
+          components: [
+            "Water surfing route",
+            "Beach/island environment",
+            "Collectible targets",
+            "Timer and progress UI",
+          ],
+          behaviors: [
+            "Guide the player through a clear forward route",
+            "Place collectibles along readable paths",
+            "Keep the session visually bright and approachable for event visitors",
+          ],
+        },
+      },
+      {
+        id: "nescafe-water-jungle",
+        type: "image",
+        title: "Water Surfing Jungle Route",
+        src: nescafeWaterJungleImage,
+        thumbnail: nescafeWaterJungleImage,
+        caption:
+          "Alternate water-route gameplay view with a greener environment and close collectible target, showing the arcade objective clearly.",
+        details: {
+          title: "Jungle Route Gameplay",
+          components: [
+            "Water traversal path",
+            "Jungle/green environment",
+            "Close collectible target",
+            "Score and timer UI",
+          ],
+          behaviors: [
+            "Create route variation inside the booth experience",
+            "Keep collectible objectives visible and easy to understand",
+            "Support quick public play sessions with immediate feedback",
+          ],
+        },
+      },
+    ],
     highlights: [
-      "Built a short interactive VR experience for public use.",
+      "Built a short interactive VR surfing experience for public booth use.",
       "Focused on quick onboarding and easy-to-understand controls.",
-      "Designed the experience for a live event environment.",
+      "Implemented timed arcade feedback, collectible targets, and multiple themed routes.",
+      "Designed the experience for a live event environment with fast session turnover.",
     ],
     timeline: "Freelance booth project",
     problem:
       "Live booth experiences need to be understandable in seconds while still feeling memorable.",
     solution:
-      "Built a compact VR interaction loop with simple feedback, clear movement, and quick reset behavior for event flow.",
+      "Built a compact VR surfing loop with simple movement, collectible targets, visible score/timer feedback, and environment variety for event flow.",
     challenges: [
       "Reducing onboarding friction for first-time VR users.",
       "Keeping the experience reliable during repeated public sessions.",
       "Designing feedback that reads clearly inside a headset.",
+      "Making branded visuals feel playful without slowing down the booth flow.",
     ],
     impact: [
       "Delivered an approachable interactive booth experience.",
       "Kept sessions short enough for live event throughput.",
       "Showed Unity's usefulness beyond traditional games.",
+    ],
+    overview: [
+      "This project was a short Unity VR booth experience for a branded Nescafe/Nestle event activation. Visitors entered a playful sand-board and water-surfing style challenge, collected branded targets, and received immediate score/timer feedback.",
+      "The portfolio focus is the Unity implementation: quick onboarding, readable VR movement, collectible placement, timed arcade feedback, and environment variation for a live public booth setting.",
+    ],
+    simulatedBehaviors: [
+      {
+        title: "Booth Gameplay Loop",
+        bullets: [
+          "Short-session VR surfing challenge.",
+          "Collectible can targets placed along the route.",
+          "Timer and score/progress feedback.",
+          "Fast start and reset behavior for live events.",
+        ],
+      },
+      {
+        title: "Visitor-Friendly VR",
+        bullets: [
+          "Simple controls for first-time users.",
+          "Readable forward routes and clear objectives.",
+          "Bright environments with low-friction onboarding.",
+          "Interaction pacing designed for booth throughput.",
+        ],
+      },
+      {
+        title: "Environment Variation",
+        bullets: [
+          "Sand/desert surfing route.",
+          "Beach water-surfing route.",
+          "Green/jungle water route.",
+          "Branded menu and campaign-style visual presentation.",
+        ],
+      },
+    ],
+    stationBreakdown: [
+      {
+        title: "Main Menu and Start Flow",
+        description:
+          "Introduces the branded booth experience and lets visitors start the short VR session quickly.",
+        bullets: [
+          "Branded title/menu presentation.",
+          "Simple start action.",
+          "Clear entry into the playable challenge.",
+        ],
+      },
+      {
+        title: "Surfing Gameplay",
+        description:
+          "Creates a light arcade loop where visitors move through sand or water routes and collect targets.",
+        bullets: [
+          "VR surfing/traversal movement.",
+          "Collectible target placement.",
+          "Score and timer feedback.",
+          "Route clarity for quick public play.",
+        ],
+      },
+      {
+        title: "Booth Reliability",
+        description:
+          "Keeps the experience understandable and repeatable for live activation conditions.",
+        bullets: [
+          "Short-session structure.",
+          "Minimal onboarding time.",
+          "Readable feedback inside the headset.",
+          "Designed for repeated public sessions.",
+        ],
+      },
+    ],
+    technicalHighlights: [
+      "Built the Unity VR booth gameplay loop.",
+      "Implemented collectible targets, score/progress feedback, and timer UI.",
+      "Created/assembled multiple themed gameplay environments.",
+      "Designed interaction pacing for public event use.",
+      "Prepared the experience for quick onboarding and repeated booth sessions.",
     ],
     featured: true,
   },
@@ -1769,8 +2290,44 @@ const cimDraftProject = projects.find((project) => project.id === "cim-station-b
 const industrialTrainingProject = projects.find((project) => project.id === "industrial-training-simulation-systems");
 
 if (cimDraftProject && industrialTrainingProject) {
-  industrialTrainingProject.media = cimDraftProject.media;
-  industrialTrainingProject.previewGif = cimDraftProject.previewGif;
+  industrialTrainingProject.media = [
+    {
+      id: "industrial-training-mr110-overview-video",
+      type: "youtube",
+      title: "Industrial Training System Overview",
+      youtubeId: "https://youtu.be/R4gS25C_wGs",
+      thumbnail: "https://i.ytimg.com/vi/R4gS25C_wGs/hqdefault.jpg",
+      caption:
+        "Public portfolio video showing the industrial training simulation workflow, station behavior, and visible cause-and-effect feedback across the training environment.",
+      details: {
+        title: "Industrial Training Video",
+        notes: [
+          "Shows the public-facing simulation presentation rather than internal project files.",
+          "Highlights station motion, training feedback, and interaction flow.",
+          "Used as the main video reference for the grouped industrial training systems page.",
+        ],
+      },
+    },
+    {
+      id: "industrial-training-nda-pixelated-video",
+      type: "youtube",
+      title: "Industrial Training System Preview",
+      youtubeId: "https://youtu.be/XWwXzmuA5bk",
+      thumbnail: "https://i.ytimg.com/vi/XWwXzmuA5bk/hqdefault.jpg",
+      caption:
+        "Public portfolio preview of the industrial training simulation. Some areas are intentionally pixelated for NDA and confidentiality purposes.",
+      details: {
+        title: "NDA-Safe Preview",
+        notes: [
+          "Pixelated regions are intentional and are included to avoid exposing confidential details.",
+          "The visible portions focus on simulation behavior, training flow, and public-safe visual context.",
+          "Presented as portfolio evidence without exposing internal code, PLC files, or private implementation details.",
+        ],
+      },
+    },
+  ];
+  industrialTrainingProject.previewGif = "https://youtu.be/R4gS25C_wGs";
+  industrialTrainingProject.previewVideo = cimThumbnailLoop;
   industrialTrainingProject.overview = [
     "Industrial Training Simulation Systems groups my Unity/WebGL digital twin style work for BEDO training systems, including MR110 Advanced Modular CIM and MR109 Compact Mechatronics workflows. The focus is the behavior I simulated: station motion, sensor feedback, actuator states, process transitions, and PLC-style training logic.",
     "The MR110 gallery shows the media currently available for the public portfolio. MR109 is included on the same page as a station-behavior breakdown, so reviewers can understand the additional simulation scope without exposing internal code, PLC projects, or unpublished media.",

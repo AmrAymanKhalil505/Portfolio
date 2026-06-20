@@ -5,9 +5,11 @@ import PageShell from "../components/PageShell";
 import ProjectCard from "../components/ProjectCard";
 import SectionHeader from "../components/SectionHeader";
 import SkillGroup from "../components/SkillGroup";
+import TechBadge from "../components/TechBadge";
 import { featuredProjects } from "../data/projects";
 import { education, experience, profile } from "../data/profile";
-import heroImage from "../assets/hero-lab.svg";
+import heroPoster from "../assets/robot-disass-poster.png";
+import heroVideo from "../assets/Robot Disass.mp4";
 
 const skillTags = ["Unity", "C#", "WebGL", "VR", "Simulation", "Digital Twin", "UI Systems"];
 
@@ -61,12 +63,24 @@ function HomePage() {
     <PageShell>
       <section className="relative overflow-hidden border-b border-white/10">
         <img
-          src={heroImage}
+          src={heroPoster}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
+          className="pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover object-right opacity-[0.34] grayscale-[12%] sm:w-[68%]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#050606_0%,rgba(5,6,6,0.88)_36%,rgba(5,6,6,0.45)_100%)]" />
+        <video
+          aria-hidden="true"
+          autoPlay
+          loop
+          muted
+          poster={heroPoster}
+          playsInline
+          preload="metadata"
+          className="pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover object-right opacity-[0.52] grayscale-[12%] sm:w-[68%]"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#050606_0%,rgba(5,6,6,0.97)_40%,rgba(5,6,6,0.88)_58%,rgba(5,6,6,0.48)_76%,rgba(5,6,6,0.18)_100%)]" />
         <div className="absolute inset-0 bg-grid opacity-25" />
         <div className="relative mx-auto flex min-h-[calc(86vh-4rem)] max-w-7xl items-center px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
           <div className="max-w-4xl">
@@ -95,11 +109,11 @@ function HomePage() {
               {skillTags.map((tag, index) => (
                 <span
                   key={tag}
-                  className={`rounded-md border border-white/12 bg-white/8 px-3 py-1 text-sm text-steel ${
+                  className={`${
                     index > 3 ? "hidden sm:inline-flex" : ""
                   }`}
                 >
-                  {tag}
+                  <TechBadge tech={tag} compact />
                 </span>
               ))}
             </div>
