@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowLeft, Github, Mail, MonitorPlay, PlayCircle } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Mail, MonitorPlay, PlayCircle } from "lucide-react";
 import ButtonLink from "../components/ButtonLink";
 import MediaDemoViewer from "../components/MediaDemoViewer";
 import PageShell from "../components/PageShell";
+import TechBadge from "../components/TechBadge";
 import { getProjectById } from "../data/projects";
 import { profile } from "../data/profile";
 
@@ -13,6 +14,9 @@ function CaseStudyPage() {
 
   if (!project) return <Navigate to="/projects" replace />;
   if (project.articleLayout === "blog") return <BlogProjectPage project={project} />;
+
+  const heroVisual =
+    project.previewGif && !getYouTubeId(project.previewGif) ? project.previewGif : project.thumbnail;
 
   return (
     <PageShell>
@@ -34,7 +38,7 @@ function CaseStudyPage() {
                 <div className="mt-7 flex flex-wrap gap-3">
                   {project.demoUrl && (
                     <ButtonLink to="#demo" variant="primary" icon={<PlayCircle size={17} />}>
-                      Watch Demo
+                      {project.demoLabel ?? "Watch Demo"}
                     </ButtonLink>
                   )}
                   {project.simulatedBehaviors ? (
@@ -59,7 +63,14 @@ function CaseStudyPage() {
                 </div>
               </div>
               <div className="overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow">
-                <img src={project.thumbnail} alt={`${project.title} visual preview`} className="h-full w-full object-cover" />
+                <img
+                  src={heroVisual}
+                  alt={`${project.title} visual preview`}
+                  className="h-full w-full object-cover"
+                  onError={(event) => {
+                    event.currentTarget.src = project.thumbnail;
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -70,9 +81,11 @@ function CaseStudyPage() {
         <section className="mx-auto grid max-w-7xl gap-5 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
           <MetaBlock label="My role" value={project.role} />
           <MetaBlock label="Timeline" value={project.timeline} />
-          <MetaBlock label="Platform" value={project.platform.join(", ")} />
-          <MetaBlock label="Tech stack" value={project.tech.join(", ")} />
+          <TechMetaBlock label="Platform" items={project.platform} />
+          <TechMetaBlock label="Tech stack" items={project.tech} />
         </section>
+
+        <ProductAttribution project={project} />
 
         {project.overview ? (
           <CimProjectDetails project={project} />
@@ -152,6 +165,67 @@ const getYouTubeThumbnail = (value: string | undefined) => {
   return youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` : "";
 };
 
+const getStationProductReference = (title: string) => {
+  if (title.startsWith("MR110")) {
+    return {
+      label: "BEDO MR110",
+      url: "https://bedoeg.com/product/mr110/",
+    };
+  }
+
+  if (title.startsWith("MR109")) {
+    return {
+      label: "BEDO MR109",
+      url: "https://bedoeg.com/product/mr109/",
+    };
+  }
+
+  const mpcMatch = title.match(/^MPC(10[0-5])/);
+  if (mpcMatch) {
+    return {
+      label: `BEDO MPC${mpcMatch[1]}`,
+      url: `https://bedoeg.com/product/mpc${mpcMatch[1]}/`,
+    };
+  }
+
+  if (title.startsWith("EV117")) {
+    return {
+      label: "BEDO EV117",
+      url: "https://bedoeg.com/product/ev117-2/",
+    };
+  }
+
+  if (title.includes("Bernoulli")) {
+    return {
+      label: "BEDO FM103",
+      url: "https://bedoeg.com/product/fm103/",
+    };
+  }
+
+  if (title.includes("Laminar Flow")) {
+    return {
+      label: "BEDO FM115",
+      url: "https://bedoeg.com/product/fm115/",
+    };
+  }
+
+  if (title.includes("Collaborative Room Editing") || title.includes("Runtime 3D Content")) {
+    return {
+      label: "Ivris Web",
+      url: "https://www.ivris.ai/collections/customer-design-services",
+    };
+  }
+
+  if (title.includes("AR Preview")) {
+    return {
+      label: "Ivris AR",
+      url: "https://play.google.com/store/apps/details?id=com.Ivris.IvrisArViewer&hl=en",
+    };
+  }
+
+  return null;
+};
+
 function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
   return (
     <PageShell>
@@ -170,14 +244,12 @@ function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
             <p className="mt-6 text-xl leading-9 text-steel">{project.summary}</p>
             <div className="mt-7 flex flex-wrap gap-2">
               {project.tech.map((tech) => (
-                <span key={tech} className="rounded-md border border-white/10 bg-white/6 px-3 py-1 text-sm text-steel">
-                  {tech}
-                </span>
+                <TechBadge key={tech} tech={tech} />
               ))}
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink to="#demo" variant="primary" icon={<PlayCircle size={17} />}>
-                Watch Demo
+                {project.demoLabel ?? "Watch Demo"}
               </ButtonLink>
               <ButtonLink to="#behaviors" variant="secondary" icon={<MonitorPlay size={17} />}>
                 View Behaviors
@@ -202,10 +274,12 @@ function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
           <dl className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <MetaBlock label="My role" value={project.role} />
             <MetaBlock label="Timeline" value={project.timeline} />
-            <MetaBlock label="Platform" value={project.platform.join(", ")} />
-            <MetaBlock label="Stack" value={project.tech.slice(0, 5).join(", ")} />
+            <TechMetaBlock label="Platform" items={project.platform} />
+            <TechMetaBlock label="Stack" items={project.tech.slice(0, 5)} />
           </dl>
         </div>
+
+        <ProductAttribution project={project} />
 
         <BlogSection title="Project Overview">
           {project.overview?.map((paragraph) => (
@@ -351,7 +425,7 @@ function InlineMediaBlock({ item }: { item: NonNullable<ProjectWithCimDetails["m
               rel="noreferrer"
               className="text-sm font-semibold text-scan transition hover:text-white"
             >
-              Open on YouTube
+              {item.type === "youtube" ? "Open on YouTube" : "Open media"}
             </a>
           )}
         </div>
@@ -367,6 +441,7 @@ function CimProjectDetails({ project }: { project: ProjectWithCimDetails }) {
       <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
         <div className="rounded-lg border border-white/10 bg-panel p-6">
           <p className="mb-3 text-sm font-semibold text-scan">Project Overview</p>
+          <h2 className="mb-4 text-2xl font-semibold text-white">What the gallery is showing</h2>
           <div className="grid gap-4 text-sm leading-7 text-steel lg:grid-cols-2">
             {project.overview?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
@@ -375,8 +450,8 @@ function CimProjectDetails({ project }: { project: ProjectWithCimDetails }) {
 
       <section id="behaviors" className="border-y border-white/10 bg-[#090B0B]">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <p className="mb-3 text-sm font-semibold text-scan">Simulated Behaviors</p>
-          <h2 className="text-3xl font-semibold text-white">Motion, pneumatics, and digital state changes</h2>
+          <p className="mb-3 text-sm font-semibold text-scan">Behavior / Feature Groups</p>
+          <h2 className="text-3xl font-semibold text-white">How the experience was organized</h2>
           <div className="mt-7 grid gap-5 md:grid-cols-3">
             {project.simulatedBehaviors?.map((behavior) => (
               <CaseSection key={behavior.title} title={behavior.title} items={behavior.bullets} />
@@ -386,23 +461,40 @@ function CimProjectDetails({ project }: { project: ProjectWithCimDetails }) {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <p className="mb-3 text-sm font-semibold text-scan">Station Breakdown</p>
-        <h2 className="text-3xl font-semibold text-white">Short behavior cards by station</h2>
+        <p className="mb-3 text-sm font-semibold text-scan">Module / Feature Breakdown</p>
+        <h2 className="text-3xl font-semibold text-white">What each area covers</h2>
         <div className="mt-7 grid gap-5 lg:grid-cols-2">
-          {project.stationBreakdown?.map((station) => (
-            <section key={station.title} className="rounded-lg border border-white/10 bg-panel p-6">
-              <h3 className="text-xl font-semibold text-white">{station.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-steel">{station.description}</p>
-              <ul className="mt-4 space-y-3">
-                {station.bullets.map((bullet) => (
-                  <li key={bullet} className="flex gap-3 text-sm leading-6 text-steel">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+          {project.stationBreakdown?.map((station) => {
+            const productReference = getStationProductReference(station.title);
+
+            return (
+              <section key={station.title} className="flex flex-col rounded-lg border border-white/10 bg-panel p-6">
+                <h3 className="text-xl font-semibold text-white">{station.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-steel">{station.description}</p>
+                <ul className="mt-4 flex-1 space-y-3">
+                  {station.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-3 text-sm leading-6 text-steel">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                {productReference && (
+                  <div className="mt-5 flex justify-end">
+                    <a
+                      href={productReference.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-9 items-center gap-2 rounded-md border border-scan/35 bg-scan/10 px-3 py-1.5 text-sm font-semibold text-scan transition hover:border-scan/70 hover:bg-scan/15 hover:text-white"
+                    >
+                      {productReference.label}
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </div>
       </section>
 
@@ -419,6 +511,57 @@ function MetaBlock({ label, value }: { label: string; value: string }) {
       <dt className="text-sm font-semibold text-scan">{label}</dt>
       <dd className="mt-2 text-sm leading-6 text-steel">{value}</dd>
     </div>
+  );
+}
+
+function TechMetaBlock({ label, items }: { label: string; items: string[] }) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-panel p-5 md:col-span-2 lg:col-span-1">
+      <dt className="text-sm font-semibold text-scan">{label}</dt>
+      <dd className="mt-3 flex flex-wrap gap-2">
+        {items.map((item) => (
+          <TechBadge key={item} tech={item} compact />
+        ))}
+      </dd>
+    </div>
+  );
+}
+
+function ProductAttribution({ project }: { project: ProjectWithCimDetails }) {
+  if (!project.productContext?.length && !project.attributionNote) return null;
+
+  return (
+    <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+      <div className="rounded-lg border border-white/10 bg-panel p-5">
+        <p className="text-sm font-semibold text-scan">Product context</p>
+        {project.attributionNote && <p className="mt-3 text-sm leading-6 text-steel">{project.attributionNote}</p>}
+        {project.productContext?.length ? (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.productContext.map((item) =>
+              item.url ? (
+                <a
+                  key={item.label}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-9 items-center gap-2 rounded-md border border-white/15 px-3 py-1.5 text-sm font-semibold text-steel transition hover:border-scan/60 hover:text-white"
+                >
+                  {item.label}
+                  <ExternalLink size={14} />
+                </a>
+              ) : (
+                <span
+                  key={item.label}
+                  className="inline-flex min-h-9 items-center rounded-md border border-white/10 bg-white/6 px-3 py-1.5 text-sm text-steel"
+                >
+                  {item.label}
+                </span>
+              ),
+            )}
+          </div>
+        ) : null}
+      </div>
+    </section>
   );
 }
 
