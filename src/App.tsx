@@ -7,10 +7,12 @@ import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
 import LabPage from "./pages/LabPage";
+import AdminPage from "./pages/AdminPage";
 
 const titleByPath = (pathname: string) => {
   if (pathname.startsWith("/projects/")) return "Case Study | Unity Developer Portfolio";
   if (pathname === "/projects") return "Projects | Unity Developer Portfolio";
+  if (pathname === "/admin") return "Admin | Unity Developer Portfolio";
   if (pathname === "/lab") return "Interactive Lab | Unity Developer Portfolio";
   return "Unity Developer Portfolio";
 };
@@ -32,6 +34,7 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:projectId" element={<CaseStudyPage />} />
           <Route path="/lab" element={<LabPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </AnimatePresence>
       <Footer />

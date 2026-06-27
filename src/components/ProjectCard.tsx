@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ArrowUpRight, MonitorPlay, PlayCircle } from "lucide-react";
+import { ArrowUpRight, PlayCircle } from "lucide-react";
 import type { Project } from "../data/projects";
 import ButtonLink from "./ButtonLink";
 import TechBadge from "./TechBadge";
@@ -98,27 +98,19 @@ function ProjectCard({ project }: ProjectCardProps) {
         )}
       </div>
       <div className="flex min-h-[22rem] flex-col p-5">
-        <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-6 text-steel">{project.summary}</p>
-        <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
-          {project.tech.slice(0, 5).map((tech) => (
-            <TechBadge key={tech} tech={tech} compact />
-          ))}
+        <div className="flex-1">
+          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+          <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
+          <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
+            {project.tech.slice(0, 5).map((tech) => (
+              <TechBadge key={tech} tech={tech} compact />
+            ))}
+          </div>
         </div>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex h-11 shrink-0 items-start justify-start">
           <ButtonLink to={project.caseStudyUrl} variant="primary" icon={<ArrowUpRight size={16} />}>
-            {project.media ? "View Project" : "View Case Study"}
+            View Project
           </ButtonLink>
-          {project.demoUrl && (
-            <ButtonLink to={`${project.caseStudyUrl}#demo`} variant="secondary" icon={<PlayCircle size={16} />}>
-              {project.demoLabel ?? "Watch Demo"}
-            </ButtonLink>
-          )}
-          {project.webglAvailable && (
-            <ButtonLink to={`${project.caseStudyUrl}#webgl`} variant="ghost" icon={<MonitorPlay size={16} />}>
-              Play WebGL Demo
-            </ButtonLink>
-          )}
         </div>
       </div>
     </article>

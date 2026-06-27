@@ -7,7 +7,6 @@ import { profile } from "../data/profile";
 const navItems = [
   { label: "Home", to: "/" },
   { label: "Projects", to: "/projects" },
-  { label: "Interactive Lab", to: "/lab" },
 ];
 
 const navClass = ({ isActive }: { isActive: boolean }) =>

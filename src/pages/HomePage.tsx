@@ -1,6 +1,20 @@
-import { ArrowRight, Download, FlaskConical, Mail, MonitorPlay } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Box,
+  Code2,
+  Download,
+  Factory,
+  Gamepad2,
+  Globe2,
+  GraduationCap,
+  Headset,
+  Mail,
+  Rows3,
+  Workflow,
+} from "lucide-react";
+import { useEffect, useState } from "react";
 import ButtonLink from "../components/ButtonLink";
-import LabStation from "../components/LabStation";
 import PageShell from "../components/PageShell";
 import ProjectCard from "../components/ProjectCard";
 import SectionHeader from "../components/SectionHeader";
@@ -8,6 +22,14 @@ import SkillGroup from "../components/SkillGroup";
 import TechBadge from "../components/TechBadge";
 import { featuredProjects } from "../data/projects";
 import { education, experience, profile } from "../data/profile";
+import {
+  heroSettingsEventName,
+  loadHeroSettings,
+  mobileCropCurtainHeight,
+  mobileOverlayGradient,
+  overlayGradient,
+  type HeroSettings,
+} from "../lib/heroSettings";
 import heroPoster from "../assets/robot-disass-poster.png";
 import heroVideo from "../assets/Robot Disass.mp4";
 
@@ -20,9 +42,37 @@ const stats = [
   "IBM Call for Code regional winner",
 ];
 
+const projectCategories = [
+  {
+    title: "Educational Simulations",
+    icon: GraduationCap,
+  },
+  {
+    title: "Digital Twin / Industrial Training",
+    icon: Factory,
+  },
+  {
+    title: "VR & Interactive Booths",
+    icon: Headset,
+  },
+  {
+    title: "WebGL Experiments",
+    icon: Globe2,
+  },
+  {
+    title: "Game Systems & Architecture",
+    icon: Gamepad2,
+  },
+  {
+    title: "AR / Interior Visualization",
+    icon: Box,
+  },
+];
+
 const skillGroups = [
   {
     title: "Unity Development",
+    icon: Code2,
     skills: [
       "C#",
       "Gameplay systems",
@@ -37,6 +87,7 @@ const skillGroups = [
   },
   {
     title: "Simulation / Industrial",
+    icon: Factory,
     skills: [
       "Physics-based interactions",
       "Baked fluid-behavior visuals",
@@ -50,15 +101,37 @@ const skillGroups = [
   },
   {
     title: "XR / Platforms",
+    icon: Headset,
     skills: ["VR", "AR", "Meta Quest 2", "Auto Hand", "360 Video", "Android", "iOS", "WebGL", "JavaScript / JSLib"],
   },
   {
     title: "Backend / Workflow",
+    icon: Workflow,
     skills: ["Photon", "PlayFab", "Node.js", "Oracle Database", "Render", "SQL", "Java", "Git", "Visual Studio"],
   },
 ];
 
 function HomePage() {
+  const [heroSettings, setHeroSettings] = useState<HeroSettings>(loadHeroSettings);
+
+  useEffect(() => {
+    const handleHeroSettings = (event: Event) => {
+      const customEvent = event as CustomEvent<HeroSettings>;
+      setHeroSettings(customEvent.detail ?? loadHeroSettings());
+    };
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === "portfolio.heroSettings") setHeroSettings(loadHeroSettings());
+    };
+
+    window.addEventListener(heroSettingsEventName, handleHeroSettings);
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener(heroSettingsEventName, handleHeroSettings);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
+
   return (
     <PageShell>
       <section className="relative overflow-hidden border-b border-white/10">
@@ -66,7 +139,8 @@ function HomePage() {
           src={heroPoster}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover object-right opacity-[0.34] grayscale-[12%] sm:w-[68%]"
+          className="hero-desktop-layer pointer-events-none absolute inset-y-0 right-0 h-full w-[68%] object-cover object-right grayscale-[12%]"
+          style={{ opacity: heroSettings.posterOpacity }}
         />
         <video
           aria-hidden="true"
@@ -76,13 +150,60 @@ function HomePage() {
           poster={heroPoster}
           playsInline
           preload="metadata"
-          className="pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover object-right opacity-[0.52] grayscale-[12%] sm:w-[68%]"
+          className="hero-desktop-layer pointer-events-none absolute inset-y-0 right-0 h-full w-[68%] object-cover object-right grayscale-[12%]"
+          style={{ opacity: heroSettings.videoOpacity }}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#050606_0%,rgba(5,6,6,0.97)_40%,rgba(5,6,6,0.88)_58%,rgba(5,6,6,0.48)_76%,rgba(5,6,6,0.18)_100%)]" />
+        <img
+          src={heroPoster}
+          alt=""
+          aria-hidden="true"
+          className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center grayscale-[10%]"
+          style={{
+            opacity: Math.min(0.8, heroSettings.posterOpacity + 0.2),
+            transform: "translateX(-50%)",
+            WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
+            maskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
+          }}
+        />
+        <video
+          aria-hidden="true"
+          autoPlay
+          loop
+          muted
+          poster={heroPoster}
+          playsInline
+          preload="metadata"
+          className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center grayscale-[10%]"
+          style={{
+            opacity: Math.min(0.9, heroSettings.videoOpacity + 0.22),
+            transform: "translateX(-50%)",
+            WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
+            maskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
+          }}
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+        <div
+          className="hero-desktop-layer absolute inset-0"
+          style={{ background: overlayGradient(heroSettings.overlayStrength) }}
+        />
+        <div
+          className="hero-mobile-layer absolute inset-0"
+          style={{ background: mobileOverlayGradient(heroSettings.overlayStrength) }}
+        />
+        <div className="hero-mobile-layer pointer-events-none absolute inset-x-0 top-0 h-[24rem]">
+          <div
+            className="absolute inset-x-0 bottom-0"
+            style={{
+              height: mobileCropCurtainHeight(heroSettings.mobileCropY),
+              background: "linear-gradient(180deg, rgba(5, 6, 6, 0) 0%, rgba(5, 6, 6, 0.92) 24%, #050606 100%)",
+            }}
+          />
+        </div>
         <div className="absolute inset-0 bg-grid opacity-25" />
-        <div className="relative mx-auto flex min-h-[calc(86vh-4rem)] max-w-7xl items-center px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+        <div className="hero-content-wrap relative mx-auto flex min-h-[calc(86vh-4rem)] max-w-7xl items-start px-4 pb-10 pt-64 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
             <p className="mb-4 inline-flex rounded-md border border-scan/30 bg-scan/10 px-3 py-1 text-sm font-semibold text-scan">
               Unity, simulation, WebGL, VR
@@ -97,9 +218,6 @@ function HomePage() {
             <div className="mt-6 flex flex-wrap gap-3">
               <ButtonLink to="/projects" variant="primary" icon={<ArrowRight size={17} />}>
                 View Projects
-              </ButtonLink>
-              <ButtonLink to="/lab" variant="secondary" icon={<FlaskConical size={17} />}>
-                Open Interactive Lab
               </ButtonLink>
               <ButtonLink to={profile.resumeUrl} download variant="ghost" icon={<Download size={17} />}>
                 Download Resume
@@ -139,6 +257,22 @@ function HomePage() {
           {featuredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
+          <article className="flex min-h-[36rem] flex-col justify-between rounded-lg border border-dashed border-white/15 bg-panel p-6 shadow-glow transition duration-300 hover:-translate-y-1 hover:border-scan/35">
+            <div>
+              <span className="flex h-14 w-14 items-center justify-center rounded-md border border-scan/25 bg-scan/10 text-scan">
+                <Rows3 size={26} strokeWidth={1.9} aria-hidden="true" />
+              </span>
+              <p className="mt-8 text-sm font-semibold text-scan">More work</p>
+              <h3 className="mt-3 text-2xl font-semibold text-white">See the full project archive</h3>
+              <p className="mt-4 text-sm leading-6 text-steel">
+                Browse the rest of the portfolio, including grouped simulation systems, AR work, VR booths,
+                educational labs, and game projects.
+              </p>
+            </div>
+            <ButtonLink to="/projects" variant="primary" icon={<ArrowUpRight size={16} />} className="mt-8 self-start">
+              See More Projects
+            </ButtonLink>
+          </article>
         </div>
       </section>
 
@@ -178,48 +312,16 @@ function HomePage() {
             title="Built around training, learning, and real-time interaction"
           />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            {[
-              "Educational Simulations",
-              "Digital Twin / Industrial Training",
-              "VR & Interactive Booths",
-              "WebGL Experiments",
-              "Game Systems & Architecture",
-              "AR / Interior Visualization",
-            ].map((category) => (
-              <div key={category} className="rounded-lg border border-white/10 bg-panel p-5">
-                <MonitorPlay className="mb-5 text-scan" size={24} />
-                <h3 className="text-base font-semibold text-white">{category}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            {projectCategories.map((category) => {
+              const Icon = category.icon;
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-          <div>
-            <SectionHeader
-              eyebrow="Interactive Simulation Lab"
-              title="A lightweight lab for technical prototypes"
-              description="The lab is a separate optional page, so visitors can read the portfolio normally and only open the experiments when they want a deeper look."
-            />
-            <ButtonLink to="/lab" variant="primary" icon={<FlaskConical size={17} />}>
-              Open Interactive Lab
-            </ButtonLink>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <LabStation
-              title="Fluid Physics Bench"
-              description="A compact station for fluid-like motion, parameters, and visible feedback."
-              cta="View Experiment"
-              variant="fluid"
-            />
-            <LabStation
-              title="PID Control Station"
-              description="A graph-focused prototype for overshoot, target response, and tuning behavior."
-              cta="View Experiment"
-              variant="pid"
-            />
+              return (
+                <div key={category.title} className="rounded-lg border border-white/10 bg-panel p-5">
+                  <Icon className="mb-5 text-scan" size={24} strokeWidth={1.9} aria-hidden="true" />
+                  <h3 className="text-base font-semibold text-white">{category.title}</h3>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -232,7 +334,7 @@ function HomePage() {
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {skillGroups.map((group) => (
-              <SkillGroup key={group.title} title={group.title} skills={group.skills} />
+              <SkillGroup key={group.title} title={group.title} skills={group.skills} icon={group.icon} />
             ))}
           </div>
         </div>

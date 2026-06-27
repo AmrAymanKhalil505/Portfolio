@@ -8,11 +8,23 @@ import ivrisThumb from "../assets/ivris-ar-room.svg";
 import vrTrainingThumb from "../assets/vr-training-suite.svg";
 import cimSystemImage from "../assets/projects/cim/thumnail.jpg";
 import cimThumbnailLoop from "../assets/projects/cim/CIM Thumnail gif.mp4";
-import cimLoadingImage from "../assets/projects/cim/Digital-Twin-Loading-Station.png";
-import cimLaserImage from "../assets/projects/cim/CNC Laser thunail .jpg";
+import mr110LoadingImage from "../assets/projects/cim/MR 110 Loading.png";
+import mr110StorageImage from "../assets/projects/cim/MR110 Storage.png";
+import mr110RobotImage from "../assets/projects/cim/MR110 Robot Station Statndalone.png";
+import mr110LaserImage from "../assets/projects/cim/MR110 CNC Laser.png";
+import mr110DrillingImage from "../assets/projects/cim/MR110 CNC Drilling.png";
 import cimRobotInterpreterImage from "../assets/projects/cim/Inter01.jpg";
 import cimBlockEditorImage from "../assets/projects/cim/Inter02.jpg";
 import cimBlockValidationImage from "../assets/projects/cim/Inter03.jpg";
+import mr109LoadingImage from "../assets/projects/MR109 Compact/MR109 Loading.png";
+import mr109TransportingImage from "../assets/projects/MR109 Compact/MR109 Transporting.png";
+import mr109MeasuringImage from "../assets/projects/MR109 Compact/MR109 Measuring.png";
+import mr109ProcessingImage from "../assets/projects/MR109 Compact/MR109 Processing.png";
+import mr109AssemblyImage from "../assets/projects/MR109 Compact/MR109 Assembly.png";
+import mr109BufferingImage from "../assets/projects/MR109 Compact/MR109 buffering.png";
+import mr109SortingImage from "../assets/projects/MR109 Compact/MR109 Sorting.png";
+import mr109RobotImage from "../assets/projects/MR109 Compact/MR109 Robot Arm.png";
+import mr109StorageImage from "../assets/projects/MR109 Compact/MR109 Storage.png";
 import ivrisMobileServicesImage from "../assets/projects/Ivris/ivris app 02.webp";
 import ivrisArPreviewImage from "../assets/projects/Ivris/Ivris app 03.webp";
 import ivrisWebPreviewLoop from "../assets/projects/Ivris/Ivris Web gif.mp4";
@@ -29,6 +41,8 @@ import pidGraphImage from "../assets/projects/PID/graph photo.png";
 import eduLaminarImage from "../assets/projects/EduLab/Laminar.jpg";
 import eduLaminarStreamlinesImage from "../assets/projects/EduLab/Laminar 02.jpg";
 import eduLaminarOpenTrayImage from "../assets/projects/EduLab/Laminar 03.jpg";
+import eduFm105LabImage from "../assets/projects/EduLab/FM103.png";
+import eduFm105GraphImage from "../assets/projects/EduLab/FM103 Graph.png";
 import eduEv117TrainerImage from "../assets/projects/EduLab/EV117 Fuel Outside.jpg";
 import eduEv117ParticlesImage from "../assets/projects/EduLab/EV117 Particles.jpg";
 import eduEv117MonitorImage from "../assets/projects/EduLab/EV117 save screen.jpg";
@@ -333,6 +347,18 @@ const mr109StationBreakdown = [
   },
 ];
 
+const mr109StationImages = [
+  mr109LoadingImage,
+  mr109TransportingImage,
+  mr109MeasuringImage,
+  mr109ProcessingImage,
+  mr109AssemblyImage,
+  mr109BufferingImage,
+  mr109SortingImage,
+  mr109RobotImage,
+  mr109StorageImage,
+];
+
 const pidLabModules = [
   {
     id: "mpc100-pressure-process-control",
@@ -508,6 +534,29 @@ const engineeringEducationModules = [
     ],
   },
   {
+    id: "fm105-flow-measurement-virtual-lab",
+    title: "FM105 Flow Measurement Virtual Lab",
+    image: eduFm105LabImage,
+    caption:
+      "Unity virtual lab for flow-measurement education, showing how a fluid-mechanics trainer can connect flow control, measurement readings, guided steps, and response visualization in one interactive scene.",
+    domain: "Fluid Mechanics",
+    learningGoal:
+      "Help students connect flow changes with measurement feedback, graph behavior, and repeatable experiment observations.",
+    components: [
+      "Flow-measurement trainer visualization",
+      "Fluid path and flow-control area",
+      "Measurement display and experiment controls",
+      "Guided step interface",
+      "Graph/response feedback view",
+    ],
+    behaviors: [
+      "Adjust flow-related experiment conditions",
+      "Observe measurement readings changing with the experiment state",
+      "Connect visual flow behavior with graph feedback",
+      "Support guided student comparison between operating states",
+    ],
+  },
+  {
     id: "laminar-flow-visualization-virtual-lab",
     title: "Laminar Flow Visualization Virtual Lab",
     image: eduLaminarImage,
@@ -624,8 +673,8 @@ export const projects: Project[] = [
         id: "loading-station-photo",
         type: "image",
         title: "Loading Station Simulation",
-        src: cimLoadingImage,
-        thumbnail: cimLoadingImage,
+        src: mr110LoadingImage,
+        thumbnail: mr110LoadingImage,
         caption:
           "Standalone loading station view. I simulated part sensing, state/material detection, position feedback, transfer actuation, conveyor movement, process ON/OFF, emergency behavior, and start/running/stop indicators. The behavior covers part detection, part extraction, conveyor movement, material/state classification, motor start/stop logic, and PLC-style states.",
         details: {
@@ -638,10 +687,10 @@ export const projects: Project[] = [
         id: "storage-station-photo",
         type: "image",
         title: "Storage Station Simulation",
-        src: cimSystemImage,
-        thumbnail: cimSystemImage,
+        src: mr110StorageImage,
+        thumbnail: mr110StorageImage,
         caption:
-          "Storage station gallery entry. Replace this image with the standalone storage station screenshot once it is added; the details below already describe the simulated storage station components and behavior.",
+          "Standalone storage station view. I simulated receiving parts, rotary transfer behavior, gripper open/close behavior, indexed pocket selection, full-pocket detection, and PLC-style storage states.",
         details: {
           title: "Storage Station Details",
           components: cimStationDetails.storage.components,
@@ -652,10 +701,10 @@ export const projects: Project[] = [
         id: "robot-station-photo",
         type: "image",
         title: "Robot Arm Station Simulation",
-        src: cimSystemImage,
-        thumbnail: cimSystemImage,
+        src: mr110RobotImage,
+        thumbnail: mr110RobotImage,
         caption:
-          "Robot arm station gallery entry. Replace this image with the standalone robot arm station screenshot once it is added; the details below already describe the simulated robot arm station components and behavior.",
+          "Standalone robot arm station view. I simulated robot transport, pick/place behavior, gripper interaction, sensor-triggered process logic, and robot command/completion state transitions.",
         details: {
           title: "Robot Arm Station Details",
           components: cimStationDetails.robot.components,
@@ -666,8 +715,8 @@ export const projects: Project[] = [
         id: "cnc-laser-station-photo",
         type: "image",
         title: "Laser Marking Station Simulation",
-        src: cimLaserImage,
-        thumbnail: cimLaserImage,
+        src: mr110LaserImage,
+        thumbnail: mr110LaserImage,
         caption:
           "Standalone laser marking station view. I simulated sample sensing, guided clamp/release behavior, tool-head movement, indexed positioning, limit/home feedback, process ON/OFF, emergency behavior, and start/running/stop indicators. The behavior covers sample detection, tool operation sequencing, return-to-home behavior, actuator reset, and PLC-style stage transitions.",
         details: {
@@ -680,10 +729,10 @@ export const projects: Project[] = [
         id: "cnc-drilling-station-photo",
         type: "image",
         title: "Electrical Drilling Station Simulation",
-        src: cimSystemImage,
-        thumbnail: cimSystemImage,
+        src: mr110DrillingImage,
+        thumbnail: mr110DrillingImage,
         caption:
-          "Electrical drilling station gallery entry. Replace this image with the standalone drilling station screenshot once it is added; the details below already describe the simulated drilling station components and behavior.",
+          "Standalone electrical drilling station view. I simulated sample sensing, guided clamp/release behavior, spindle operation, indexed positioning, return-to-home behavior, actuator reset, and PLC-style operation states.",
         details: {
           title: "Electrical Drilling Station Details",
           components: cimStationDetails.drilling.components,
@@ -1063,6 +1112,7 @@ export const projects: Project[] = [
     caseStudyUrl: "/projects/engineering-education-virtual-labs",
     productContext: [
       { label: "BEDO FM103 fluid mechanics training context", url: "https://bedoeg.com/product/fm103/" },
+      { label: "BEDO FM105 fluid mechanics training context" },
       { label: "BEDO FM115 fluid mechanics training context", url: "https://bedoeg.com/product/fm115/" },
       { label: "BEDO EV117 Fuel Cell Vehicle training context", url: "https://bedoeg.com/product/ev117-2/" },
     ],
@@ -1085,6 +1135,32 @@ export const projects: Project[] = [
           ],
         },
       })),
+      {
+        id: "fm105-flow-measurement-graph-view",
+        type: "image" as const,
+        title: "FM105 Flow Measurement Graph View",
+        src: eduFm105GraphImage,
+        thumbnail: eduFm105GraphImage,
+        caption:
+          "Graph-focused view for the FM105 flow-measurement lab, showing how experiment readings can be presented as student-facing feedback for comparison and analysis.",
+        details: {
+          title: "FM105 Graph Feedback",
+          components: [
+            "Flow measurement graph",
+            "Experiment reading display",
+            "Guided feedback area",
+            "Student-facing comparison view",
+          ],
+          behaviors: [
+            "Visualize measurement changes over the experiment",
+            "Compare flow-related readings between operating states",
+            "Support guided analysis without exposing internal code or project files",
+          ],
+          notes: [
+            "Shown as a public portfolio screenshot of educational feedback and visualization only.",
+          ],
+        },
+      },
       {
         id: "laminar-streamline-detail",
         type: "image" as const,
@@ -2325,6 +2401,91 @@ if (cimDraftProject && industrialTrainingProject) {
         ],
       },
     },
+    {
+      id: "industrial-training-mr110-loading",
+      type: "image",
+      title: "MR110 - Loading Station",
+      src: mr110LoadingImage,
+      thumbnail: mr110LoadingImage,
+      caption:
+        "MR110 loading station view showing the entry-point workflow: detecting a part, extracting it, moving it on a conveyor, and classifying the material/state before the motor stops.",
+      details: {
+        title: "MR110 Loading Station Details",
+        components: cimStationDetails.loading.components,
+        behaviors: cimStationDetails.loading.behaviors,
+      },
+    },
+    {
+      id: "industrial-training-mr110-storage",
+      type: "image",
+      title: "MR110 - Storage Station",
+      src: mr110StorageImage,
+      thumbnail: mr110StorageImage,
+      caption:
+        "MR110 storage station view showing receiving, rotary movement, gripper interaction, pocket selection, indexed positioning, and full/available storage behavior.",
+      details: {
+        title: "MR110 Storage Station Details",
+        components: cimStationDetails.storage.components,
+        behaviors: cimStationDetails.storage.behaviors,
+      },
+    },
+    {
+      id: "industrial-training-mr110-robot",
+      type: "image",
+      title: "MR110 - Robot Station",
+      src: mr110RobotImage,
+      thumbnail: mr110RobotImage,
+      caption:
+        "MR110 robot station view showing robot arm transport, pick/place interaction, gripper behavior, sensor-triggered process logic, and robot command/done state transitions.",
+      details: {
+        title: "MR110 Robot Station Details",
+        components: cimStationDetails.robot.components,
+        behaviors: cimStationDetails.robot.behaviors,
+      },
+    },
+    {
+      id: "industrial-training-mr110-laser",
+      type: "image",
+      title: "MR110 - Laser Marking Station",
+      src: mr110LaserImage,
+      thumbnail: mr110LaserImage,
+      caption:
+        "MR110 laser marking station view showing sample detection, clamp/release behavior, tool-head movement, operation sequencing, return-to-home behavior, and actuator reset.",
+      details: {
+        title: "MR110 Laser Marking Station Details",
+        components: cimStationDetails.laser.components,
+        behaviors: cimStationDetails.laser.behaviors,
+      },
+    },
+    {
+      id: "industrial-training-mr110-drilling",
+      type: "image",
+      title: "MR110 - Electrical Drilling Station",
+      src: mr110DrillingImage,
+      thumbnail: mr110DrillingImage,
+      caption:
+        "MR110 electrical drilling station view showing sample detection, clamping, spindle operation, positioning behavior, return-to-home behavior, and PLC-style operation sequencing.",
+      details: {
+        title: "MR110 Electrical Drilling Station Details",
+        components: cimStationDetails.drilling.components,
+        behaviors: cimStationDetails.drilling.behaviors,
+      },
+    },
+    ...mr109StationBreakdown.map((station, index) => ({
+      id: `industrial-training-mr109-${station.title
+        .toLowerCase()
+        .replace("mr109 - ", "")
+        .replace(/\s+/g, "-")}`,
+      type: "image" as const,
+      title: station.title,
+      src: mr109StationImages[index],
+      thumbnail: mr109StationImages[index],
+      caption: station.description,
+      details: {
+        title: `${station.title} Details`,
+        notes: station.bullets,
+      },
+    })),
   ];
   industrialTrainingProject.previewGif = "https://youtu.be/R4gS25C_wGs";
   industrialTrainingProject.previewVideo = cimThumbnailLoop;
