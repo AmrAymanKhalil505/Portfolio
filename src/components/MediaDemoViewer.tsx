@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink, Image as ImageIcon, PlayCircle } from "lucide-react";
+import { getGeneratedThumbnail } from "../data/generatedThumbnails";
 
 export type MediaItem = {
   id: string;
@@ -45,6 +46,12 @@ const getYouTubeThumbnail = (item: MediaItem) => {
   return videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : "";
 };
 
+const getMediaThumbnail = (item: MediaItem) => {
+  if (item.type === "youtube") return getYouTubeThumbnail(item);
+  const source = item.thumbnail || item.src;
+  return getGeneratedThumbnail(source, item.thumbnail || item.src || "");
+};
+
 const getYouTubeEmbedUrl = (item: MediaItem, shouldAutoplay: boolean) => {
   const videoId = getYouTubeId(item.youtubeId ?? item.src);
   const params = new URLSearchParams({
@@ -76,7 +83,7 @@ function MediaDemoViewer({ media }: MediaDemoViewerProps) {
   if (!selected) return null;
 
   const isLoaded = loadedMediaIds.has(selected.id);
-  const selectedThumbnail = selected.type === "youtube" ? getYouTubeThumbnail(selected) : selected.thumbnail;
+  const selectedThumbnail = getMediaThumbnail(selected);
 
   const selectMedia = (item: MediaItem) => {
     setSelectedId(item.id);
@@ -214,7 +221,7 @@ function MediaDemoViewer({ media }: MediaDemoViewerProps) {
           >
             {media.map((item, index) => {
               const isSelected = item.id === selected.id;
-              const thumbnail = item.type === "youtube" ? getYouTubeThumbnail(item) : item.thumbnail;
+              const thumbnail = getMediaThumbnail(item);
 
               return (
                 <button

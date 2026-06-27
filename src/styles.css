@@ -46,6 +46,34 @@ a {
   -webkit-line-clamp: 2;
 }
 
+.hero-desktop-layer {
+  display: none;
+}
+
+.hero-mobile-layer {
+  display: block;
+}
+
+.hero-content-wrap {
+  align-items: flex-start;
+}
+
+@media (min-aspect-ratio: 13 / 9) {
+  .hero-desktop-layer {
+    display: block;
+  }
+
+  .hero-mobile-layer {
+    display: none;
+  }
+
+  .hero-content-wrap {
+    align-items: center;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
 .bg-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
