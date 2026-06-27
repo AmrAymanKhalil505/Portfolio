@@ -1,0 +1,70 @@
+{
+  "companyAliases": {
+    "BEDO": ["bedo", "BEDO", "bedoeg", "BEDO MR110", "BEDO MR109", "BEDO MPC", "BEDO FM"],
+    "Ivris": ["ivris", "Ivris", "Ivris AR"],
+    "Nescafe": ["nescafe", "Nescafe", "Nestle", "nestle"],
+    "IBM": ["ibm", "IBM", "IBM Cloud", "Call for Code"],
+    "Tanta University": ["tanta university", "Tanta University", "Meta Quest 2", "Tanta"]
+  },
+  "explicitNoteMappings": {
+    "pid_virtual_labs_suite_shared": "pid-control-virtual-labs-suite",
+    "fluid_mechanics_energy_virtual_labs_shared": "engineering-education-virtual-labs",
+    "dc_motor_pid_digital_shadow_mpc103": "pid-control-virtual-labs-suite",
+    "mr109_compact_mechatronics_training_system": "industrial-training-simulation-systems"
+  },
+  "parentProjectMappings": {
+    "bernoulli_principle_virtual_lab": "engineering-education-virtual-labs",
+    "ev117_fuel_cell_vehicle_digital_lab": "engineering-education-virtual-labs",
+    "laminar_flow_visualization_virtual_lab": "engineering-education-virtual-labs",
+    "mpc100_pressure_process_control": "pid-control-virtual-labs-suite",
+    "mpc101_temperature_process_control": "pid-control-virtual-labs-suite",
+    "mpc102_dc_motor_speed_control": "pid-control-virtual-labs-suite",
+    "mpc104_level_process_control": "pid-control-virtual-labs-suite",
+    "mpc105_flow_process_control": "pid-control-virtual-labs-suite",
+    "DC Motor PID Digital Shadow": "pid-control-virtual-labs-suite"
+  },
+  "ndaRules": {
+    "highRiskPatterns": [
+      "\\bconfidential\\b",
+      "\\bNDA\\b",
+      "\\bproprietary\\b",
+      "internal use only",
+      "do not share",
+      "private repository"
+    ],
+    "mediumRiskPatterns": [
+      "\\bpassword\\b",
+      "\\bapi[\\s_]?key\\b",
+      "\\btoken\\b",
+      "\\bsecret\\b",
+      "\\bcredentials?\\b",
+      "private[\\s_]?url",
+      "local[\\s_]?path",
+      "source[\\s_]?code",
+      "code[\\s_]?block",
+      "sensor[\\s_]?list",
+      "component[\\s_]?list",
+      "part[\\s_]?number"
+    ],
+    "contentFlags": {
+      "codeBlocks": true,
+      "privateUrls": true,
+      "localPaths": true
+    }
+  },
+  "skillCategories": {
+    "Unity": ["Unity"],
+    "C#": ["C#"],
+    "WebGL": ["WebGL"],
+    "VR / AR": ["VR", "Meta Quest 2", "AR", "Auto Hand", "360 Video"],
+    "Simulation & Digital Twin": ["Simulation", "Digital Twin", "Physics", "Mechatronics", "PLC Concepts"],
+    "Control Systems": ["PID Control", "Control Systems", "TIA Portal"],
+    "Educational Technology": ["Virtual Lab", "Educational Simulation", "Interactive Learning", "Educational Game"],
+    "Mobile Development": ["Android", "iOS", "Mobile Game"],
+    "Backend & Cloud": ["Photon", "PlayFab", "Node.js", "Render", "Django", "REST API", "IBM Cloud", "Kubernetes"],
+    "Data & ML": ["Data Visualization", "Machine Learning", "IoT", "Data Monitoring"],
+    "UI / Architecture": ["uGUI", "ScriptableObject architecture", "SOAP", "Interaction Design", "Arcade Gameplay", "Booth Experience"],
+    "Localization": ["Arabic UI", "Environmental Awareness"]
+  },
+  "excludedMdFiles": []
+}
