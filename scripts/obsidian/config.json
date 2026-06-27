@@ -1,0 +1,177 @@
+{
+  "vaultDir": "obsidian-vault",
+  "sourceNotesDir": "src/md files",
+  "rawNoteMappings": {
+    "atmosphere_guardian_educational_game": "atmosphere-guardian",
+    "cim_station_behavior_simulation": "cim-station-behavior-simulation",
+    "DC Motor PID Digital Shadow": "pid-control-virtual-labs-suite",
+    "dc_motor_pid_digital_shadow_mpc103": "pid-control-virtual-labs-suite",
+    "fluid_mechanics_energy_virtual_labs_shared": "engineering-education-virtual-labs",
+    "mr109_compact_mechatronics_training_system": "industrial-training-simulation-systems",
+    "pid_virtual_labs_suite_shared": "pid-control-virtual-labs-suite"
+  },
+  "componentNotes": {
+    "bernoulli_principle_virtual_lab": {
+      "parentProjectId": "engineering-education-virtual-labs",
+      "title": "Bernoulli Principle Virtual Lab",
+      "skills": ["Unity", "WebGL", "Simulation", "Virtual Lab", "Fluid Mechanics"]
+    },
+    "dc_motor_pid_digital_shadow_mpc103": {
+      "parentProjectId": "pid-control-virtual-labs-suite",
+      "title": "DC Motor PID Digital Shadow",
+      "skills": ["Unity", "C#", "PID Control", "Control Systems", "Digital Shadow"]
+    },
+    "ev117_fuel_cell_vehicle_digital_lab": {
+      "parentProjectId": "engineering-education-virtual-labs",
+      "title": "EV117 Fuel Cell Vehicle Digital Lab",
+      "skills": ["Unity", "WebGL", "Simulation", "Virtual Lab", "Energy Systems"]
+    },
+    "laminar_flow_visualization_virtual_lab": {
+      "parentProjectId": "engineering-education-virtual-labs",
+      "title": "Laminar Flow Visualization Virtual Lab",
+      "skills": ["Unity", "WebGL", "Simulation", "Virtual Lab", "Fluid Mechanics"]
+    },
+    "mpc100_pressure_process_control": {
+      "parentProjectId": "pid-control-virtual-labs-suite",
+      "title": "MPC100 Pressure Process Control Digital Shadow",
+      "skills": ["Unity", "C#", "PID Control", "Control Systems", "Digital Shadow"]
+    },
+    "mpc101_temperature_process_control": {
+      "parentProjectId": "pid-control-virtual-labs-suite",
+      "title": "MPC101 Temperature Process Control Digital Shadow",
+      "skills": ["Unity", "C#", "PID Control", "Control Systems", "Digital Shadow"]
+    },
+    "mpc102_dc_motor_speed_control": {
+      "parentProjectId": "pid-control-virtual-labs-suite",
+      "title": "MPC102 DC Motor Speed Control Digital Shadow",
+      "skills": ["Unity", "C#", "PID Control", "Control Systems", "Digital Shadow"]
+    },
+    "mpc104_level_process_control": {
+      "parentProjectId": "pid-control-virtual-labs-suite",
+      "title": "MPC104 Level Process Control Digital Shadow",
+      "skills": ["Unity", "C#", "PID Control", "Control Systems", "Digital Shadow"]
+    },
+    "mpc105_flow_process_control": {
+      "parentProjectId": "pid-control-virtual-labs-suite",
+      "title": "MPC105 Flow Process Control Digital Shadow",
+      "skills": ["Unity", "C#", "PID Control", "Control Systems", "Digital Shadow"]
+    }
+  },
+  "companyAliases": {
+    "BEDO": ["BEDO", "MR110", "MR109", "MPC100", "MPC101", "MPC102", "MPC103", "MPC104", "MPC105", "EV117", "FM105"],
+    "IBM": ["IBM", "Call for Code", "Code and Response"],
+    "Ivris": ["Ivris"],
+    "Nescafe": ["Nescafe", "Nestle"],
+    "Tanta University": ["Tanta University", "Meta Quest 2 Training Suite"]
+  },
+  "skillNotes": {
+    "Unity": {
+      "aliases": ["Unity"],
+      "meaning": "Real-time 3D application development across WebGL simulations, VR training, AR visualization, interactive labs, games, and technical demos.",
+      "talkingPoints": [
+        "Built both polished user-facing experiences and behavior-focused engineering simulations.",
+        "Used Unity as a bridge between technical systems, training workflows, and interactive visualization.",
+        "Shipped across WebGL, mobile, VR, and prototype contexts."
+      ]
+    },
+    "C#": {
+      "aliases": ["C#"],
+      "meaning": "Gameplay, simulation, UI, data-flow, and training-logic implementation inside Unity projects.",
+      "talkingPoints": [
+        "Implemented station logic, interaction systems, control workflows, and UI behavior.",
+        "Used C# to connect visual feedback with underlying simulation state."
+      ]
+    },
+    "WebGL": {
+      "aliases": ["WebGL"],
+      "meaning": "Browser-delivered interactive simulations and demos that make Unity work easier to share publicly.",
+      "talkingPoints": [
+        "Turned technical projects into accessible browser experiences.",
+        "Balanced media, UI, and performance constraints for portfolio-safe demos."
+      ]
+    },
+    "Simulation & Digital Twin": {
+      "aliases": ["Simulation", "Digital Twin", "Digital Shadow", "Industrial Training", "Mechatronics", "PLC Concepts"],
+      "meaning": "Behavior-driven virtual systems that explain motion, state, sensors, feedback, and training workflows without exposing private implementation files.",
+      "talkingPoints": [
+        "Modeled visible system behavior rather than claiming ownership of physical hardware.",
+        "Translated industrial and educational systems into understandable training experiences."
+      ]
+    },
+    "Control Systems": {
+      "aliases": ["PID Control", "Control Systems", "PID Systems"],
+      "meaning": "Interactive learning tools for PID response, tuning, disturbance behavior, and performance analysis.",
+      "talkingPoints": [
+        "Made abstract control-system behavior visible through graphs, parameters, and guided feedback.",
+        "Connected engineering theory with student-facing experimentation."
+      ]
+    },
+    "VR / AR": {
+      "aliases": ["VR", "AR", "Meta Quest 2", "Auto Hand", "360 Video"],
+      "meaning": "Immersive and spatial experiences for booths, training, interior visualization, and lab exploration.",
+      "talkingPoints": [
+        "Built experiences for both headset-based presence and mobile AR preview workflows.",
+        "Focused on practical interaction design, onboarding, and reliable demonstration flow."
+      ]
+    },
+    "Educational Technology": {
+      "aliases": ["Virtual Lab", "Educational Simulation", "Interactive Learning", "Educational Game", "Environmental Awareness"],
+      "meaning": "Interactive systems that help learners understand engineering, science, environmental, or training concepts through direct manipulation.",
+      "talkingPoints": [
+        "Used visual feedback and guided interaction to make technical topics easier to grasp.",
+        "Designed project pages so HR can scan quickly while technical reviewers can go deeper."
+      ]
+    },
+    "Mobile Development": {
+      "aliases": ["Android", "iOS", "Mobile Game"],
+      "meaning": "Mobile-facing Unity work across educational games and AR/interior visualization workflows.",
+      "talkingPoints": [
+        "Handled platform constraints, mobile UI, and device-friendly interaction patterns."
+      ]
+    },
+    "Backend & Cloud": {
+      "aliases": ["Node.js", "Render", "Django", "REST API", "IBM Cloud", "Kubernetes", "PlayFab"],
+      "meaning": "Supporting services, APIs, hosting, and account/data integration around interactive applications.",
+      "talkingPoints": [
+        "Integrated runtime content, backend services, and public prototype workflows where needed."
+      ]
+    },
+    "Data & ML": {
+      "aliases": ["Machine Learning", "Data Monitoring", "Data Visualization"],
+      "meaning": "Data-facing project work around monitoring, visualization, and decision-support prototypes.",
+      "talkingPoints": [
+        "Presented data and ML ideas through understandable user workflows and public demos."
+      ]
+    },
+    "UI / Architecture": {
+      "aliases": ["uGUI", "ScriptableObject architecture", "SOAP", "Interaction Design", "Arcade Gameplay", "Booth Experience", "Photon"],
+      "meaning": "Unity UI, state organization, interaction architecture, multiplayer/collaboration support, and reusable systems.",
+      "talkingPoints": [
+        "Kept interaction-heavy projects understandable and maintainable.",
+        "Built UI for simulation feedback, debugging, onboarding, and public demos."
+      ]
+    },
+    "Localization": {
+      "aliases": ["Arabic UI"],
+      "meaning": "Localized interface and instruction work for Arabic learning experiences.",
+      "talkingPoints": [
+        "Supported kid-friendly educational flow with localized instructions and readable feedback."
+      ]
+    }
+  },
+  "ndaRules": {
+    "flagExactComponentLists": true,
+    "highRiskPatterns": [
+      { "label": "credential wording", "pattern": "\\b(password|token|secret|api[_ -]?key|credential|private key)\\b" },
+      { "label": "confidentiality wording", "pattern": "\\b(confidential|proprietary|under nda|nda)\\b" },
+      { "label": "private URL", "pattern": "https?://(localhost|127\\.0\\.0\\.1|10\\.\\d+|192\\.168\\.|172\\.(1[6-9]|2\\d|3[0-1])\\.)" },
+      { "label": "Windows local path", "pattern": "\\b[A-Z]:\\\\[^\\n\\r`]+" }
+    ],
+    "mediumRiskPatterns": [
+      { "label": "internal implementation wording", "pattern": "\\b(internal|implementation detail|client implementation|private repository|source files?)\\b" },
+      { "label": "PLC code detail", "pattern": "\\b(TIA Portal|ladder logic|PLC code|function block|data block|I/O address|input address|output address)\\b" },
+      { "label": "source-code block", "pattern": "```" },
+      { "label": "exact sensor or component list", "pattern": "\\b(capacitive sensor|inductive sensor|reed switch|photoelectric sensor|light barrier|5/2 single solenoid valve|limit switch|stepper motor)\\b" }
+    ]
+  }
+}
