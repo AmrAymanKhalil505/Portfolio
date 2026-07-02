@@ -72,6 +72,8 @@ const getEvidenceItems = (project: Project) => {
 function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const evidenceItems = getEvidenceItems(project);
+  const usesDotIndicator = project.id === "industrial-training-simulation-systems";
+  const dotCount = usesDotIndicator ? Math.min(evidenceItems.length, 16) : 0;
 
   const playPreviewVideo = () => {
     const video = previewVideoRef.current;
@@ -135,10 +137,13 @@ function ProjectCard({ project }: ProjectCardProps) {
           <h3 className="text-xl font-semibold text-white">{project.title}</h3>
           <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
           {evidenceItems.length > 0 && (
-            <div
-              className="evidence-badge-scroll mt-4 grid max-h-[8.25rem] gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2"
-              aria-label={`${project.title} technical evidence`}
-            >
+            <>
+              <div
+                className={`evidence-badge-scroll mt-4 grid max-h-[8.25rem] gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
+                  usesDotIndicator ? "evidence-badge-scroll--dots" : ""
+                }`}
+                aria-label={`${project.title} technical evidence`}
+              >
               {evidenceItems.map((item) => (
                 <span
                   key={item}
@@ -147,7 +152,15 @@ function ProjectCard({ project }: ProjectCardProps) {
                   {item}
                 </span>
               ))}
-            </div>
+              </div>
+              {usesDotIndicator && dotCount > 0 && (
+                <div className="evidence-dot-rail mt-3" aria-hidden="true">
+                  {Array.from({ length: dotCount }).map((_, index) => (
+                    <span key={index} className={index === 0 ? "is-active" : ""} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
           <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
             {project.tech.slice(0, 5).map((tech) => (
