@@ -37,8 +37,25 @@ const getFallbackPreviewImage = (project: Project) => {
   return youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` : project.thumbnail;
 };
 
+const getEvidenceItems = (project: Project) => {
+  const evidence = [];
+
+  if (project.webglAvailable) evidence.push("WebGL demo");
+  if (project.media?.length) evidence.push(`${project.media.length} media proofs`);
+  if (project.stationBreakdown?.length) evidence.push(`${project.stationBreakdown.length} stations`);
+  if (project.simulatedBehaviors?.length) evidence.push(`${project.simulatedBehaviors.length} behaviors`);
+  if (project.technicalHighlights?.length) evidence.push("Tech breakdown");
+  if (project.previewVideo || project.previewGif) evidence.push("Motion preview");
+
+  return evidence.slice(0, 3);
+};
+
+const getPlatformSummary = (project: Project) => project.platform.slice(0, 2).join(" + ");
+
 function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
+  const evidenceItems = getEvidenceItems(project);
+  const platformSummary = getPlatformSummary(project);
 
   const playPreviewVideo = () => {
     const video = previewVideoRef.current;
@@ -97,10 +114,31 @@ function ProjectCard({ project }: ProjectCardProps) {
           </span>
         )}
       </div>
-      <div className="flex min-h-[22rem] flex-col p-5">
+      <div className="flex min-h-[23.5rem] flex-col p-5">
         <div className="flex-1">
-          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+          <div className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-scan/75">
+            <span>Evidence panel</span>
+            {platformSummary && (
+              <>
+                <span className="h-1 w-1 rounded-full bg-scan/45" aria-hidden="true" />
+                <span className="truncate text-steel/70">{platformSummary}</span>
+              </>
+            )}
+          </div>
+          <h3 className="mt-3 text-xl font-semibold text-white">{project.title}</h3>
           <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
+          {evidenceItems.length > 0 && (
+            <div className="mt-4 grid gap-2" aria-label={`${project.title} technical evidence`}>
+              {evidenceItems.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-md border border-scan/15 bg-scan/[0.055] px-3 py-2 text-xs font-medium text-scan/90"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          )}
           <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
             {project.tech.slice(0, 5).map((tech) => (
               <TechBadge key={tech} tech={tech} compact />
@@ -109,7 +147,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         </div>
         <div className="mt-6 flex h-11 shrink-0 items-start justify-start">
           <ButtonLink to={project.caseStudyUrl} variant="primary" icon={<ArrowUpRight size={16} />}>
-            View Project
+            Inspect Case Study
           </ButtonLink>
         </div>
       </div>
