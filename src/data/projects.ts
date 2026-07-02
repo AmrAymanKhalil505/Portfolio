@@ -384,7 +384,6 @@ export const projects: Project[] = [
       badges: [
         "50+ sensor / PLC I/O signals",
         "4 motion/programming models",
-        "16 media proofs",
         "9 MR109 station workflows",
         "Robot FK / IK",
         "6-joint robot control",

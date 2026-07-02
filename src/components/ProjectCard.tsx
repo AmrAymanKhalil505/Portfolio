@@ -46,7 +46,7 @@ const getEvidenceItems = (project: Project) => {
   const evidence = [];
   const technicalEvidence = project.technicalEvidence;
 
-  if (technicalEvidence?.badges?.length) return technicalEvidence.badges.slice(0, 3);
+  if (technicalEvidence?.badges?.length) return technicalEvidence.badges;
 
   if (technicalEvidence?.sensorsSimulated) {
     evidence.push(formatEvidenceCount(technicalEvidence.sensorsSimulated, technicalEvidence.sensorLabel ?? "sensors simulated"));
@@ -62,7 +62,6 @@ const getEvidenceItems = (project: Project) => {
   }
 
   if (project.webglAvailable) evidence.push("WebGL demo");
-  if (project.media?.length) evidence.push(`${project.media.length} media proofs`);
   if (project.stationBreakdown?.length) evidence.push(`${project.stationBreakdown.length} stations`);
   if (project.technicalHighlights?.length) evidence.push("Tech breakdown");
   if (project.previewVideo || project.previewGif) evidence.push("Motion preview");
@@ -70,18 +69,9 @@ const getEvidenceItems = (project: Project) => {
   return evidence.slice(0, 3);
 };
 
-const getHiddenEvidenceCount = (project: Project) => {
-  const badgeCount = project.technicalEvidence?.badges?.length ?? 0;
-  return Math.max(0, badgeCount - 3);
-};
-
-const getPlatformSummary = (project: Project) => project.platform.slice(0, 2).join(" + ");
-
 function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const evidenceItems = getEvidenceItems(project);
-  const hiddenEvidenceCount = getHiddenEvidenceCount(project);
-  const platformSummary = getPlatformSummary(project);
 
   const playPreviewVideo = () => {
     const video = previewVideoRef.current;
@@ -142,19 +132,13 @@ function ProjectCard({ project }: ProjectCardProps) {
       </div>
       <div className="flex min-h-[23.5rem] flex-col p-5">
         <div className="flex-1">
-          <div className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-scan/75">
-            <span>Evidence panel</span>
-            {platformSummary && (
-              <>
-                <span className="h-1 w-1 rounded-full bg-scan/45" aria-hidden="true" />
-                <span className="truncate text-steel/70">{platformSummary}</span>
-              </>
-            )}
-          </div>
-          <h3 className="mt-3 text-xl font-semibold text-white">{project.title}</h3>
+          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
           <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
           {evidenceItems.length > 0 && (
-            <div className="mt-4 grid gap-2" aria-label={`${project.title} technical evidence`}>
+            <div
+              className="evidence-badge-scroll mt-4 grid max-h-[8.25rem] gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2"
+              aria-label={`${project.title} technical evidence`}
+            >
               {evidenceItems.map((item) => (
                 <span
                   key={item}
@@ -163,11 +147,6 @@ function ProjectCard({ project }: ProjectCardProps) {
                   {item}
                 </span>
               ))}
-              {hiddenEvidenceCount > 0 && (
-                <span className="rounded-md border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-medium text-steel/80">
-                  +{hiddenEvidenceCount} more technical signals in case study
-                </span>
-              )}
             </div>
           )}
           <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
