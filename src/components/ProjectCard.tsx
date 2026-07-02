@@ -73,7 +73,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const evidenceScrollRef = useRef<HTMLDivElement>(null);
   const evidenceItems = getEvidenceItems(project);
-  const usesDotIndicator = project.id === "industrial-training-simulation-systems";
+  const usesDotIndicator = evidenceItems.length > 3;
   const dotCount = usesDotIndicator ? Math.min(evidenceItems.length, 10) : 0;
   const [activeEvidenceDot, setActiveEvidenceDot] = useState(0);
 
@@ -150,17 +150,17 @@ function ProjectCard({ project }: ProjectCardProps) {
           </span>
         )}
       </div>
-      <div className="flex min-h-[23.5rem] flex-col p-5">
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-          <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
+      <div className="flex min-h-[35rem] flex-col p-5">
+        <h3 className="h-16 overflow-hidden text-xl font-semibold leading-tight text-white">{project.title}</h3>
+        <p className="mt-3 h-[7.5rem] overflow-hidden text-sm leading-6 text-steel">{project.summary}</p>
+        <div className="mt-4 h-40">
           {evidenceItems.length > 0 && (
-            <div className={`mt-4 ${usesDotIndicator ? "flex items-stretch gap-3" : ""}`}>
+            <div className={`h-full ${usesDotIndicator ? "flex items-stretch gap-3" : ""}`}>
               <div
                 ref={usesDotIndicator ? evidenceScrollRef : undefined}
                 onScroll={usesDotIndicator ? updateEvidenceDot : undefined}
-                className={`evidence-badge-scroll grid flex-1 gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
-                  usesDotIndicator ? "max-h-[9.25rem] evidence-badge-scroll--dots" : "max-h-[8.25rem]"
+                className={`evidence-badge-scroll grid h-full flex-1 gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
+                  usesDotIndicator ? "evidence-badge-scroll--dots" : ""
                 }`}
                 aria-label={`${project.title} technical evidence`}
               >
@@ -190,13 +190,13 @@ function ProjectCard({ project }: ProjectCardProps) {
               )}
             </div>
           )}
-          <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
-            {project.tech.slice(0, 5).map((tech) => (
-              <TechBadge key={tech} tech={tech} compact />
-            ))}
-          </div>
         </div>
-        <div className="mt-6 flex h-11 shrink-0 items-start justify-start">
+        <div className="mt-5 flex h-[8.25rem] flex-wrap content-start gap-2 overflow-hidden" aria-label={`${project.title} tech stack`}>
+          {project.tech.slice(0, 5).map((tech) => (
+            <TechBadge key={tech} tech={tech} compact />
+          ))}
+        </div>
+        <div className="mt-auto flex h-11 shrink-0 items-start justify-start">
           <ButtonLink to={project.caseStudyUrl} variant="primary" icon={<ArrowUpRight size={16} />}>
             Inspect Case Study
           </ButtonLink>

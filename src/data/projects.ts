@@ -382,20 +382,13 @@ export const projects: Project[] = [
       mathematicalModelLabel: "motion/programming models",
       modelNames: ["PLC digital twin", "Robot FK/IK", "Robot G-code interpreter", "CNC visual interpreter"],
       badges: [
-        "50+ sensor / PLC I/O signals",
-        "4 motion/programming models",
-        "9 MR109 station workflows",
-        "Robot FK / IK",
-        "6-joint robot control",
-        "Robot G-code interpreter",
-        "Visual script editor",
-        "CNC visual interpreter",
-        "TIA Portal digital twin",
-        "PLC-style state flow",
-        "Pneumatic actuation",
-        "Stepper indexed motion",
-        "Encoder feedback",
-        "Emergency/process states",
+        "Real-time machine state feedback",
+        "PLC-driven station logic",
+        "Sensor-driven automation",
+        "Robotic motion control",
+        "Visual program builder",
+        "Multi-station workflow simulation",
+        "Safety & emergency states",
       ],
       evidenceList: [
         "TIA Portal-connected digital twin simulation with PLC-style station states, I/O mapping, start/running/stop, process ON/OFF, and emergency behavior.",
@@ -459,6 +452,13 @@ export const projects: Project[] = [
       mathematicalModelsSimulated: 6,
       mathematicalModelLabel: "control models",
       modelNames: ["Pressure", "Temperature", "Motor speed", "Motor position", "Liquid level", "Flow rate"],
+      badges: [
+        "Live parameter tuning",
+        "Real-time data visualization",
+        "Interactive graph feedback",
+        "Export experiment data",
+        "Performance metrics dashboard",
+      ],
     },
     media: [
       ...pidLabModules.map((module) => ({
@@ -607,6 +607,13 @@ export const projects: Project[] = [
       mathematicalModelsSimulated: 4,
       mathematicalModelLabel: "engineering models",
       modelNames: ["Bernoulli flow", "Flow measurement", "Laminar streamlines", "Fuel-cell power flow"],
+      badges: [
+        "Interactive experiment workflows",
+        "Real-time measurement feedback",
+        "Visual flow simulation",
+        "Graph-based lab analysis",
+        "Exploded-view system animation",
+      ],
     },
     media: [
       ...engineeringEducationModules.map((module) => ({
@@ -1013,6 +1020,15 @@ export const projects: Project[] = [
       },
     ],
     attributionNote: ivrisAttributionNote,
+    technicalEvidence: {
+      badges: [
+        "Runtime 3D asset loading",
+        "Collaborative room editing",
+        "Mobile AR furniture preview",
+        "Cross-platform WebGL/mobile app",
+        "Backend-connected app workflows",
+      ],
+    },
     media: [
       {
         id: "ivris-public-tutorial-room-workflow",
@@ -1295,6 +1311,15 @@ export const projects: Project[] = [
     caseStudyUrl: "/projects/nescafe-surfing-vr-booth",
     productContext: [{ label: "Nescafe / Nestle booth activation context" }],
     attributionNote: nescafeAttributionNote,
+    technicalEvidence: {
+      badges: [
+        "Short-session VR gameplay",
+        "Visitor-friendly onboarding",
+        "Timed arcade score loop",
+        "Branded collectible objectives",
+        "Multi-route environment variation",
+      ],
+    },
     media: [
       {
         id: "nescafe-booth-demo",
@@ -1651,6 +1676,15 @@ export const projects: Project[] = [
     ],
     attributionNote:
       "Public links provide competition and project context. This portfolio page focuses on my contribution as a team member and summarizes the public smart-irrigation concept without claiming sole ownership of the full team project.",
+    technicalEvidence: {
+      badges: [
+        "IoT field monitoring workflow",
+        "Backend API data pipeline",
+        "ML irrigation decision support",
+        "Sensor-to-app data flow",
+        "Connected agriculture prototype",
+      ],
+    },
     media: [
       {
         id: "smart-irrigation-demo",
