@@ -46,7 +46,7 @@ const getEvidenceItems = (project: Project) => {
   const evidence = [];
   const technicalEvidence = project.technicalEvidence;
 
-  if (technicalEvidence?.badges?.length) return technicalEvidence.badges;
+  if (technicalEvidence?.badges?.length) return technicalEvidence.badges.slice(0, 3);
 
   if (technicalEvidence?.sensorsSimulated) {
     evidence.push(formatEvidenceCount(technicalEvidence.sensorsSimulated, technicalEvidence.sensorLabel ?? "sensors simulated"));
@@ -70,11 +70,17 @@ const getEvidenceItems = (project: Project) => {
   return evidence.slice(0, 3);
 };
 
+const getHiddenEvidenceCount = (project: Project) => {
+  const badgeCount = project.technicalEvidence?.badges?.length ?? 0;
+  return Math.max(0, badgeCount - 3);
+};
+
 const getPlatformSummary = (project: Project) => project.platform.slice(0, 2).join(" + ");
 
 function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const evidenceItems = getEvidenceItems(project);
+  const hiddenEvidenceCount = getHiddenEvidenceCount(project);
   const platformSummary = getPlatformSummary(project);
 
   const playPreviewVideo = () => {
@@ -148,10 +154,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           <h3 className="mt-3 text-xl font-semibold text-white">{project.title}</h3>
           <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
           {evidenceItems.length > 0 && (
-            <div
-              className="mt-4 grid max-h-[8.6rem] gap-2 overflow-y-auto pr-1"
-              aria-label={`${project.title} technical evidence`}
-            >
+            <div className="mt-4 grid gap-2" aria-label={`${project.title} technical evidence`}>
               {evidenceItems.map((item) => (
                 <span
                   key={item}
@@ -160,6 +163,11 @@ function ProjectCard({ project }: ProjectCardProps) {
                   {item}
                 </span>
               ))}
+              {hiddenEvidenceCount > 0 && (
+                <span className="rounded-md border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-medium text-steel/80">
+                  +{hiddenEvidenceCount} more technical signals in case study
+                </span>
+              )}
             </div>
           )}
           <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
