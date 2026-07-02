@@ -34,6 +34,13 @@ export type Project = {
     url?: string;
   }[];
   attributionNote?: string;
+  technicalEvidence?: {
+    sensorsSimulated?: number;
+    sensorLabel?: string;
+    mathematicalModelsSimulated?: number;
+    mathematicalModelLabel?: string;
+    modelNames?: string[];
+  };
   highlights: string[];
   timeline: string;
   problem: string;

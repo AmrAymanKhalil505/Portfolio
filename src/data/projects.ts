@@ -72,6 +72,10 @@ export const projects: Project[] = [
       },
     ],
     attributionNote: bedoAttributionNote,
+    technicalEvidence: {
+      sensorsSimulated: 11,
+      sensorLabel: "sensor/feedback systems",
+    },
     media: [
       {
         id: "full-system-run",
@@ -371,6 +375,10 @@ export const projects: Project[] = [
       },
     ],
     attributionNote: bedoAttributionNote,
+    technicalEvidence: {
+      sensorsSimulated: 20,
+      sensorLabel: "sensor/feedback systems",
+    },
     highlights: [
       "Built Unity-based training simulations for multi-station industrial systems.",
       "Simulated MR110 Advanced Modular CIM and MR109 Compact Mechatronics training workflows.",
@@ -416,6 +424,13 @@ export const projects: Project[] = [
       { label: "BEDO MPC105 Flow Process Control Trainer", url: "https://bedoeg.com/product/mpc105/" },
     ],
     attributionNote: bedoAttributionNote,
+    technicalEvidence: {
+      sensorsSimulated: 6,
+      sensorLabel: "feedback sensors simulated",
+      mathematicalModelsSimulated: 6,
+      mathematicalModelLabel: "control models",
+      modelNames: ["Pressure", "Temperature", "Motor speed", "Motor position", "Liquid level", "Flow rate"],
+    },
     media: [
       ...pidLabModules.map((module) => ({
         id: module.id,
@@ -557,6 +572,13 @@ export const projects: Project[] = [
       { label: "BEDO EV117 Fuel Cell Vehicle training context", url: "https://bedoeg.com/product/ev117-2/" },
     ],
     attributionNote: bedoAttributionNote,
+    technicalEvidence: {
+      sensorsSimulated: 7,
+      sensorLabel: "measurement systems",
+      mathematicalModelsSimulated: 4,
+      mathematicalModelLabel: "engineering models",
+      modelNames: ["Bernoulli flow", "Flow measurement", "Laminar streamlines", "Fuel-cell power flow"],
+    },
     media: [
       ...engineeringEducationModules.map((module) => ({
         id: module.id,

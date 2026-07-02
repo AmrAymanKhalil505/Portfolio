@@ -39,11 +39,23 @@ const getFallbackPreviewImage = (project: Project) => {
 
 const getEvidenceItems = (project: Project) => {
   const evidence = [];
+  const technicalEvidence = project.technicalEvidence;
+
+  if (technicalEvidence?.sensorsSimulated) {
+    evidence.push(`${technicalEvidence.sensorsSimulated} ${technicalEvidence.sensorLabel ?? "sensors simulated"}`);
+  }
+
+  if (technicalEvidence?.mathematicalModelsSimulated) {
+    evidence.push(
+      `${technicalEvidence.mathematicalModelsSimulated} ${
+        technicalEvidence.mathematicalModelLabel ?? "mathematical models"
+      }`,
+    );
+  }
 
   if (project.webglAvailable) evidence.push("WebGL demo");
   if (project.media?.length) evidence.push(`${project.media.length} media proofs`);
   if (project.stationBreakdown?.length) evidence.push(`${project.stationBreakdown.length} stations`);
-  if (project.simulatedBehaviors?.length) evidence.push(`${project.simulatedBehaviors.length} behaviors`);
   if (project.technicalHighlights?.length) evidence.push("Tech breakdown");
   if (project.previewVideo || project.previewGif) evidence.push("Motion preview");
 
