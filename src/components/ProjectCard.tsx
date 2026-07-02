@@ -37,19 +37,25 @@ const getFallbackPreviewImage = (project: Project) => {
   return youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` : project.thumbnail;
 };
 
+const formatEvidenceCount = (count: number, label = "") => {
+  if (!label) return `${count}`;
+  return label.startsWith("+") ? `${count}${label}` : `${count} ${label}`;
+};
+
 const getEvidenceItems = (project: Project) => {
   const evidence = [];
   const technicalEvidence = project.technicalEvidence;
 
   if (technicalEvidence?.sensorsSimulated) {
-    evidence.push(`${technicalEvidence.sensorsSimulated} ${technicalEvidence.sensorLabel ?? "sensors simulated"}`);
+    evidence.push(formatEvidenceCount(technicalEvidence.sensorsSimulated, technicalEvidence.sensorLabel ?? "sensors simulated"));
   }
 
   if (technicalEvidence?.mathematicalModelsSimulated) {
     evidence.push(
-      `${technicalEvidence.mathematicalModelsSimulated} ${
-        technicalEvidence.mathematicalModelLabel ?? "mathematical models"
-      }`,
+      formatEvidenceCount(
+        technicalEvidence.mathematicalModelsSimulated,
+        technicalEvidence.mathematicalModelLabel ?? "mathematical models",
+      ),
     );
   }
 
@@ -62,14 +68,11 @@ const getEvidenceItems = (project: Project) => {
   return evidence.slice(0, 3);
 };
 
-const getEvidenceList = (project: Project) => project.technicalEvidence?.evidenceList ?? [];
-
 const getPlatformSummary = (project: Project) => project.platform.slice(0, 2).join(" + ");
 
 function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const evidenceItems = getEvidenceItems(project);
-  const evidenceList = getEvidenceList(project);
   const platformSummary = getPlatformSummary(project);
 
   const playPreviewVideo = () => {
@@ -151,19 +154,6 @@ function ProjectCard({ project }: ProjectCardProps) {
                 >
                   {item}
                 </span>
-              ))}
-            </div>
-          )}
-          {evidenceList.length > 0 && (
-            <div
-              className="mt-4 max-h-32 space-y-2 overflow-y-auto rounded-lg border border-white/10 bg-ink/35 p-3 pr-2 text-xs leading-5 text-steel scrollbar-thin scrollbar-track-transparent scrollbar-thumb-scan/25"
-              aria-label={`${project.title} detailed technical evidence`}
-            >
-              {evidenceList.map((item) => (
-                <div key={item} className="flex gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan/70" aria-hidden="true" />
-                  <span>{item}</span>
-                </div>
               ))}
             </div>
           )}
