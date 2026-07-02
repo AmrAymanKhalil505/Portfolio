@@ -376,8 +376,21 @@ export const projects: Project[] = [
     ],
     attributionNote: bedoAttributionNote,
     technicalEvidence: {
-      sensorsSimulated: 20,
-      sensorLabel: "sensor/feedback systems",
+      sensorsSimulated: 50,
+      sensorLabel: "+ sensor / PLC I/O signals",
+      mathematicalModelsSimulated: 4,
+      mathematicalModelLabel: "motion/programming models",
+      modelNames: ["PLC digital twin", "Robot FK/IK", "Robot G-code interpreter", "CNC visual interpreter"],
+      evidenceList: [
+        "TIA Portal-connected digital twin simulation with PLC-style station states, I/O mapping, start/running/stop, process ON/OFF, and emergency behavior.",
+        "MR109 station families include loading, transporting, measuring, buffering, processing, assembly, sorting, robot, and storage workflows.",
+        "Simulated sensor families include light barrier, capacitive, inductive, reed, limit, encoder, laser distance, optical fiber, photoelectric, and color sensing.",
+        "Simulated moving parts include conveyors, pneumatic cylinders, rotary actuators, suction/vacuum handling, grippers, DC motors, and stepper-driven indexed motion.",
+        "Robot arm system includes 6-joint forward kinematics, inverse kinematics through X/Y/Z target control, joint limits, and direct manual motion control.",
+        "Robot automatic mode runs a G-code-style interpreter with Run/Pause/Stop/Load/Edit controls, conditions, jumps, calls, dwell commands, and output writes.",
+        "Robot visual script editor/compiler lets students build command rows without typing every line manually, validate them, and export/load the script into the interpreter.",
+        "CNC-style visual programming/interpreter system supports student-built process logic similar to Scratch/block construction for CNC station behavior.",
+      ],
     },
     highlights: [
       "Built Unity-based training simulations for multi-station industrial systems.",
