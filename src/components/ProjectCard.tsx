@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { ArrowUpRight, PlayCircle } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowUpRight, ChevronDown, ChevronUp, PlayCircle } from "lucide-react";
 import type { Project } from "../data/projects";
 import ButtonLink from "./ButtonLink";
 import TechBadge from "./TechBadge";
@@ -71,9 +71,11 @@ const getEvidenceItems = (project: Project) => {
 
 function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
+  const evidenceScrollRef = useRef<HTMLDivElement>(null);
   const evidenceItems = getEvidenceItems(project);
   const usesDotIndicator = project.id === "industrial-training-simulation-systems";
-  const dotCount = usesDotIndicator ? Math.min(evidenceItems.length, 16) : 0;
+  const dotCount = usesDotIndicator ? Math.min(evidenceItems.length, 10) : 0;
+  const [activeEvidenceDot, setActiveEvidenceDot] = useState(0);
 
   const playPreviewVideo = () => {
     const video = previewVideoRef.current;
@@ -90,6 +92,22 @@ function ProjectCard({ project }: ProjectCardProps) {
 
     video.pause();
     video.currentTime = 0;
+  };
+
+  const updateEvidenceDot = () => {
+    const reel = evidenceScrollRef.current;
+    if (!reel || dotCount <= 1) return;
+
+    const scrollRange = reel.scrollHeight - reel.clientHeight;
+    const progress = scrollRange > 0 ? reel.scrollTop / scrollRange : 0;
+    setActiveEvidenceDot(Math.round(progress * (dotCount - 1)));
+  };
+
+  const scrollEvidenceReel = (direction: "up" | "down") => {
+    const reel = evidenceScrollRef.current;
+    if (!reel) return;
+
+    reel.scrollBy({ top: direction === "up" ? -48 : 48, behavior: "smooth" });
   };
 
   return (
@@ -137,30 +155,40 @@ function ProjectCard({ project }: ProjectCardProps) {
           <h3 className="text-xl font-semibold text-white">{project.title}</h3>
           <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
           {evidenceItems.length > 0 && (
-            <>
+            <div className={`mt-4 ${usesDotIndicator ? "flex items-stretch gap-3" : ""}`}>
               <div
-                className={`evidence-badge-scroll mt-4 grid max-h-[8.25rem] gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
+                ref={usesDotIndicator ? evidenceScrollRef : undefined}
+                onScroll={usesDotIndicator ? updateEvidenceDot : undefined}
+                className={`evidence-badge-scroll grid max-h-[8.25rem] flex-1 gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
                   usesDotIndicator ? "evidence-badge-scroll--dots" : ""
                 }`}
                 aria-label={`${project.title} technical evidence`}
               >
-              {evidenceItems.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-md border border-scan/15 bg-scan/[0.055] px-3 py-2 text-xs font-medium text-scan/90"
-                >
-                  {item}
-                </span>
-              ))}
+                {evidenceItems.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-md border border-scan/15 bg-scan/[0.055] px-3 py-2 text-xs font-medium text-scan/90"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
               {usesDotIndicator && dotCount > 0 && (
-                <div className="evidence-dot-rail mt-3" aria-hidden="true">
-                  {Array.from({ length: dotCount }).map((_, index) => (
-                    <span key={index} className={index === 0 ? "is-active" : ""} />
-                  ))}
+                <div className="evidence-dot-rail evidence-dot-rail--vertical">
+                  <button type="button" onClick={() => scrollEvidenceReel("up")} aria-label="Scroll evidence badges up">
+                    <ChevronUp size={14} />
+                  </button>
+                  <div className="evidence-dot-stack">
+                    {Array.from({ length: dotCount }).map((_, index) => (
+                      <span key={index} className={index === activeEvidenceDot ? "is-active" : ""} />
+                    ))}
+                  </div>
+                  <button type="button" onClick={() => scrollEvidenceReel("down")} aria-label="Scroll evidence badges down">
+                    <ChevronDown size={14} />
+                  </button>
                 </div>
               )}
-            </>
+            </div>
           )}
           <div className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} tech stack`}>
             {project.tech.slice(0, 5).map((tech) => (
