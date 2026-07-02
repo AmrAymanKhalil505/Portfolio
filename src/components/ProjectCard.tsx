@@ -159,8 +159,8 @@ function ProjectCard({ project }: ProjectCardProps) {
               <div
                 ref={usesDotIndicator ? evidenceScrollRef : undefined}
                 onScroll={usesDotIndicator ? updateEvidenceDot : undefined}
-                className={`evidence-badge-scroll grid max-h-[8.25rem] flex-1 gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
-                  usesDotIndicator ? "evidence-badge-scroll--dots" : ""
+                className={`evidence-badge-scroll grid flex-1 gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
+                  usesDotIndicator ? "max-h-[9.25rem] evidence-badge-scroll--dots" : "max-h-[8.25rem]"
                 }`}
                 aria-label={`${project.title} technical evidence`}
               >
