@@ -46,6 +46,8 @@ const getEvidenceItems = (project: Project) => {
   const evidence = [];
   const technicalEvidence = project.technicalEvidence;
 
+  if (technicalEvidence?.badges?.length) return technicalEvidence.badges;
+
   if (technicalEvidence?.sensorsSimulated) {
     evidence.push(formatEvidenceCount(technicalEvidence.sensorsSimulated, technicalEvidence.sensorLabel ?? "sensors simulated"));
   }
@@ -146,7 +148,10 @@ function ProjectCard({ project }: ProjectCardProps) {
           <h3 className="mt-3 text-xl font-semibold text-white">{project.title}</h3>
           <p className="mt-3 text-sm leading-6 text-steel">{project.summary}</p>
           {evidenceItems.length > 0 && (
-            <div className="mt-4 grid gap-2" aria-label={`${project.title} technical evidence`}>
+            <div
+              className="mt-4 grid max-h-[8.6rem] gap-2 overflow-y-auto pr-1"
+              aria-label={`${project.title} technical evidence`}
+            >
               {evidenceItems.map((item) => (
                 <span
                   key={item}

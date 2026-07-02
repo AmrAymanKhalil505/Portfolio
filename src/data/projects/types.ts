@@ -40,6 +40,7 @@ export type Project = {
     mathematicalModelsSimulated?: number;
     mathematicalModelLabel?: string;
     modelNames?: string[];
+    badges?: string[];
     evidenceList?: string[];
   };
   highlights: string[];
