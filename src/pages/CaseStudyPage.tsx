@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Github, Mail, MonitorPlay, PlayCircle } from "lucide-react";
+import BedoWatermark, { isBedoProject } from "../components/BedoWatermark";
 import ButtonLink from "../components/ButtonLink";
 import MediaDemoViewer from "../components/MediaDemoViewer";
 import PageShell from "../components/PageShell";
@@ -21,7 +22,10 @@ function CaseStudyPage() {
   return (
     <PageShell>
       <article>
-        <section className="border-b border-white/10 bg-[#080A0A]">
+        {project.heroVideo ? (
+          <ProjectVideoHero project={project} heroVisual={heroVisual} />
+        ) : (
+          <section className="border-b border-white/10 bg-[#080A0A]">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <Link
               to="/projects"
@@ -62,7 +66,7 @@ function CaseStudyPage() {
                   )}
                 </div>
               </div>
-              <div className="overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow">
+              <div className="relative overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow">
                 <img
                   src={heroVisual}
                   alt={`${project.title} visual preview`}
@@ -71,12 +75,16 @@ function CaseStudyPage() {
                     event.currentTarget.src = project.thumbnail;
                   }}
                 />
+                <BedoWatermark visible={isBedoProject(project)} />
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        )}
 
-        {project.media && <MediaDemoViewer media={project.media} />}
+        {project.media && <MediaDemoViewer media={project.media} showBedoWatermark={isBedoProject(project)} />}
+
+        <TechnicalReviewSummary project={project} />
 
         <section className="mx-auto grid max-w-7xl gap-5 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
           <MetaBlock label="My role" value={project.role} />
@@ -142,6 +150,107 @@ function CaseStudyPage() {
 }
 
 type ProjectWithCimDetails = NonNullable<ReturnType<typeof getProjectById>>;
+
+function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDetails; heroVisual: string }) {
+  return (
+    <section className="relative min-h-[34rem] overflow-hidden border-b border-white/10 bg-[#050606]">
+      <video
+        aria-hidden="true"
+        autoPlay
+        loop
+        muted
+        poster={heroVisual}
+        playsInline
+        preload="metadata"
+        className="hero-desktop-layer pointer-events-none absolute inset-0 h-full w-full object-contain object-center opacity-60 grayscale-[8%]"
+      >
+        <source src={project.heroVideo} type="video/mp4" />
+      </video>
+      <video
+        aria-hidden="true"
+        autoPlay
+        loop
+        muted
+        poster={heroVisual}
+        playsInline
+        preload="metadata"
+        className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center opacity-80 grayscale-[8%]"
+        style={{
+          transform: "translateX(-50%)",
+          WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
+          maskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
+        }}
+      >
+        <source src={project.heroVideo} type="video/mp4" />
+      </video>
+      <div
+        className="hero-desktop-layer absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, #050606 0%, rgba(5, 6, 6, 0.98) 34%, rgba(5, 6, 6, 0.78) 56%, rgba(5, 6, 6, 0.34) 78%, rgba(5, 6, 6, 0.72) 100%)",
+        }}
+      />
+      <div
+        className="hero-mobile-layer absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(5, 6, 6, 0.20) 0%, rgba(5, 6, 6, 0.54) 34%, rgba(5, 6, 6, 0.78) 72%, #050606 92%, #050606 100%), linear-gradient(90deg, rgba(5, 6, 6, 0.76) 0%, rgba(5, 6, 6, 0.20) 24%, rgba(5, 6, 6, 0.06) 50%, rgba(5, 6, 6, 0.20) 76%, rgba(5, 6, 6, 0.76) 100%)",
+        }}
+      />
+      <div className="hero-mobile-layer pointer-events-none absolute inset-x-0 top-0 h-[24rem]">
+        <div
+          className="absolute inset-x-0 bottom-0 h-16"
+          style={{ background: "linear-gradient(180deg, rgba(5, 6, 6, 0) 0%, rgba(5, 6, 6, 0.92) 24%, #050606 100%)" }}
+        />
+      </div>
+      <div className="absolute inset-0 bg-grid opacity-20" />
+      <div className="hero-content-wrap relative mx-auto flex min-h-[34rem] max-w-7xl items-start px-4 pb-10 pt-64 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <Link
+            to="/projects"
+            className="mb-10 inline-flex items-center gap-2 rounded-md px-1 py-2 text-sm font-semibold text-steel transition hover:text-white"
+          >
+            <ArrowLeft size={16} />
+            Back to projects
+          </Link>
+          <p className="mb-3 text-sm font-semibold text-scan">{project.category}</p>
+          <h1 className="text-4xl font-semibold leading-tight text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.65)] sm:text-6xl">
+            {project.title}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-steel drop-shadow-[0_2px_16px_rgba(0,0,0,0.8)]">
+            {project.summary}
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            {project.demoUrl && (
+              <ButtonLink to="#demo" variant="primary" icon={<PlayCircle size={17} />}>
+                {project.demoLabel ?? "Watch Demo"}
+              </ButtonLink>
+            )}
+            {project.simulatedBehaviors ? (
+              <ButtonLink to="#behaviors" variant="secondary" icon={<MonitorPlay size={17} />}>
+                View Behaviors
+              </ButtonLink>
+            ) : project.webglAvailable ? (
+              <ButtonLink to="#webgl" variant="secondary" icon={<MonitorPlay size={17} />}>
+                Play WebGL Demo
+              </ButtonLink>
+            ) : null}
+            {project.simulatedBehaviors && (
+              <ButtonLink to={`mailto:${profile.email}`} variant="ghost" icon={<Mail size={17} />}>
+                Contact Me
+              </ButtonLink>
+            )}
+            {project.githubUrl && (
+              <ButtonLink to={project.githubUrl} variant="ghost" icon={<Github size={17} />}>
+                GitHub
+              </ButtonLink>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const getYouTubeId = (value: string | undefined) => {
   if (!value) return "";
@@ -226,6 +335,104 @@ const getStationProductReference = (title: string) => {
   return null;
 };
 
+const formatCount = (count: number, singular: string, plural = `${singular}s`) =>
+  `${count} ${count === 1 ? singular : plural}`;
+
+const getReviewEvidenceItems = (project: ProjectWithCimDetails) => {
+  const items = [
+    project.media?.length ? formatCount(project.media.length, "media demo") : "Project screenshots / visual proof",
+    project.simulatedBehaviors?.length
+      ? formatCount(project.simulatedBehaviors.length, "simulated behavior group")
+      : null,
+    project.stationBreakdown?.length ? formatCount(project.stationBreakdown.length, "module breakdown") : null,
+    project.technicalEvidence?.badges?.length
+      ? formatCount(project.technicalEvidence.badges.length, "technical feature badge")
+      : null,
+    project.webglAvailable ? "WebGL-ready delivery path" : null,
+  ];
+
+  return items.filter(Boolean) as string[];
+};
+
+const getStrongestTechnicalSignal = (project: ProjectWithCimDetails) =>
+  project.technicalEvidence?.evidenceList?.[0] ??
+  project.technicalHighlights?.[0] ??
+  project.technicalEvidence?.badges?.[0] ??
+  project.highlights[0] ??
+  project.solution;
+
+function TechnicalReviewSummary({ project, narrow = false }: { project: ProjectWithCimDetails; narrow?: boolean }) {
+  const evidenceItems = getReviewEvidenceItems(project);
+  const platformSummary = project.platform.slice(0, 4).join(" / ");
+  const publicSafetyNote =
+    project.attributionNote ??
+    "This page focuses on my Unity simulation, visualization, UI, and educational implementation work.";
+  const featureBadges = project.technicalEvidence?.badges?.slice(0, 5) ?? [];
+  const shellWidth = narrow ? "max-w-4xl" : "max-w-7xl";
+
+  return (
+    <section className={`mx-auto ${shellWidth} px-4 py-10 sm:px-6 lg:px-8`}>
+      <div className="overflow-hidden rounded-xl border border-scan/25 bg-panel shadow-glow">
+        <div className="border-b border-white/10 bg-white/[0.03] px-6 py-5">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-scan">Technical Review Summary</p>
+          <h2 className="mt-3 text-2xl font-semibold text-white">What a reviewer should notice first</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-steel">
+            A quick project panel for role, platform, simulated behavior, and the strongest implementation signal in
+            this case study.
+          </p>
+        </div>
+
+        <dl className="grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+          <ReviewSummaryBlock label="Role" value={project.role} />
+          <ReviewSummaryBlock label="Platform" value={platformSummary} />
+          <ReviewSummaryBlock label="Media / Details" value={evidenceItems.slice(0, 3).join(" • ")} />
+          <ReviewSummaryBlock label="Best signal" value={getStrongestTechnicalSignal(project)} />
+        </dl>
+
+        <div className="grid gap-5 px-6 py-6 lg:grid-cols-[1fr_1fr]">
+          <section>
+            <h3 className="text-sm font-semibold text-white">What to look at</h3>
+            <ul className="mt-4 space-y-3">
+              {evidenceItems.map((item) => (
+                <li key={item} className="flex gap-3 text-sm leading-6 text-steel">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="text-sm font-semibold text-white">Public-safe scope</h3>
+            <p className="mt-4 text-sm leading-6 text-steel">{publicSafetyNote}</p>
+            {featureBadges.length ? (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {featureBadges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="rounded-full border border-scan/25 bg-scan/10 px-3 py-1 text-xs font-semibold text-scan"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </section>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReviewSummaryBlock({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-panel p-5">
+      <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-scan">{label}</dt>
+      <dd className="mt-3 text-sm leading-6 text-steel">{value}</dd>
+    </div>
+  );
+}
+
 function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
   return (
     <PageShell>
@@ -261,16 +468,21 @@ function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
           </div>
         </header>
 
+        <TechnicalReviewSummary project={project} narrow />
+
         <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
-          <img
-            src={project.thumbnail}
-            alt={`${project.title} thumbnail`}
-            onError={(event) => {
-              const fallback = getYouTubeThumbnail(project.previewGif);
-              if (fallback) event.currentTarget.src = fallback;
-            }}
-            className="aspect-video w-full rounded-lg border border-white/10 object-cover shadow-glow"
-          />
+          <div className="relative overflow-hidden rounded-lg border border-white/10 shadow-glow">
+            <img
+              src={project.thumbnail}
+              alt={`${project.title} thumbnail`}
+              onError={(event) => {
+                const fallback = getYouTubeThumbnail(project.previewGif);
+                if (fallback) event.currentTarget.src = fallback;
+              }}
+              className="aspect-video w-full object-cover"
+            />
+            <BedoWatermark visible={isBedoProject(project)} />
+          </div>
           <dl className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <MetaBlock label="My role" value={project.role} />
             <MetaBlock label="Timeline" value={project.timeline} />

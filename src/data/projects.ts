@@ -7,6 +7,8 @@ import webglThumb from "../assets/webgl-systems.svg";
 import ivrisThumb from "../assets/ivris-ar-room.svg";
 import vrTrainingThumb from "../assets/vr-training-suite.svg";
 import cimSystemImage from "../assets/projects/cim/thumnail.jpg";
+import industrialTrainingHeroVideo from "../assets/Industrial Traning Hero.mp4";
+import pidHeroVideo from "../assets/PID Hero .mp4";
 import cimThumbnailLoop from "../assets/projects/cim/CIM Thumnail gif.mp4";
 import mr110LoadingImage from "../assets/projects/cim/MR 110 Loading.png";
 import mr110StorageImage from "../assets/projects/cim/MR110 Storage.png";
@@ -29,7 +31,7 @@ import pidGraphImage from "../assets/projects/PID/graph photo.png";
 import eduLaminarImage from "../assets/projects/EduLab/Laminar.jpg";
 import eduLaminarStreamlinesImage from "../assets/projects/EduLab/Laminar 02.jpg";
 import eduLaminarOpenTrayImage from "../assets/projects/EduLab/Laminar 03.jpg";
-import eduFm105GraphImage from "../assets/projects/EduLab/FM103 Graph.png";
+import eduFm103GraphImage from "../assets/projects/EduLab/FM103 Graph.png";
 import eduEv117ParticlesImage from "../assets/projects/EduLab/EV117 Particles.jpg";
 import eduEv117MonitorImage from "../assets/projects/EduLab/EV117 save screen.jpg";
 import nescafeMenuImage from "../assets/projects/Nescafe/Sand Board Main Menu.jpeg";
@@ -362,6 +364,7 @@ export const projects: Project[] = [
     platform: ["Unity", "WebGL", "Industrial training"],
     tech: ["Unity", "C#", "WebGL", "Simulation", "Digital Twin", "Mechatronics", "PLC Concepts"],
     thumbnail: cimSystemImage,
+    heroVideo: industrialTrainingHeroVideo,
     demoUrl: "#demo",
     demoLabel: "View Gallery",
     caseStudyUrl: "/projects/industrial-training-simulation-systems",
@@ -434,6 +437,7 @@ export const projects: Project[] = [
     platform: ["Unity", "WebGL", "Virtual labs"],
     tech: ["Unity", "C#", "WebGL", "PID Control", "Control Systems", "Digital Shadow", "Virtual Lab", "Data Visualization"],
     thumbnail: pidPressureImage,
+    heroVideo: pidHeroVideo,
     demoUrl: "#demo",
     demoLabel: "View Lab Modules",
     caseStudyUrl: "/projects/pid-control-virtual-labs-suite",
@@ -596,7 +600,6 @@ export const projects: Project[] = [
     caseStudyUrl: "/projects/engineering-education-virtual-labs",
     productContext: [
       { label: "BEDO FM103 fluid mechanics training context", url: "https://bedoeg.com/product/fm103/" },
-      { label: "BEDO FM105 fluid mechanics training context" },
       { label: "BEDO FM115 fluid mechanics training context", url: "https://bedoeg.com/product/fm115/" },
       { label: "BEDO EV117 Fuel Cell Vehicle training context", url: "https://bedoeg.com/product/ev117-2/" },
     ],
@@ -634,15 +637,15 @@ export const projects: Project[] = [
         },
       })),
       {
-        id: "fm105-flow-measurement-graph-view",
+        id: "fm103-flow-measurement-graph-view",
         type: "image" as const,
-        title: "FM105 Flow Measurement Graph View",
-        src: eduFm105GraphImage,
-        thumbnail: eduFm105GraphImage,
+        title: "FM103 Flow Measurement Graph View",
+        src: eduFm103GraphImage,
+        thumbnail: eduFm103GraphImage,
         caption:
-          "Graph-focused view for the FM105 flow-measurement lab, showing how experiment readings can be presented as student-facing feedback for comparison and analysis.",
+          "Graph-focused view for the FM103 flow-measurement lab, showing how experiment readings can be presented as student-facing feedback for comparison and analysis.",
         details: {
-          title: "FM105 Graph Feedback",
+          title: "FM103 Graph Feedback",
           components: [
             "Flow measurement graph",
             "Experiment reading display",

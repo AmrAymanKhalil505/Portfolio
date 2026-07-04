@@ -1,6 +1,16 @@
-import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink, Image as ImageIcon, PlayCircle } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Boxes,
+  ChevronLeft,
+  ChevronRight,
+  ClipboardList,
+  Image as ImageIcon,
+  MonitorPlay,
+  PlayCircle,
+  Tags,
+} from "lucide-react";
 import { getGeneratedThumbnail } from "../data/generatedThumbnails";
+import BedoWatermark from "./BedoWatermark";
 
 export type MediaItem = {
   id: string;
@@ -21,6 +31,7 @@ export type MediaItem = {
 
 type MediaDemoViewerProps = {
   media: MediaItem[];
+  showBedoWatermark?: boolean;
 };
 
 const getYouTubeId = (value: string | undefined) => {
@@ -68,7 +79,28 @@ const getYouTubeEmbedUrl = (item: MediaItem, shouldAutoplay: boolean) => {
   return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
 };
 
-function MediaDemoViewer({ media }: MediaDemoViewerProps) {
+const getMediaTypeLabel = (type: MediaItem["type"]) => {
+  switch (type) {
+    case "youtube":
+      return "YouTube demo";
+    case "video":
+      return "Video capture";
+    case "gif":
+      return "Motion clip";
+    case "image":
+      return "Screenshot";
+    default:
+      return "Media";
+  }
+};
+
+const getSelectedTags = (item: MediaItem) => {
+  const behaviorTags = item.details?.behaviors?.slice(0, 4) ?? [];
+  const componentTags = item.details?.components?.slice(0, Math.max(0, 4 - behaviorTags.length)) ?? [];
+  return [...behaviorTags, ...componentTags];
+};
+
+function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerProps) {
   const [selectedId, setSelectedId] = useState(media[0]?.id);
   const [loadedMediaIds, setLoadedMediaIds] = useState<Set<string>>(new Set());
   const selected = useMemo(
@@ -79,12 +111,11 @@ function MediaDemoViewer({ media }: MediaDemoViewerProps) {
     0,
     media.findIndex((item) => item.id === selected?.id),
   );
-
   if (!selected) return null;
 
   const isLoaded = loadedMediaIds.has(selected.id);
   const selectedThumbnail = getMediaThumbnail(selected);
-
+  const selectedTags = getSelectedTags(selected);
   const selectMedia = (item: MediaItem) => {
     setSelectedId(item.id);
   };
@@ -102,111 +133,121 @@ function MediaDemoViewer({ media }: MediaDemoViewerProps) {
     });
   };
 
-  const openUrl = selected.type === "youtube" ? selected.youtubeId ?? selected.src : selected.src;
-
   return (
     <section id="demo" className="border-y border-white/10 bg-[#090B0B]">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="mb-3 text-sm font-semibold text-scan">Gallery</p>
-            <h2 className="text-3xl font-semibold text-white">Project media and station details</h2>
-          </div>
-          {openUrl && (
-            <a
-              href={openUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-sm font-semibold text-steel transition hover:border-white/30 hover:text-white"
-            >
-              <ExternalLink size={16} />
-              {selected.type === "youtube" ? "Open on YouTube" : "Open media"}
-            </a>
-          )}
-        </div>
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)] lg:items-start">
+          <div className="overflow-hidden rounded-xl border border-white/10 bg-panel shadow-glow">
+            <div className="relative aspect-video bg-black">
+              <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
+                <span className="rounded-md border border-scan/25 bg-ink/75 px-3 py-1 text-xs font-semibold text-scan backdrop-blur">
+                  {getMediaTypeLabel(selected.type)}
+                </span>
+                <span className="rounded-md bg-ink/75 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+                  {selectedIndex + 1}/{media.length}
+                </span>
+              </div>
 
-        <div className="overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow">
-          <div className="relative aspect-video bg-black">
-            <div className="absolute right-4 top-4 z-10 rounded-md bg-ink/75 px-3 py-1 text-sm font-semibold text-white backdrop-blur">
-              {selectedIndex + 1}/{media.length}
-            </div>
-            <button
-              type="button"
-              onClick={() => selectByOffset(-1)}
-              className="absolute left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-white backdrop-blur transition hover:border-scan hover:text-scan"
-              aria-label="Previous media"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              type="button"
-              onClick={() => selectByOffset(1)}
-              className="absolute right-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-white backdrop-blur transition hover:border-scan hover:text-scan"
-              aria-label="Next media"
-            >
-              <ChevronRight size={24} />
-            </button>
-            {selected.type === "youtube" && isLoaded && (
-              <iframe
-                className="absolute inset-0 h-full w-full"
-                src={getYouTubeEmbedUrl(selected, true)}
-                title={selected.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                loading="lazy"
-              />
-            )}
+              {media.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => selectByOffset(-1)}
+                    className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-white backdrop-blur transition hover:border-scan hover:text-scan sm:flex"
+                    aria-label="Previous media"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => selectByOffset(1)}
+                    className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-white backdrop-blur transition hover:border-scan hover:text-scan sm:flex"
+                    aria-label="Next media"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </>
+              )}
 
-            {selected.type === "youtube" && !isLoaded && (
-              <button
-                type="button"
-                onClick={loadSelectedMedia}
-                className="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden text-left"
-                aria-label={`Play ${selected.title}`}
-              >
-                <img
-                  src={selectedThumbnail}
-                  alt={selected.alt ?? `${selected.title} thumbnail`}
-                  className="h-full w-full object-cover opacity-80"
+              {selected.type === "youtube" && isLoaded && (
+                <iframe
+                  className="absolute inset-0 h-full w-full"
+                  src={getYouTubeEmbedUrl(selected, true)}
+                  title={selected.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
                   loading="lazy"
                 />
-                <span className="absolute inset-0 bg-ink/30" aria-hidden="true" />
-                <span className="absolute flex h-20 w-20 items-center justify-center rounded-full border border-white/25 bg-ink/75 text-white backdrop-blur transition hover:scale-105">
-                  <PlayCircle size={38} />
-                </span>
-              </button>
-            )}
+              )}
 
-            {(selected.type === "video" || selected.type === "gif") && selected.src && (
-              <video
-                src={selected.src}
-                poster={selected.thumbnail}
-                className="h-full w-full object-cover"
-                controls
-                loop
-                muted
-                playsInline
-                preload="metadata"
-              />
-            )}
+              {selected.type === "youtube" && !isLoaded && (
+                <button
+                  type="button"
+                  onClick={loadSelectedMedia}
+                  className="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden text-left"
+                  aria-label={`Play ${selected.title}`}
+                >
+                  <img
+                    src={selectedThumbnail}
+                    alt={selected.alt ?? `${selected.title} thumbnail`}
+                    className="h-full w-full object-cover opacity-80"
+                    loading="lazy"
+                  />
+                  <span className="absolute inset-0 bg-ink/30" aria-hidden="true" />
+                  <span className="absolute flex h-20 w-20 items-center justify-center rounded-full border border-white/25 bg-ink/75 text-white backdrop-blur transition hover:scale-105">
+                    <PlayCircle size={38} />
+                  </span>
+                </button>
+              )}
 
-            {selected.type === "image" && (
-              <img
-                src={selected.src ?? selected.thumbnail}
-                alt={selected.alt ?? selected.title}
-                className="h-full w-full object-contain"
-                loading="lazy"
-              />
-            )}
+              {(selected.type === "video" || selected.type === "gif") && selected.src && (
+                <video
+                  src={selected.src}
+                  poster={selected.thumbnail}
+                  className="h-full w-full object-cover"
+                  controls
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                />
+              )}
+
+              {selected.type === "image" && (
+                <img
+                  src={selected.src ?? selected.thumbnail}
+                  alt={selected.alt ?? selected.title}
+                  className="h-full w-full object-contain"
+                  loading="lazy"
+                />
+              )}
+
+              <BedoWatermark visible={showBedoWatermark} />
+            </div>
+
+            <div className="border-t border-white/10 p-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-scan">Selected view</p>
+                  <h3 className="mt-2 text-xl font-semibold text-white">{selected.title}</h3>
+                </div>
+                <div className="flex gap-2 sm:hidden">
+                  <MediaStepButton label="Previous media" onClick={() => selectByOffset(-1)}>
+                    <ChevronLeft size={18} />
+                  </MediaStepButton>
+                  <MediaStepButton label="Next media" onClick={() => selectByOffset(1)}>
+                    <ChevronRight size={18} />
+                  </MediaStepButton>
+                </div>
+              </div>
+              <p className="gallery-caption mt-2 text-sm leading-6 text-steel">{selected.caption}</p>
+            </div>
           </div>
 
-          <div className="border-t border-white/10 p-5">
-            <h3 className="text-xl font-semibold text-white">{selected.title}</h3>
-            <p className="gallery-caption mt-2 text-sm leading-6 text-steel">{selected.caption}</p>
-          </div>
+          <SelectedEvidencePanel selected={selected} selectedTags={selectedTags} />
         </div>
 
-        <div className="mt-4 flex items-center gap-3">
+        <div className="mt-5 flex items-center gap-3">
           <button
             type="button"
             onClick={() => selectByOffset(-1)}
@@ -228,8 +269,8 @@ function MediaDemoViewer({ media }: MediaDemoViewerProps) {
                   key={item.id}
                   type="button"
                   onClick={() => selectMedia(item)}
-                  className={`group w-36 shrink-0 snap-start overflow-hidden rounded-md border bg-panel text-left transition sm:w-40 ${
-                    isSelected ? "border-scan" : "border-white/10 hover:border-white/25"
+                  className={`group w-44 shrink-0 snap-start overflow-hidden rounded-lg border bg-panel text-left transition sm:w-52 ${
+                    isSelected ? "border-scan shadow-glow" : "border-white/10 hover:border-white/25"
                   }`}
                   aria-label={`Show ${item.title}`}
                   aria-pressed={isSelected}
@@ -251,8 +292,16 @@ function MediaDemoViewer({ media }: MediaDemoViewerProps) {
                       {index + 1}
                     </span>
                     <span className="absolute right-1.5 top-1.5 rounded bg-ink/80 px-1.5 py-0.5 text-[0.68rem] font-semibold text-white">
-                      {item.type === "youtube" ? "Video" : "Image"}
+                      {getMediaTypeLabel(item.type)}
                     </span>
+                  </span>
+                  <span className="block border-t border-white/10 px-3 py-2">
+                    <span className="line-clamp-2 text-xs font-semibold leading-5 text-white">{item.title}</span>
+                    {item.details?.behaviors?.[0] && (
+                      <span className="mt-1 block truncate text-[0.68rem] leading-4 text-steel">
+                        {item.details.behaviors[0]}
+                      </span>
+                    )}
                   </span>
                 </button>
               );
@@ -268,57 +317,205 @@ function MediaDemoViewer({ media }: MediaDemoViewerProps) {
           </button>
         </div>
 
-        <div className="mt-3 flex justify-center gap-2" aria-label="Gallery position">
-          {media.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => selectMedia(item)}
-              className={`h-2.5 rounded-full transition ${
-                item.id === selected.id ? "w-7 bg-scan" : "w-2.5 bg-white/25 hover:bg-white/45"
-              }`}
-              aria-label={`Show ${item.title}`}
-            />
-          ))}
-        </div>
-
-        <section className="mt-5 rounded-lg border border-white/10 bg-panel p-5">
-          <div className="min-h-[18rem] max-h-[24rem] overflow-y-auto pr-2">
-            <p className="mb-2 text-sm font-semibold text-scan">Selected Media Details</p>
-            <h3 className="text-xl font-semibold text-white">{selected.details?.title ?? selected.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-steel">{selected.caption}</p>
-            {selected.details ? (
-              <>
-                <div className="mt-5 grid gap-6 md:grid-cols-2">
-                  {selected.details.components && (
-                    <DetailList title="Simulated components" items={selected.details.components} />
-                  )}
-                  {selected.details.behaviors && (
-                    <DetailList title="Main simulated behavior" items={selected.details.behaviors} />
-                  )}
-                </div>
-                {selected.details.notes && (
-                  <div className="mt-5 border-t border-white/10 pt-4">
-                    <DetailList title="Interface notes" items={selected.details.notes} />
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="mt-5 rounded-md border border-white/10 bg-ink/45 p-4 text-sm leading-6 text-steel">
-                Select a station image from the slider to view the simulated components and behavior for that station.
-              </div>
-            )}
+        <div className="mt-3 flex items-center justify-center gap-3" aria-label="Gallery position">
+          <MediaStepButton label="Previous media" onClick={() => selectByOffset(-1)}>
+            <ChevronLeft size={18} />
+          </MediaStepButton>
+          <div className="flex flex-wrap justify-center gap-2">
+            {media.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => selectMedia(item)}
+                className={`h-2.5 rounded-full transition ${
+                  item.id === selected.id ? "w-7 bg-scan" : "w-2.5 bg-white/25 hover:bg-white/45"
+                }`}
+                aria-label={`Show ${item.title}`}
+              />
+            ))}
           </div>
-        </section>
+          <MediaStepButton label="Next media" onClick={() => selectByOffset(1)}>
+            <ChevronRight size={18} />
+          </MediaStepButton>
+        </div>
       </div>
     </section>
   );
 }
 
-function DetailList({ title, items }: { title: string; items: string[] }) {
+function MediaStepButton({ children, label, onClick }: { children: React.ReactNode; label: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-steel transition hover:border-white/30 hover:text-white"
+      aria-label={label}
+    >
+      {children}
+    </button>
+  );
+}
+
+function SelectedEvidencePanel({ selected, selectedTags }: { selected: MediaItem; selectedTags: string[] }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const [scrollMetrics, setScrollMetrics] = useState({ clientHeight: 0, scrollHeight: 0, scrollTop: 0 });
+
+  const updateScrollMetrics = useCallback(() => {
+    const content = contentRef.current;
+    if (!content) return;
+
+    setScrollMetrics({
+      clientHeight: content.clientHeight,
+      scrollHeight: content.scrollHeight,
+      scrollTop: content.scrollTop,
+    });
+  }, []);
+
+  useEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+
+    content.scrollTop = 0;
+    updateScrollMetrics();
+
+    const resizeObserver = new ResizeObserver(updateScrollMetrics);
+    resizeObserver.observe(content);
+    if (content.firstElementChild) resizeObserver.observe(content.firstElementChild);
+    window.addEventListener("resize", updateScrollMetrics);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [selected.id, updateScrollMetrics]);
+
+  const maxScroll = Math.max(0, scrollMetrics.scrollHeight - scrollMetrics.clientHeight);
+  const canScroll = maxScroll > 4;
+  const thumbHeightPercent = canScroll
+    ? Math.max(12, (scrollMetrics.clientHeight / scrollMetrics.scrollHeight) * 100)
+    : 100;
+  const thumbTopPercent = canScroll
+    ? (scrollMetrics.scrollTop / maxScroll) * (100 - thumbHeightPercent)
+    : 0;
+
+  const setScrollFromPointer = (clientY: number) => {
+    const content = contentRef.current;
+    const rail = railRef.current;
+    if (!content || !rail || !canScroll) return;
+
+    const railRect = rail.getBoundingClientRect();
+    const thumbHeight = Math.max(48, (scrollMetrics.clientHeight / scrollMetrics.scrollHeight) * railRect.height);
+    const usableTrack = Math.max(1, railRect.height - thumbHeight);
+    const nextThumbTop = Math.min(Math.max(clientY - railRect.top - thumbHeight / 2, 0), usableTrack);
+    content.scrollTop = (nextThumbTop / usableTrack) * maxScroll;
+  };
+
+  const handleThumbPointerDown = (event: React.PointerEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const content = contentRef.current;
+    const rail = railRef.current;
+    if (!content || !rail || !canScroll) return;
+
+    const railRect = rail.getBoundingClientRect();
+    const startY = event.clientY;
+    const startScrollTop = content.scrollTop;
+    const scrollRatio = maxScroll / Math.max(1, railRect.height - (thumbHeightPercent / 100) * railRect.height);
+
+    const handlePointerMove = (moveEvent: PointerEvent) => {
+      content.scrollTop = startScrollTop + (moveEvent.clientY - startY) * scrollRatio;
+    };
+
+    const handlePointerUp = () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp, { once: true });
+  };
+
+  return (
+    <aside className="flex flex-col rounded-xl border border-white/10 bg-panel p-5 shadow-glow lg:h-[41rem] lg:max-h-[41rem]">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-scan">Brief</p>
+          <h3 className="mt-2 text-xl font-semibold text-white">{selected.details?.title ?? selected.title}</h3>
+        </div>
+        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-scan/25 bg-scan/10 px-2.5 py-1 text-xs font-semibold text-scan">
+          <MonitorPlay size={13} />
+          {getMediaTypeLabel(selected.type)}
+        </span>
+      </div>
+
+      <div className="mt-4 grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_1rem] gap-3">
+        <div ref={contentRef} onScroll={updateScrollMetrics} className="brief-scroll h-full overflow-y-auto pr-1">
+          <p className="text-sm leading-6 text-steel">{selected.caption}</p>
+
+          {selectedTags.length ? (
+            <div className="mt-5">
+              <div className="flex items-center gap-2 text-sm font-semibold text-white">
+                <Tags size={16} className="text-scan" />
+                Behavior tags
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {selectedTags.map((tag) => (
+                  <span key={tag} className="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs text-steel">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {selected.details ? (
+            <div className="mt-6 space-y-5 border-t border-white/10 pt-5">
+              {selected.details.components && (
+                <DetailList icon={<Boxes size={16} />} title="Simulated components" items={selected.details.components} />
+              )}
+              {selected.details.behaviors && (
+                <DetailList icon={<MonitorPlay size={16} />} title="Main simulated behavior" items={selected.details.behaviors} />
+              )}
+              {selected.details.notes && (
+                <DetailList icon={<ClipboardList size={16} />} title="Interface notes" items={selected.details.notes} />
+              )}
+            </div>
+          ) : (
+            <div className="mt-6 rounded-md border border-white/10 bg-ink/45 p-4 text-sm leading-6 text-steel">
+              This capture does not have a detailed breakdown yet. It still works as visual context, and can later be
+              expanded with simulated components, behaviors, and interface notes.
+            </div>
+          )}
+        </div>
+
+        <div
+          ref={railRef}
+          className={`relative h-full rounded-full border border-white/10 bg-white/10 ${canScroll ? "cursor-pointer" : "opacity-35"}`}
+          onPointerDown={(event) => setScrollFromPointer(event.clientY)}
+        >
+          <button
+            type="button"
+            className={`absolute left-1/2 w-3 -translate-x-1/2 rounded-full bg-scan shadow-glow transition hover:bg-white ${
+              canScroll ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
+            }`}
+            style={{ height: `${thumbHeightPercent}%`, top: `${thumbTopPercent}%` }}
+            onPointerDown={handleThumbPointerDown}
+            aria-label="Scroll brief"
+          />
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function DetailList({ icon, title, items }: { icon: React.ReactNode; title: string; items: string[] }) {
   return (
     <div>
-      <p className="text-sm font-semibold text-scan">{title}</p>
+      <div className="flex items-center gap-2 text-sm font-semibold text-white">
+        <span className="text-scan">{icon}</span>
+        {title}
+      </div>
       <ul className="mt-3 grid gap-2">
         {items.map((item) => (
           <li key={item} className="flex gap-2 text-sm leading-6 text-steel">

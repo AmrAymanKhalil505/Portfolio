@@ -1,5 +1,5 @@
 import eduLaminarImage from "../../../assets/projects/EduLab/Laminar.jpg";
-import eduFm105LabImage from "../../../assets/projects/EduLab/FM103.png";
+import eduFm103LabImage from "../../../assets/projects/EduLab/FM103.png";
 import eduEv117TrainerImage from "../../../assets/projects/EduLab/EV117 Fuel Outside.jpg";
 
 export const engineeringEducationModules = [
@@ -28,9 +28,9 @@ export const engineeringEducationModules = [
     ],
   },
   {
-    id: "fm105-flow-measurement-virtual-lab",
-    title: "FM105 Flow Measurement Virtual Lab",
-    image: eduFm105LabImage,
+    id: "fm103-flow-measurement-virtual-lab",
+    title: "FM103 Flow Measurement Virtual Lab",
+    image: eduFm103LabImage,
     caption:
       "Unity virtual lab for flow-measurement education, showing how a fluid-mechanics trainer can connect flow control, measurement readings, guided steps, and response visualization in one interactive scene.",
     domain: "Fluid Mechanics",

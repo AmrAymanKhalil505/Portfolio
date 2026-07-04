@@ -46,6 +46,14 @@ a {
   -webkit-line-clamp: 2;
 }
 
+.brief-scroll {
+  scrollbar-width: none;
+}
+
+.brief-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .evidence-badge-scroll {
   scrollbar-width: thin;
   scrollbar-color: rgba(169, 251, 215, 0.52) rgba(255, 255, 255, 0.045);

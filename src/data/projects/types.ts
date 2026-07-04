@@ -23,6 +23,7 @@ export type Project = {
   thumbnail: string;
   previewGif?: string;
   previewVideo?: string;
+  heroVideo?: string;
   media?: MediaItem[];
   articleLayout?: "blog";
   demoUrl?: string;

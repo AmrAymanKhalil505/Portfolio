@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, ChevronUp, PlayCircle } from "lucide-react";
 import type { Project } from "../data/projects";
+import BedoWatermark, { isBedoProject } from "./BedoWatermark";
 import ButtonLink from "./ButtonLink";
 import TechBadge from "./TechBadge";
 
@@ -141,11 +142,12 @@ function ProjectCard({ project }: ProjectCardProps) {
             aria-label={`${project.title} hover preview`}
           />
         )}
-        <span className="absolute left-3 top-3 rounded-md border border-white/15 bg-ink/78 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur">
+        <BedoWatermark visible={isBedoProject(project)} />
+        <span className="absolute left-3 top-3 z-30 rounded-md border border-white/15 bg-ink/78 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur">
           {project.category}
         </span>
         {project.media && (
-          <span className="absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-ink/75 text-white backdrop-blur">
+          <span className="absolute bottom-3 right-3 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-ink/75 text-white backdrop-blur">
             <PlayCircle size={22} />
           </span>
         )}
@@ -162,7 +164,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                 className={`evidence-badge-scroll grid h-full flex-1 gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
                   usesDotIndicator ? "evidence-badge-scroll--dots" : ""
                 }`}
-                aria-label={`${project.title} technical evidence`}
+                aria-label={`${project.title} technical details`}
               >
                 {evidenceItems.map((item) => (
                   <span
@@ -175,7 +177,7 @@ function ProjectCard({ project }: ProjectCardProps) {
               </div>
               {usesDotIndicator && dotCount > 0 && (
                 <div className="evidence-dot-rail evidence-dot-rail--vertical">
-                  <button type="button" onClick={() => scrollEvidenceReel("up")} aria-label="Scroll evidence badges up">
+                  <button type="button" onClick={() => scrollEvidenceReel("up")} aria-label="Scroll feature badges up">
                     <ChevronUp size={14} />
                   </button>
                   <div className="evidence-dot-stack">
@@ -183,7 +185,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                       <span key={index} className={index === activeEvidenceDot ? "is-active" : ""} />
                     ))}
                   </div>
-                  <button type="button" onClick={() => scrollEvidenceReel("down")} aria-label="Scroll evidence badges down">
+                  <button type="button" onClick={() => scrollEvidenceReel("down")} aria-label="Scroll feature badges down">
                     <ChevronDown size={14} />
                   </button>
                 </div>

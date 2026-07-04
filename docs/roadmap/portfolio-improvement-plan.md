@@ -73,7 +73,7 @@ Current progress against that sequence:
 commit 1 — ✅ Done
 commit 2 — 🟡 Partial
 commit 3 — ✅ Done
-commit 4 — ⬜ Not started
+commit 4 — 🟡 Started
 commit 5 — 🟡 Partial
 commit 6 — ⬜ Not started
 ```
@@ -399,23 +399,29 @@ Featured
 
 ### 4. Case study page
 
-Status: ⬜ Not started
+Status: ✅ Major pass done
 
-This is the recommended next visible upgrade.
+Completed:
 
-Add a `Technical Review Summary` near the top.
+- ✅ Added a reusable `TechnicalReviewSummary` panel near the top of standard case-study pages.
+- ✅ Added the same panel to blog-style case-study pages with the narrower article width.
+- ✅ Summary derives role, platform, evidence count, strongest technical signal, public-safe scope, and feature badges from existing project data.
+- ✅ `npm run build` passed after the implementation.
 
-Suggested structure:
+Implemented structure:
 
 ```text
 Technical Review Summary
-Role: Unity/WebGL Simulation Developer
-Platform: Unity, WebGL, VR, Mobile
-Evidence: 5 media demos, 6 simulated behaviors, 4 station breakdowns
-Best signal: PLC-style process simulation + media-backed case study
+Role
+Platform
+Evidence
+Best signal
+Evidence to inspect
+Public-safe scope
+Feature badges
 ```
 
-Goal:
+Goal covered:
 
 Within 20 seconds, the visitor should understand:
 
@@ -429,18 +435,19 @@ why it is impressive
 
 ### 5. Media gallery
 
-Status: ⬜ Not started
+Status: ✅ Major pass done
 
-Improve `src/components/MediaDemoViewer.tsx` into a stronger evidence console.
+Improved `src/components/MediaDemoViewer.tsx` into a stronger evidence console.
 
-Needed:
+Completed:
 
-- ⬜ Media type badge.
-- ⬜ Behavior tags.
-- ⬜ Better components/behaviors/notes hierarchy.
-- ⬜ Better selected-media details panel.
-- ⬜ Better mobile scrolling.
-- ⬜ Stronger copy, such as `Watch evidence`.
+- ✅ Evidence-console section copy.
+- ✅ Media type badges.
+- ✅ Behavior and component tags.
+- ✅ Clearer components, behaviors, and notes hierarchy.
+- ✅ Better selected-media evidence brief.
+- ✅ Improved filmstrip cards and mobile controls.
+- ✅ `npm run build` passed.
 
 ## Phase 4 — Content Improvement
 
@@ -774,8 +781,8 @@ Recommended order:
 ```text
 1. Finish project data split.                       🟡 Started
 2. Improve project cards.                           ✅ Major pass done
-3. Add technical review summary to case-study pages. ⬜ Recommended next
-4. Improve MediaDemoViewer evidence presentation.    ⬜ Not started
+3. Add technical review summary to case-study pages. ✅ Major pass done
+4. Improve MediaDemoViewer evidence presentation.    ✅ Major pass done
 5. Improve home hero and proof strip.                ⬜ Not started
 6. Improve Obsidian frontmatter and MOCs.            🟡 Partial
 7. Add project validation script.                    ⬜ Not started
@@ -810,19 +817,20 @@ Note: the original plan mentioned media count, WebGL status, behavior count, sta
 
 ### Ticket 3 — Case-study technical review summary
 
-Status: ⬜ Recommended next
+Status: ✅ Major pass done
 
 ```text
-Add top summary panel with role, platform, evidence, strongest signal, and public-safe attribution.
+Added top summary panel with role, platform, evidence, strongest signal, and public-safe attribution.
+Panel appears on both standard and blog case-study layouts.
 Run npm run build.
 ```
 
 ### Ticket 4 — Media gallery evidence console
 
-Status: ⬜ Not started
+Status: ✅ Major pass done
 
 ```text
-Improve MediaDemoViewer with technical captions, media type badges, selected evidence details, and mobile layout.
+Improved MediaDemoViewer with evidence-console copy, media type badges, selected evidence details, behavior tags, stronger filmstrip cards, and mobile navigation.
 Run npm run build.
 ```
 
@@ -877,7 +885,7 @@ Current status against definition of done:
 npm run build passes                                      ✅ Done
 npm run vault passes                                      🟡 Verify after vault changes
 major project cards show technical evidence               ✅ Major pass done
-case-study pages explain role/platform/evidence clearly    ⬜ Next recommended work
+case-study pages explain role/platform/evidence clearly    ✅ Major pass done
 Obsidian vault has usable MOCs and Dataview metadata        🟡 Partial
 project data is modular enough to edit safely              🟡 Partial
 public-safety wording is clean                             🟡 Partial
@@ -889,11 +897,11 @@ mobile pages still look good                               ⬜ Needs manual QA
 Start with:
 
 ```text
-Ticket 3 — Case-study technical review summary
+Ticket 5 — Vault Dataview readiness
 ```
 
 Reason:
 
 ```text
-It gives the biggest visible portfolio upgrade for the least risk.
+The major visible case-study upgrades are now in place. The next useful upgrade is improving vault metadata, MOCs, and interview-prep notes.
 ```
