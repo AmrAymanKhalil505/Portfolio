@@ -1,3 +1,5 @@
+const publicAssetUrl = (fileName: string) => `${import.meta.env.BASE_URL}${fileName}`;
+
 export const profile = {
   name: "Amr Khalil",
   title: "Senior Unity Engineer",
@@ -6,7 +8,7 @@ export const profile = {
   phone: "(+20) 1061446951",
   linkedinUrl: "https://linkedin.com/in/amr-ayman-khalil",
   githubUrl: "https://github.com/AmrAymanKhalil505",
-  resumeUrl: "/Amr_Khalil_CV.pdf",
+  resumeUrl: publicAssetUrl("Amr_Khalil_CV.pdf"),
 };
 
 export const experience = [

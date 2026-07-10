@@ -70,13 +70,12 @@ loads the iframe only when the visitor clicks play. YouTube embeds are muted and
 
 ## Resume And Contact
 
-The current resume download is `public/amr-khalil-resume.pdf`, generated from
-`public/amr-khalil-resume.html`.
+The current resume download is `public/Amr_Khalil_CV.pdf`.
 
 To replace it with an Overleaf export, save the exported PDF to:
 
 ```text
-public/amr-khalil-resume.pdf
+public/Amr_Khalil_CV.pdf
 ```
 
 Update the placeholder email and social links in:
