@@ -7,8 +7,18 @@ import webglThumb from "../assets/webgl-systems.svg";
 import ivrisThumb from "../assets/ivris-ar-room.svg";
 import vrTrainingThumb from "../assets/vr-training-suite.svg";
 import cimSystemImage from "../assets/projects/cim/thumnail.jpg";
+import atmoProtectorHeroVideo from "../assets/Atmo Protector Hero.mp4";
+import atmoGreenMindsLogo from "../assets/projects/Atmo Protection/Green minds EN logo.png";
+import atmoInstructionImage from "../assets/projects/Atmo Protection/Image1.jpg";
+import atmoGameplayImage from "../assets/projects/Atmo Protection/Image2.jpg";
+import atmoHealthImage from "../assets/projects/Atmo Protection/Image3.jpg";
+import atmoUpgradesImage from "../assets/projects/Atmo Protection/Image4.jpg";
+import engineeringEducationHeroVideo from "../assets/Engineering Educational .mp4";
 import industrialTrainingHeroVideo from "../assets/Industrial Traning Hero.mp4";
+import ivrisHeroVideo from "../assets/Ivris.mp4";
+import nescafeHeroVideo from "../assets/Nescafe .mp4";
 import pidHeroVideo from "../assets/PID Hero .mp4";
+import tantaUniversityHeroVideo from "../assets/Tanta University.mp4";
 import cimThumbnailLoop from "../assets/projects/cim/CIM Thumnail gif.mp4";
 import mr110LoadingImage from "../assets/projects/cim/MR 110 Loading.png";
 import mr110StorageImage from "../assets/projects/cim/MR110 Storage.png";
@@ -260,7 +270,7 @@ export const projects: Project[] = [
     ],
     overview: [
       "CIM Station Behavior Simulation is a Unity industrial training project for inspecting station behavior in one visual environment. The focus is the cause-and-effect chain behind each module: sensors detect changes, actuators move, control states update, motors start or stop, and PLC-style process states respond.",
-      "The gallery shows the simulation from two angles: process demos and station/interface views. Under the gallery, each station is described by the functional systems I simulated and the behavior those systems create, so a technical reviewer can understand the engineering work without exposing internal implementation details.",
+      "The gallery shows the simulation from two angles: process demos and station/interface views. Under the gallery, each station is described by the functional systems I simulated and the behavior those systems create, making the engineering work easier to understand through visible state, motion, and interaction flow.",
     ],
     simulatedBehaviors: [
       {
@@ -408,22 +418,22 @@ export const projects: Project[] = [
       "Built Unity-based training simulations for multi-station industrial systems.",
       "Simulated MR110 Advanced Modular CIM and MR109 Compact Mechatronics training workflows.",
       "Visualized station motion, sensor-driven events, actuator states, and process transitions.",
-      "Created safe educational views that explain behavior without exposing internal implementation details.",
+      "Created educational views that explain behavior through clear visual feedback.",
     ],
     timeline: "Grouped industrial training simulation work",
     problem:
       "Industrial training systems such as MR110 and MR109 can be difficult to understand when mechanical motion, sensing, actuation, and process state changes are separated across diagrams, hardware, and control tools.",
     solution:
-      "Built Unity simulations that connect visible station behavior with PLC-style process concepts, allowing learners and reviewers to observe motion, state changes, and training workflows in one environment.",
+      "Built Unity simulations that connect visible station behavior with PLC-style process concepts, allowing learners to observe motion, state changes, and training workflows in one environment.",
     challenges: [
       "Representing industrial behavior clearly without publishing proprietary hardware details.",
-      "Balancing technical depth with NDA-safe portfolio presentation.",
+      "Presenting technical depth clearly while keeping the showcase focused on public project visuals.",
       "Keeping complex station interactions understandable through visual state feedback.",
     ],
     impact: [
       "Demonstrates experience building serious Unity simulations for industrial education.",
       "Shows ability to model station behavior, process flow, and training-oriented feedback.",
-      "Creates a reusable public-facing umbrella for related company work without exposing every internal project.",
+      "Groups related industrial training simulations into one clear case study.",
     ],
     featured: true,
   },
@@ -508,7 +518,7 @@ export const projects: Project[] = [
             "Support guided analysis of control-system performance",
           ],
           notes: [
-            "Shown as a public portfolio example of graphing and educational feedback, not as internal implementation logic.",
+            "Shown as a portfolio example of graphing and educational feedback.",
             "Contains demo tuning values and response metrics only; no source code, file paths, credentials, or private project data are visible.",
           ],
         },
@@ -526,7 +536,7 @@ export const projects: Project[] = [
       "Created Unity virtual labs where controller tuning, process response, disturbance behavior, and visual feedback update together, helping students compare behavior across different control scenarios.",
     challenges: [
       "Making control response readable for learners without overloading the UI.",
-      "Presenting process-control work without exposing internal implementation details or unpublished lab files.",
+      "Presenting process-control work through visible experiment behavior, response graphs, and interaction flow.",
       "Keeping simulation, graphing, and interaction responsive inside WebGL-friendly experiences.",
     ],
     impact: [
@@ -536,7 +546,7 @@ export const projects: Project[] = [
     ],
     overview: [
       "PID Virtual Labs Suite groups multiple Unity/WebGL digital-shadow modules for control-system education. The suite focuses on how PID tuning changes visible system response across pressure, temperature, DC motor speed, DC motor position, liquid level, and flow-rate trainers.",
-      "Each module is presented through the controlled variable, actuator behavior, feedback signal, disturbance source, response visualization, and student workflow. The page stays portfolio-safe by explaining the learning behavior and Unity implementation without exposing internal project files or detailed proprietary logic.",
+      "Each module is presented through the controlled variable, actuator behavior, feedback signal, disturbance source, response visualization, and student workflow, keeping the focus on visible learning behavior and Unity implementation.",
     ],
     simulatedBehaviors: [
       {
@@ -595,6 +605,7 @@ export const projects: Project[] = [
     platform: ["Unity", "WebGL", "Educational simulations"],
     tech: ["Unity", "C#", "WebGL", "Virtual Lab", "Educational Simulation", "Data Visualization", "Interactive Learning"],
     thumbnail: eduLaminarImage,
+    heroVideo: engineeringEducationHeroVideo,
     demoUrl: "#demo",
     demoLabel: "View Lab Modules",
     caseStudyUrl: "/projects/engineering-education-virtual-labs",
@@ -655,7 +666,7 @@ export const projects: Project[] = [
           behaviors: [
             "Visualize measurement changes over the experiment",
             "Compare flow-related readings between operating states",
-            "Support guided analysis without exposing internal code or project files",
+            "Support guided analysis through clear experiment feedback",
           ],
           notes: [
             "Shown as a public portfolio screenshot of educational feedback and visualization only.",
@@ -770,7 +781,7 @@ export const projects: Project[] = [
       "Built Unity/WebGL virtual labs that let learners interact with experiment variables, observe visual feedback, and understand fluid mechanics and energy-system behavior through guided simulation.",
     challenges: [
       "Designing educational interactions that are simple enough for students but useful for technical review.",
-      "Choosing public-safe screenshots and videos that do not reveal internal curriculum or product details.",
+      "Choosing screenshots and videos that show the learning experience clearly without overloading visitors with product details.",
       "Balancing scientific clarity, performance, and browser-friendly presentation.",
     ],
     impact: [
@@ -780,7 +791,7 @@ export const projects: Project[] = [
     ],
     overview: [
       "Engineering Education Virtual Labs groups my Unity/WebGL educational simulations for fluid mechanics and energy systems. The page focuses on turning abstract classroom concepts into visible, interactive experiment workflows that learners can inspect and repeat.",
-      "The modules cover Bernoulli principle behavior, laminar streamline visualization, and fuel-cell vehicle energy flow. Each module is described through the learning goal, simulated components, visual behavior, guided experiment flow, and public-safe technical contribution.",
+      "The modules cover Bernoulli principle behavior, laminar streamline visualization, and fuel-cell vehicle energy flow. Each module is described through the learning goal, simulated components, visual behavior, guided experiment flow, and technical contribution.",
     ],
     simulatedBehaviors: [
       {
@@ -822,7 +833,7 @@ export const projects: Project[] = [
       "Built Unity virtual lab scenes for fluid mechanics and energy-system education.",
       "Created visual simulations for pressure/velocity relationships, laminar flow patterns, and fuel-cell vehicle energy flow.",
       "Added interactive controls, guided experiment steps, measurement feedback, and dashboard-style educational UI.",
-      "Designed the page to show engineering-simulation ability without overloading visitors with formulas or exposing internal curriculum files.",
+      "Designed the page to show engineering-simulation ability without overloading visitors with formulas or unnecessary curriculum detail.",
       "Kept the public presentation focused on learning behavior, visual feedback, and reusable Unity simulation patterns.",
     ],
     featured: true,
@@ -836,7 +847,11 @@ export const projects: Project[] = [
     role: "Unity Developer",
     platform: ["Unity", "Android", "iOS"],
     tech: ["Unity", "C#", "Android", "iOS", "Mobile Game", "Educational Game", "Arabic UI", "Environmental Awareness"],
-    thumbnail: agriThumb,
+    thumbnail: atmoGreenMindsLogo,
+    previewGif: "https://youtu.be/eWFaHaYUy44",
+    heroVideo: atmoProtectorHeroVideo,
+    demoUrl: "#media",
+    demoLabel: "View Game Demo",
     caseStudyUrl: "/projects/atmosphere-guardian",
     highlights: [
       "Built a mobile-friendly Unity educational game for children.",
@@ -844,6 +859,148 @@ export const projects: Project[] = [
       "Created Arabic instruction screens for localized learning.",
       "Added environmental upgrade mechanics connected to air-pollution concepts.",
       "Designed the gameplay loop around protecting the atmosphere through interactive cleanup.",
+    ],
+    technicalEvidence: {
+      badges: [
+        "Mobile educational game",
+        "Arabic learning UI",
+        "Pollution collection loop",
+        "Atmosphere health system",
+        "Environmental upgrade mechanics",
+        "Kid-friendly gameplay",
+      ],
+      evidenceList: [
+        "YouTube gameplay demo",
+        "4 game screenshots",
+        "3 learning behavior groups",
+        "5 system breakdowns",
+      ],
+    },
+    media: [
+      {
+        id: "atmo-gameplay-demo",
+        type: "youtube",
+        title: "Atmosphere Guardian Gameplay Demo",
+        youtubeId: "https://youtu.be/eWFaHaYUy44",
+        thumbnail: "https://i.ytimg.com/vi/eWFaHaYUy44/hqdefault.jpg",
+        caption:
+          "Gameplay demo showing the mobile educational loop: flying the environmental airplane, collecting pollution targets, protecting atmosphere health, and connecting play with environmental awareness.",
+        details: {
+          title: "Game Loop Preview",
+          components: [
+            "Player airplane controller",
+            "Pollution target objects",
+            "Atmosphere health feedback",
+            "Environmental learning message",
+          ],
+          behaviors: [
+            "Fly through the scene using simple mobile-friendly movement",
+            "Collect harmful gas clouds as cleanup targets",
+            "Connect cleanup actions with atmosphere protection",
+            "Keep the learning loop understandable for children",
+          ],
+        },
+      },
+      {
+        id: "atmo-arabic-instructions",
+        type: "image",
+        title: "Arabic Instruction Flow",
+        src: atmoInstructionImage,
+        thumbnail: atmoInstructionImage,
+        alt: "Atmosphere Guardian Arabic instruction screen",
+        caption:
+          "Arabic instruction and learning screen that introduces the environmental goal before the gameplay starts.",
+        details: {
+          title: "Localized Learning Entry",
+          components: [
+            "Arabic instruction panel",
+            "Environmental icons",
+            "Kid-friendly confirmation flow",
+            "Game objective explanation",
+          ],
+          behaviors: [
+            "Explain the environmental goal in Arabic",
+            "Introduce the cleanup task before play",
+            "Use visual symbols to support younger learners",
+            "Prepare the player for the core atmosphere-protection loop",
+          ],
+        },
+      },
+      {
+        id: "atmo-cleanup-gameplay",
+        type: "image",
+        title: "Airplane Cleanup Gameplay",
+        src: atmoGameplayImage,
+        thumbnail: atmoGameplayImage,
+        alt: "Atmosphere Guardian airplane gameplay screen",
+        caption:
+          "Gameplay view showing the airplane, pollution clouds, and environmental objects used to turn air-pollution concepts into interactive play.",
+        details: {
+          title: "Interactive Cleanup Loop",
+          components: [
+            "Airplane player object",
+            "Pollution cloud targets",
+            "Scene objects and obstacles",
+            "Mobile-friendly visual layout",
+          ],
+          behaviors: [
+            "Move the airplane through a readable 2D/arcade-style scene",
+            "Collect pollution targets as the main action",
+            "Give immediate feedback when cleanup targets are reached",
+            "Keep gameplay simple enough for young players",
+          ],
+        },
+      },
+      {
+        id: "atmo-health-feedback",
+        type: "image",
+        title: "Atmosphere Health Feedback",
+        src: atmoHealthImage,
+        thumbnail: atmoHealthImage,
+        alt: "Atmosphere Guardian atmosphere health and pollution feedback screen",
+        caption:
+          "Game state view showing how atmosphere health and pollution feedback make air quality understandable as a visible gameplay system.",
+        details: {
+          title: "Health-Based Learning Feedback",
+          components: [
+            "Atmosphere health value",
+            "Pollution targets",
+            "Progress/loss feedback",
+            "Environmental scene state",
+          ],
+          behaviors: [
+            "Represent atmosphere quality as a clear health value",
+            "Connect pollution remaining in the scene with player urgency",
+            "Reward cleanup actions through visible feedback",
+            "Turn an abstract air-quality topic into a readable game state",
+          ],
+        },
+      },
+      {
+        id: "atmo-environmental-upgrades",
+        type: "image",
+        title: "Environmental Upgrade Concepts",
+        src: atmoUpgradesImage,
+        thumbnail: atmoUpgradesImage,
+        alt: "Atmosphere Guardian environmental upgrades screen",
+        caption:
+          "Upgrade screen connecting game progression with cleaner choices such as recycling, filtering, magnet collection, and electric transportation ideas.",
+        details: {
+          title: "Upgrade-Based Learning",
+          components: [
+            "Recycling upgrade concept",
+            "Filter upgrade concept",
+            "Magnet collection upgrade",
+            "Electric car environmental idea",
+          ],
+          behaviors: [
+            "Use upgrades to reinforce environmental choices",
+            "Connect progression with cleaner real-world concepts",
+            "Make learning rewards visible and playful",
+            "Support the environmental-awareness theme beyond the main flight loop",
+          ],
+        },
+      },
     ],
     timeline: "Educational mobile game project",
     problem:
@@ -977,7 +1134,7 @@ export const projects: Project[] = [
     highlights: [
       "Built simulation state logic for virtual devices.",
       "Created interactive controls and real-time visual feedback.",
-      "Structured the project for educational demonstration and debugging.",
+      "Structured the project for educational demonstration and clear iteration.",
     ],
     timeline: "BEDO Innovating Education - Oct 2024 to present",
     problem:
@@ -991,7 +1148,7 @@ export const projects: Project[] = [
     ],
     impact: [
       "Created a clearer way to explain device states and automation flow.",
-      "Made debugging and demonstration easier through visible feedback.",
+      "Made testing and demonstration easier through visible feedback.",
       "Established a reusable pattern for future industrial training modules.",
     ],
     featured: true,
@@ -1008,6 +1165,7 @@ export const projects: Project[] = [
     platform: ["Unity", "WebGL", "Android", "iOS"],
     tech: ["Unity", "C#", "WebGL", "AR", "Photon", "PlayFab", "Node.js", "Render"],
     thumbnail: ivrisWebsiteHomeImage,
+    heroVideo: ivrisHeroVideo,
     previewVideo: ivrisWebPreviewLoop,
     demoUrl: "#demo",
     demoLabel: "View App Gallery",
@@ -1061,8 +1219,8 @@ export const projects: Project[] = [
         details: {
           title: "Public Tutorial Clip",
           notes: [
-            "Uses public in-app tutorial material that can be shown as portfolio evidence.",
-            "Helps visitors understand the interactive app flow before reviewing the still screenshots.",
+            "Uses public in-app tutorial material to show the customer-facing app flow.",
+            "Helps visitors understand the interactive app flow before moving into the still screenshots.",
             "Keeps the case study focused on visible product behavior and my Unity application contribution.",
           ],
         },
@@ -1074,7 +1232,7 @@ export const projects: Project[] = [
         src: ivrisMobileServicesImage,
         thumbnail: ivrisMobileServicesImage,
         caption:
-          "Public Ivris mobile/service page context showing how the customer design experience is presented to users. I use this as product context for the Unity app work, not as a claim of ownership over the Ivris storefront.",
+          "Public Ivris mobile/service page context showing how the customer design experience is presented to users. This supports the Unity app work shown here: runtime content, room editing, collaboration, AR preview, and backend integration.",
         details: {
           title: "Customer Service Context",
           notes: [
@@ -1260,7 +1418,7 @@ export const projects: Project[] = [
       "Built Photon-powered collaborative room editing for WebGL sessions.",
       "Integrated mobile AR preview flows for Android and iOS.",
       "Connected the Unity client with PlayFab and a Render-hosted backend.",
-      "Used the public Ivris Customer Design Services context to present the work without exposing private implementation details.",
+      "Used the public Ivris Customer Design Services context to frame the Unity application work clearly.",
     ],
     featured: true,
   },
@@ -1309,6 +1467,7 @@ export const projects: Project[] = [
     platform: ["Unity", "VR headset"],
     tech: ["Unity", "C#", "VR", "Arcade Gameplay", "Booth Experience", "Interaction Design"],
     thumbnail: nescafeMenuImage,
+    heroVideo: nescafeHeroVideo,
     demoUrl: "#demo",
     demoLabel: "Watch Booth Demo",
     caseStudyUrl: "/projects/nescafe-surfing-vr-booth",
@@ -1542,21 +1701,22 @@ export const projects: Project[] = [
     platform: ["Unity", "Meta Quest 2", "VR"],
     tech: ["Unity", "C#", "Meta Quest 2", "VR", "Auto Hand", "360 Video", "Android"],
     thumbnail: vrTrainingThumb,
+    heroVideo: tantaUniversityHeroVideo,
     caseStudyUrl: "/projects/meta-quest-vr-training-suite",
     highlights: [
       "Handled the full development pipeline as the solo developer, from instructional-design interpretation through Unity implementation.",
       "Built three Meta Quest 2 experiences: headset onboarding, 360 surgical-room video viewing, and an interactive viscosity lab.",
-      "Adapted placeholder assets and modified models to fit educational scenarios, then programmed the full VR interactions.",
+      "Adapted available assets and modified models to fit educational scenarios, then programmed the full VR interactions.",
     ],
     timeline: "Tanta University - Dec 2023 to Oct 2024",
     problem:
       "Students and first-time VR users needed safe, repeatable training experiences for headset onboarding, medical observation, and lab experimentation before real-world exposure.",
     solution:
-      "Built a Meta Quest 2 training suite that converts instructional goals into VR scenes, interaction flows, modified/placeholder 3D assets, 360 video navigation, and hands-on lab tools.",
+      "Built a Meta Quest 2 training suite that converts instructional goals into VR scenes, interaction flows, adapted 3D assets, 360 video navigation, and hands-on lab tools.",
     challenges: [
       "Designing VR interactions that first-time Quest 2 users can understand quickly.",
       "Turning instructional material into usable VR steps without a large production team.",
-      "Adapting placeholder models and assets so the scenes supported the learning goal.",
+      "Adapting available models and assets so the scenes supported the learning goal.",
       "Managing 360 surgical-room viewpoints and camera switching inside the headset.",
       "Making handheld lab tools feel usable with VR grabbing and interaction constraints.",
     ],
@@ -1566,7 +1726,7 @@ export const projects: Project[] = [
       "Created reusable VR patterns for guided instruction, 360 viewpoint switching, handheld tools, and lab-device interactions.",
     ],
     overview: [
-      "At Tanta University, I worked as the solo Unity VR developer for a Meta Quest 2 training suite. I handled the full flow from understanding the instructional-design requirements, adapting or modifying placeholder assets/models, building the Unity scenes, programming the interactions, and preparing the headset experiences.",
+      "At Tanta University, I worked as the solo Unity VR developer for a Meta Quest 2 training suite. I handled the full flow from understanding the instructional-design requirements, adapting or modifying 3D assets/models, building the Unity scenes, programming the interactions, and preparing the headset experiences.",
       "The suite included three main experiments: a Quest 2 onboarding tutorial for learning headset controls, a surgical-room 360 video viewer with multiple camera angles, and a viscosity experiment with handheld tools such as a calculator, stopwatch, and objects that can be placed into liquid.",
     ],
     simulatedBehaviors: [
@@ -1575,7 +1735,7 @@ export const projects: Project[] = [
         bullets: [
           "Translated instructional requirements into VR interaction flows.",
           "Built Unity scenes and interaction logic for Meta Quest 2.",
-          "Used placeholder assets where needed and modified them to fit the training context.",
+          "Used available assets where needed and modified them to fit the training context.",
           "Programmed the experience flow, tools, UI, and headset-ready builds.",
         ],
       },
@@ -1631,9 +1791,9 @@ export const projects: Project[] = [
       {
         title: "Asset and Scene Adaptation",
         description:
-          "A practical solo-dev workflow where placeholder assets were used as a base, modified, and assembled into working training scenes.",
+          "A practical solo-dev workflow where available assets were adapted, modified, and assembled into working training scenes.",
         bullets: [
-          "Placeholder assets adapted for instructional needs.",
+          "Assets adapted for instructional needs.",
           "Model/scene adjustments to support interaction points.",
           "Unity implementation prepared for Quest 2 deployment.",
         ],
@@ -1645,7 +1805,7 @@ export const projects: Project[] = [
       "Implemented 360 video viewing with camera-angle switching.",
       "Programmed handheld VR lab devices, including calculator and stopwatch interactions.",
       "Built grabbable experiment objects and liquid-placement interaction flow for the viscosity lab.",
-      "Adapted placeholder assets and modified scene elements to satisfy educational requirements.",
+      "Adapted available assets and modified scene elements to satisfy educational requirements.",
     ],
   },
   {
@@ -1709,7 +1869,7 @@ export const projects: Project[] = [
             "Monitor soil moisture conditions",
             "Support water-saving irrigation decisions",
             "Use data-driven plant/crop health signals",
-            "Present the solution clearly for judges and public review",
+            "Present the solution clearly for competition judging and public demos",
           ],
           notes: [
             "The public GitHub repository describes a Django backend API used to connect database, mobile app, and hardware-device communication.",
@@ -1883,7 +2043,7 @@ export const projects: Project[] = [
     ],
     impact: [
       "Created a cleaner starting point for future interactive tools.",
-      "Improved debugging and iteration speed.",
+      "Improved testing and iteration speed.",
       "Reduced duplicated UI logic across prototypes.",
     ],
     webglAvailable: true,
@@ -1919,13 +2079,13 @@ if (cimDraftProject && industrialTrainingProject) {
       youtubeId: "https://youtu.be/XWwXzmuA5bk",
       thumbnail: "https://i.ytimg.com/vi/XWwXzmuA5bk/hqdefault.jpg",
       caption:
-        "Public portfolio preview of the industrial training simulation. Some areas are intentionally pixelated for NDA and confidentiality purposes.",
+        "Public portfolio preview of the industrial training simulation. Some areas are intentionally blurred while keeping the simulation flow visible.",
       details: {
-        title: "NDA-Safe Preview",
+        title: "Simulation Preview",
         notes: [
           "Pixelated regions are intentional and are included to avoid exposing confidential details.",
-          "The visible portions focus on simulation behavior, training flow, and public-safe visual context.",
-          "Presented as portfolio evidence without exposing internal code, PLC files, or private implementation details.",
+          "The visible portions focus on simulation behavior, training flow, and readable visual context.",
+          "Presented as a portfolio example focused on visible behavior, PLC-style states, and training flow.",
         ],
       },
     },
@@ -2019,7 +2179,7 @@ if (cimDraftProject && industrialTrainingProject) {
   industrialTrainingProject.previewVideo = cimThumbnailLoop;
   industrialTrainingProject.overview = [
     "Industrial Training Simulation Systems groups my Unity/WebGL digital twin style work for BEDO training systems, including MR110 Advanced Modular CIM and MR109 Compact Mechatronics workflows. The focus is the behavior I simulated: station motion, sensor feedback, actuator states, process transitions, and PLC-style training logic.",
-    "The MR110 gallery shows the media currently available for the public portfolio. MR109 is included on the same page as a station-behavior breakdown, so reviewers can understand the additional simulation scope without exposing internal code, PLC projects, or unpublished media.",
+    "The MR110 gallery shows the available project media. MR109 is included on the same page as a station-behavior breakdown, making the additional simulation scope clear through visible station behavior and process flow.",
   ];
   industrialTrainingProject.simulatedBehaviors = [
     {
@@ -2060,7 +2220,7 @@ if (cimDraftProject && industrialTrainingProject) {
     "Simulated multi-station industrial behavior using sensors, actuators, motors, conveyors, robot handling, storage, sorting, and pneumatic components.",
     "Represented PLC-style process states such as start, running, stop, process ON/OFF, ready, busy, done, and emergency.",
     "Created visual behavior for loading, transporting, measuring, processing, assembly, buffering, sorting, robot arm, storage, laser marking, and electrical drilling station concepts.",
-    "Designed the simulations for industrial training, demonstration, learning, and debugging without exposing internal project files or proprietary implementation details.",
+    "Designed the simulations for industrial training, demonstration, learning, and clear iteration around visible station behavior.",
   ];
 }
 

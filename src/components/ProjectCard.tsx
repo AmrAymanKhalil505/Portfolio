@@ -74,9 +74,20 @@ function ProjectCard({ project }: ProjectCardProps) {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const evidenceScrollRef = useRef<HTMLDivElement>(null);
   const evidenceItems = getEvidenceItems(project);
+  const [showAllMobileEvidence, setShowAllMobileEvidence] = useState(false);
+  const [showAllMobileTech, setShowAllMobileTech] = useState(false);
+  const compactMobileEvidenceItems = evidenceItems.slice(0, 3);
+  const mobileEvidenceItems = showAllMobileEvidence ? evidenceItems : compactMobileEvidenceItems;
+  const hiddenEvidenceCount = Math.max(evidenceItems.length - compactMobileEvidenceItems.length, 0);
+  const compactMobileTechItems = project.tech.slice(0, 4);
+  const mobileTechItems = showAllMobileTech ? project.tech : compactMobileTechItems;
+  const hiddenTechCount = Math.max(project.tech.length - compactMobileTechItems.length, 0);
   const usesDotIndicator = evidenceItems.length > 3;
   const dotCount = usesDotIndicator ? Math.min(evidenceItems.length, 10) : 0;
   const [activeEvidenceDot, setActiveEvidenceDot] = useState(0);
+  const usesLogoThumbnail = project.id === "atmosphere-guardian";
+  const previewImage = usesLogoThumbnail ? project.thumbnail : getPreviewImage(project);
+  const fallbackPreviewImage = usesLogoThumbnail ? project.thumbnail : getFallbackPreviewImage(project);
 
   const playPreviewVideo = () => {
     const video = previewVideoRef.current;
@@ -119,15 +130,21 @@ function ProjectCard({ project }: ProjectCardProps) {
       onFocus={playPreviewVideo}
       onBlur={stopPreviewVideo}
     >
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-[#0B0E0D]">
+      <div
+        className={`relative aspect-[16/10] overflow-hidden border-b border-white/10 ${
+          usesLogoThumbnail ? "bg-white" : "bg-[#0B0E0D]"
+        }`}
+      >
         <img
-          src={getPreviewImage(project)}
+          src={previewImage}
           alt={`${project.title} preview`}
           loading="lazy"
           onError={(event) => {
-            event.currentTarget.src = getFallbackPreviewImage(project);
+            event.currentTarget.src = fallbackPreviewImage;
           }}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          className={`h-full w-full transition duration-500 ${
+            usesLogoThumbnail ? "object-contain p-6 group-hover:scale-[1.03]" : "object-cover group-hover:scale-105"
+          }`}
         />
         {project.previewVideo && (
           <video
@@ -152,10 +169,31 @@ function ProjectCard({ project }: ProjectCardProps) {
           </span>
         )}
       </div>
-      <div className="flex min-h-[35rem] flex-col p-5">
-        <h3 className="h-16 overflow-hidden text-xl font-semibold leading-tight text-white">{project.title}</h3>
-        <p className="mt-3 h-[7.5rem] overflow-hidden text-sm leading-6 text-steel">{project.summary}</p>
-        <div className="mt-4 h-40">
+      <div className="flex min-h-0 flex-col p-4 sm:p-5 md:min-h-[35rem]">
+        <h3 className="max-h-14 overflow-hidden text-lg font-semibold leading-tight text-white md:h-16 md:max-h-none md:text-xl">
+          {project.title}
+        </h3>
+        <p className="mt-3 max-h-[4.5rem] overflow-hidden text-sm leading-6 text-steel md:h-[7.5rem] md:max-h-none">
+          {project.summary}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2 md:hidden" aria-label={`${project.title} key highlights`}>
+          {mobileEvidenceItems.map((item) => (
+            <span key={item} className="rounded-full border border-scan/15 bg-scan/[0.055] px-3 py-1.5 text-xs font-medium text-scan/90">
+              {item}
+            </span>
+          ))}
+          {hiddenEvidenceCount > 0 && (
+            <button
+              type="button"
+              onClick={() => setShowAllMobileEvidence((isExpanded) => !isExpanded)}
+              className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-steel transition hover:border-scan/30 hover:text-white"
+              aria-expanded={showAllMobileEvidence}
+            >
+              {showAllMobileEvidence ? "Show less" : `+${hiddenEvidenceCount} more`}
+            </button>
+          )}
+        </div>
+        <div className="mt-4 hidden h-40 md:block">
           {evidenceItems.length > 0 && (
             <div className={`h-full ${usesDotIndicator ? "flex items-stretch gap-3" : ""}`}>
               <div
@@ -193,14 +231,29 @@ function ProjectCard({ project }: ProjectCardProps) {
             </div>
           )}
         </div>
-        <div className="mt-5 flex h-[8.25rem] flex-wrap content-start gap-2 overflow-hidden" aria-label={`${project.title} tech stack`}>
+        <div className="mt-4 flex flex-wrap gap-2 md:hidden" aria-label={`${project.title} tech stack`}>
+          {mobileTechItems.map((tech) => (
+            <TechBadge key={tech} tech={tech} compact />
+          ))}
+          {hiddenTechCount > 0 && (
+            <button
+              type="button"
+              onClick={() => setShowAllMobileTech((isExpanded) => !isExpanded)}
+              className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-medium text-steel transition hover:border-scan/30 hover:text-white"
+              aria-expanded={showAllMobileTech}
+            >
+              {showAllMobileTech ? "Show less" : `+${hiddenTechCount}`}
+            </button>
+          )}
+        </div>
+        <div className="mt-5 hidden h-[8.25rem] flex-wrap content-start gap-2 overflow-hidden md:flex" aria-label={`${project.title} tech stack`}>
           {project.tech.slice(0, 5).map((tech) => (
             <TechBadge key={tech} tech={tech} compact />
           ))}
         </div>
-        <div className="mt-auto flex h-11 shrink-0 items-start justify-start">
+        <div className="mt-5 flex h-11 shrink-0 items-start justify-start md:mt-auto">
           <ButtonLink to={project.caseStudyUrl} variant="primary" icon={<ArrowUpRight size={16} />}>
-            Inspect Case Study
+            View Case Study
           </ButtonLink>
         </div>
       </div>

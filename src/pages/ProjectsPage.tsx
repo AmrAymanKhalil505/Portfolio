@@ -21,7 +21,7 @@ function ProjectsPage() {
           <SectionHeader
             eyebrow="Projects"
             title="Filterable Unity and interactive systems portfolio"
-            description="Each project card shows the role, category, stack, and next action so technical reviewers can go deeper without hunting."
+            description="Each project card shows the role, category, stack, and next action so visitors can quickly understand the work and explore the full case study."
           />
           <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
             {(["All", ...categories] as Filter[]).map((category) => (

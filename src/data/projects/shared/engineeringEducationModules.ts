@@ -6,48 +6,28 @@ export const engineeringEducationModules = [
   {
     id: "bernoulli-principle-virtual-lab",
     title: "Bernoulli Principle Virtual Lab",
-    caption:
-      "Unity virtual lab for visualizing Bernoulli's principle through venturi flow, pressure distribution, velocity changes, and real-time measurement feedback.",
-    domain: "Fluid Mechanics",
-    learningGoal:
-      "Show how changing flow area affects velocity and static pressure across a venturi section.",
-    components: [
-      "Venturi tube / flow channel visualization",
-      "Water flow path",
-      "Pressure tapping points",
-      "Manometer-style pressure indicators",
-      "Flow control valve",
-      "Measuring scale and experiment UI",
-    ],
-    behaviors: [
-      "Flow moving through different cross-section areas",
-      "Velocity increasing in narrow sections",
-      "Static pressure decreasing at high-velocity regions",
-      "Flow-rate changes affecting all pressure and velocity readings",
-      "Comparison between theoretical and measured-style values",
-    ],
-  },
-  {
-    id: "fm103-flow-measurement-virtual-lab",
-    title: "FM103 Flow Measurement Virtual Lab",
     image: eduFm103LabImage,
     caption:
-      "Unity virtual lab for flow-measurement education, showing how a fluid-mechanics trainer can connect flow control, measurement readings, guided steps, and response visualization in one interactive scene.",
+      "Unity virtual lab for the FM103 Bernoulli and flow-measurement trainer, connecting venturi flow, pressure distribution, flow control, measurement readings, guided steps, and graph feedback in one interactive scene.",
     domain: "Fluid Mechanics",
     learningGoal:
-      "Help students connect flow changes with measurement feedback, graph behavior, and repeatable experiment observations.",
+      "Show how changing flow area affects velocity and static pressure while helping students connect flow changes with measurement feedback, graph behavior, and repeatable experiment observations.",
     components: [
-      "Flow-measurement trainer visualization",
-      "Fluid path and flow-control area",
+      "FM103 Bernoulli / flow-measurement trainer visualization",
+      "Venturi tube / flow channel visualization",
+      "Water flow path and flow-control area",
+      "Pressure tapping points and manometer-style indicators",
       "Measurement display and experiment controls",
       "Guided step interface",
       "Graph/response feedback view",
     ],
     behaviors: [
-      "Adjust flow-related experiment conditions",
-      "Observe measurement readings changing with the experiment state",
+      "Flow moving through different cross-section areas",
+      "Velocity increasing in narrow sections",
+      "Static pressure decreasing at high-velocity regions",
+      "Flow-rate changes affecting pressure, velocity, and measurement readings",
       "Connect visual flow behavior with graph feedback",
-      "Support guided student comparison between operating states",
+      "Support guided student comparison between theoretical and measured-style values",
     ],
   },
   {

@@ -1,8 +1,8 @@
 export const bedoAttributionNote =
-  "Product names and hardware references belong to BEDO and their respective owners. This portfolio page focuses on my Unity/WebGL simulation, UI, visualization, and educational implementation work, not ownership of the physical training product or full hardware design. Any media, module previews, or gallery content shown here are my portfolio presentation, not official BEDO-provided demos.";
+  "Product names and hardware references are included for context. This case study focuses on my Unity/WebGL simulation, UI, visualization, and educational implementation work.";
 
 export const ivrisAttributionNote =
-  "Ivris product names, service pages, and brand references belong to Ivris. This portfolio page focuses on my Unity, AR, WebGL collaboration, runtime content loading, and integration work for the application.";
+  "Ivris product and service references are included for context. This case study focuses on my Unity/WebGL/AR application work, runtime content, collaboration, and backend-connected workflows.";
 
 export const nescafeAttributionNote =
-  "Nescafe, Nestle, and campaign brand references belong to their respective owners. This portfolio page focuses on my Unity VR booth implementation work and uses the media as project presentation context.";
+  "Nescafe/Nestle references are included for event context. This case study focuses on my Unity VR booth gameplay, interaction design, and event-experience implementation work.";

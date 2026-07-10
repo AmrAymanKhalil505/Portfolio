@@ -6,7 +6,7 @@ export const profile = {
   phone: "(+20) 1061446951",
   linkedinUrl: "https://linkedin.com/in/amr-ayman-khalil",
   githubUrl: "https://github.com/AmrAymanKhalil505",
-  resumeUrl: "/amr-khalil-resume.pdf",
+  resumeUrl: "/Amr_Khalil_CV.pdf",
 };
 
 export const experience = [

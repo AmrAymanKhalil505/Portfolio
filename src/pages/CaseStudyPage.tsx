@@ -121,7 +121,7 @@ function CaseStudyPage() {
                   <h2 className="text-2xl font-semibold text-white">Screenshots or video</h2>
                   <div className="mt-6 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
                     <div className="relative overflow-hidden rounded-lg border border-white/10 bg-panel">
-                      <img src={project.thumbnail} alt={`${project.title} demo placeholder`} className="h-full min-h-80 w-full object-cover" />
+                      <img src={project.thumbnail} alt={`${project.title} demo preview`} className="h-full min-h-80 w-full object-cover" />
                       <div className="absolute inset-0 flex items-center justify-center bg-ink/20">
                         <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-white backdrop-blur">
                           <PlayCircle size={30} />
@@ -129,7 +129,7 @@ function CaseStudyPage() {
                       </div>
                     </div>
                     <div id="webgl" className="rounded-lg border border-white/10 bg-panel p-6">
-                      <h3 className="text-xl font-semibold text-white">WebGL demo placeholder</h3>
+                      <h3 className="text-xl font-semibold text-white">Interactive demo preview</h3>
                       <p className="mt-3 text-sm leading-6 text-steel">
                         Replace this block with the published Unity WebGL build URL or an embedded build once the
                         project is ready for public visitors.
@@ -162,7 +162,7 @@ function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDeta
         poster={heroVisual}
         playsInline
         preload="metadata"
-        className="hero-desktop-layer pointer-events-none absolute inset-0 h-full w-full object-contain object-center opacity-60 grayscale-[8%]"
+        className="hero-desktop-layer pointer-events-none absolute inset-0 h-full w-full object-contain object-right opacity-60 grayscale-[8%]"
       >
         <source src={project.heroVideo} type="video/mp4" />
       </video>
@@ -340,13 +340,13 @@ const formatCount = (count: number, singular: string, plural = `${singular}s`) =
 
 const getReviewEvidenceItems = (project: ProjectWithCimDetails) => {
   const items = [
-    project.media?.length ? formatCount(project.media.length, "media demo") : "Project screenshots / visual proof",
+    project.media?.length ? formatCount(project.media.length, "media demo") : "Project screenshots / visual previews",
     project.simulatedBehaviors?.length
       ? formatCount(project.simulatedBehaviors.length, "simulated behavior group")
       : null,
     project.stationBreakdown?.length ? formatCount(project.stationBreakdown.length, "module breakdown") : null,
     project.technicalEvidence?.badges?.length
-      ? formatCount(project.technicalEvidence.badges.length, "technical feature badge")
+      ? formatCount(project.technicalEvidence.badges.length, "implementation highlight")
       : null,
     project.webglAvailable ? "WebGL-ready delivery path" : null,
   ];
@@ -374,36 +374,23 @@ function TechnicalReviewSummary({ project, narrow = false }: { project: ProjectW
     <section className={`mx-auto ${shellWidth} px-4 py-10 sm:px-6 lg:px-8`}>
       <div className="overflow-hidden rounded-xl border border-scan/25 bg-panel shadow-glow">
         <div className="border-b border-white/10 bg-white/[0.03] px-6 py-5">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-scan">Technical Review Summary</p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">What a reviewer should notice first</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-scan">Project Snapshot</p>
+          <h2 className="mt-3 text-2xl font-semibold text-white">Quick overview</h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-steel">
-            A quick project panel for role, platform, simulated behavior, and the strongest implementation signal in
-            this case study.
+            A compact look at the role, platform, media, and main technical focus of this case study.
           </p>
         </div>
 
         <dl className="grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
           <ReviewSummaryBlock label="Role" value={project.role} />
           <ReviewSummaryBlock label="Platform" value={platformSummary} />
-          <ReviewSummaryBlock label="Media / Details" value={evidenceItems.slice(0, 3).join(" • ")} />
-          <ReviewSummaryBlock label="Best signal" value={getStrongestTechnicalSignal(project)} />
+          <ReviewSummaryBlock label="Case study contents" value={evidenceItems.slice(0, 3).join(" • ")} />
+          <ReviewSummaryBlock label="Technical focus" value={getStrongestTechnicalSignal(project)} />
         </dl>
 
-        <div className="grid gap-5 px-6 py-6 lg:grid-cols-[1fr_1fr]">
+        <div className="px-6 py-6">
           <section>
-            <h3 className="text-sm font-semibold text-white">What to look at</h3>
-            <ul className="mt-4 space-y-3">
-              {evidenceItems.map((item) => (
-                <li key={item} className="flex gap-3 text-sm leading-6 text-steel">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section>
-            <h3 className="text-sm font-semibold text-white">Public-safe scope</h3>
+            <h3 className="text-sm font-semibold text-white">Context note</h3>
             <p className="mt-4 text-sm leading-6 text-steel">{publicSafetyNote}</p>
             {featureBadges.length ? (
               <div className="mt-5 flex flex-wrap gap-2">
@@ -503,7 +490,7 @@ function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
           <p className="mb-3 text-sm font-semibold text-scan">Demos</p>
           <h2 className="text-3xl font-semibold text-white">Watch the simulated behavior</h2>
           <p className="mt-4 text-base leading-8 text-steel">
-            The videos are embedded inside the article so the work can be reviewed without leaving the portfolio.
+            The videos are included here so the interaction flow can be understood directly inside the case study.
           </p>
           <div className="mt-8 space-y-10">
             {project.media?.map((item) => (

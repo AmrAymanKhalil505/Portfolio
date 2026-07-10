@@ -330,7 +330,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Technical skills"
-            title="Unity implementation skills grouped for fast review"
+            title="Unity implementation skills grouped by project type"
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {skillGroups.map((group) => (
@@ -365,7 +365,7 @@ function HomePage() {
       <section className="border-t border-white/10 bg-[linear-gradient(90deg,#101314,#0A0D0C)]">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
-            <h2 className="text-2xl font-semibold text-white">Need a Unity simulation or prototype reviewed?</h2>
+            <h2 className="text-2xl font-semibold text-white">Need a Unity simulation or prototype built?</h2>
             <p className="mt-2 text-sm text-steel">
               Send the project brief, target platform, and what needs to be interactive.
             </p>
