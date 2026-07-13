@@ -16,8 +16,8 @@ const getYouTubeId = (value: string) => {
     const url = new URL(value);
     if (url.hostname.includes("youtu.be")) return url.pathname.replace("/", "");
     if (url.searchParams.get("v")) return url.searchParams.get("v") ?? "";
-    const embedMatch = url.pathname.match(/\/embed\/([^/?]+)/);
-    if (embedMatch) return embedMatch[1];
+    const pathMatch = url.pathname.match(/\/(?:embed|shorts)\/([^/?]+)/);
+    if (pathMatch) return pathMatch[1];
   } catch {
     return "";
   }

@@ -150,8 +150,8 @@ function HomePage() {
           poster={heroPoster}
           playsInline
           preload="metadata"
-          className="hero-desktop-layer pointer-events-none absolute inset-y-0 right-0 h-full w-[68%] object-cover object-right grayscale-[12%]"
-          style={{ opacity: heroSettings.videoOpacity }}
+          className="hero-desktop-layer pointer-events-none absolute inset-y-0 right-0 h-full w-[68%] object-cover object-right"
+          style={{ opacity: heroSettings.videoOpacity, filter: "brightness(1.2) grayscale(12%)" }}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
@@ -175,9 +175,10 @@ function HomePage() {
           poster={heroPoster}
           playsInline
           preload="metadata"
-          className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center grayscale-[10%]"
+          className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center"
           style={{
             opacity: Math.min(0.9, heroSettings.videoOpacity + 0.22),
+            filter: "brightness(1.2) grayscale(10%)",
             transform: "translateX(-50%)",
             WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
             maskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",

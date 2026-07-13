@@ -162,7 +162,8 @@ function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDeta
         poster={heroVisual}
         playsInline
         preload="metadata"
-        className="hero-desktop-layer pointer-events-none absolute inset-0 h-full w-full object-contain object-right opacity-60 grayscale-[8%]"
+        className="hero-desktop-layer pointer-events-none absolute inset-0 h-full w-full object-contain object-right opacity-60"
+        style={{ filter: "brightness(1.2) grayscale(8%)" }}
       >
         <source src={project.heroVideo} type="video/mp4" />
       </video>
@@ -174,8 +175,9 @@ function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDeta
         poster={heroVisual}
         playsInline
         preload="metadata"
-        className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center opacity-80 grayscale-[8%]"
+        className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center opacity-80"
         style={{
+          filter: "brightness(1.2) grayscale(8%)",
           transform: "translateX(-50%)",
           WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
           maskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
@@ -260,8 +262,8 @@ const getYouTubeId = (value: string | undefined) => {
     const url = new URL(value);
     if (url.hostname.includes("youtu.be")) return url.pathname.replace("/", "");
     if (url.searchParams.get("v")) return url.searchParams.get("v") ?? "";
-    const embedMatch = url.pathname.match(/\/embed\/([^/?]+)/);
-    if (embedMatch) return embedMatch[1];
+    const pathMatch = url.pathname.match(/\/(?:embed|shorts)\/([^/?]+)/);
+    if (pathMatch) return pathMatch[1];
   } catch {
     return "";
   }

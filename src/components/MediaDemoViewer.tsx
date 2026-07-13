@@ -42,8 +42,8 @@ const getYouTubeId = (value: string | undefined) => {
     const url = new URL(value);
     if (url.hostname.includes("youtu.be")) return url.pathname.replace("/", "");
     if (url.searchParams.get("v")) return url.searchParams.get("v") ?? "";
-    const embedMatch = url.pathname.match(/\/embed\/([^/?]+)/);
-    if (embedMatch) return embedMatch[1];
+    const pathMatch = url.pathname.match(/\/(?:embed|shorts)\/([^/?]+)/);
+    if (pathMatch) return pathMatch[1];
   } catch {
     return value;
   }
@@ -136,8 +136,8 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
   return (
     <section id="demo" className="border-y border-white/10 bg-[#090B0B]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)] lg:items-start">
-          <div className="overflow-hidden rounded-xl border border-white/10 bg-panel shadow-glow">
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)] lg:items-stretch">
+          <div className="h-full overflow-hidden rounded-xl border border-white/10 bg-panel shadow-glow">
             <div className="relative aspect-video bg-black">
               <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
                 <span className="rounded-md border border-scan/25 bg-ink/75 px-3 py-1 text-xs font-semibold text-scan backdrop-blur">

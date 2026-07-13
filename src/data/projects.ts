@@ -3,7 +3,6 @@ import fluidThumb from "../assets/fluid-physics.svg";
 import vrThumb from "../assets/vr-booth.svg";
 import agriThumb from "../assets/agri-tech.svg";
 import pidThumb from "../assets/pid-control.svg";
-import webglThumb from "../assets/webgl-systems.svg";
 import ivrisThumb from "../assets/ivris-ar-room.svg";
 import vrTrainingThumb from "../assets/vr-training-suite.svg";
 import cimSystemImage from "../assets/projects/cim/thumnail.jpg";
@@ -848,7 +847,7 @@ export const projects: Project[] = [
     platform: ["Unity", "Android", "iOS"],
     tech: ["Unity", "C#", "Android", "iOS", "Mobile Game", "Educational Game", "Arabic UI", "Environmental Awareness"],
     thumbnail: atmoGreenMindsLogo,
-    previewGif: "https://youtu.be/eWFaHaYUy44",
+    previewGif: "https://youtube.com/shorts/upsJHmKdVN0",
     heroVideo: atmoProtectorHeroVideo,
     demoUrl: "#media",
     demoLabel: "View Game Demo",
@@ -881,8 +880,8 @@ export const projects: Project[] = [
         id: "atmo-gameplay-demo",
         type: "youtube",
         title: "Atmosphere Guardian Gameplay Demo",
-        youtubeId: "https://youtu.be/eWFaHaYUy44",
-        thumbnail: "https://i.ytimg.com/vi/eWFaHaYUy44/hqdefault.jpg",
+        youtubeId: "https://youtube.com/shorts/upsJHmKdVN0",
+        thumbnail: "https://i.ytimg.com/vi/upsJHmKdVN0/hqdefault.jpg",
         caption:
           "Gameplay demo showing the mobile educational loop: flying the environmental airplane, collecting pollution targets, protecting atmosphere health, and connecting play with environmental awareness.",
         details: {
@@ -1487,8 +1486,8 @@ export const projects: Project[] = [
         id: "nescafe-booth-demo",
         type: "youtube",
         title: "Booth Gameplay Demo",
-        youtubeId: "https://youtu.be/e25POZ4Ghio",
-        thumbnail: "https://i.ytimg.com/vi/e25POZ4Ghio/hqdefault.jpg",
+        youtubeId: "https://youtube.com/shorts/upsJHmKdVN0",
+        thumbnail: "https://i.ytimg.com/vi/upsJHmKdVN0/hqdefault.jpg",
         caption:
           "Video demo of the VR booth gameplay, showing the timed surfing loop, collectible cans, and branded event-style presentation.",
         details: {
@@ -1701,7 +1700,10 @@ export const projects: Project[] = [
     platform: ["Unity", "Meta Quest 2", "VR"],
     tech: ["Unity", "C#", "Meta Quest 2", "VR", "Auto Hand", "360 Video", "Android"],
     thumbnail: vrTrainingThumb,
+    previewGif: "https://youtube.com/shorts/hgh_BzUa5X0",
     heroVideo: tantaUniversityHeroVideo,
+    demoUrl: "#media",
+    demoLabel: "View VR Demo",
     caseStudyUrl: "/projects/meta-quest-vr-training-suite",
     highlights: [
       "Handled the full development pipeline as the solo developer, from instructional-design interpretation through Unity implementation.",
@@ -1797,6 +1799,30 @@ export const projects: Project[] = [
           "Model/scene adjustments to support interaction points.",
           "Unity implementation prepared for Quest 2 deployment.",
         ],
+      },
+    ],
+    media: [
+      {
+        id: "tanta-vr-training-suite-preview",
+        type: "youtube",
+        title: "Tanta University VR Training Suite Preview",
+        youtubeId: "https://youtube.com/shorts/hgh_BzUa5X0",
+        thumbnail: "https://i.ytimg.com/vi/hgh_BzUa5X0/hqdefault.jpg",
+        caption:
+          "Short video preview from the Tanta University Meta Quest 2 training suite, showing the VR training experience and interaction flow.",
+        details: {
+          title: "VR Training Preview",
+          components: [
+            "Meta Quest 2 training experience",
+            "Unity VR interaction flow",
+            "Educational scene content",
+          ],
+          behaviors: [
+            "Present the training experience inside the headset",
+            "Demonstrate the interactive VR workflow",
+            "Show the project as a working educational simulation",
+          ],
+        },
       },
     ],
     technicalHighlights: [
@@ -2013,40 +2039,6 @@ export const projects: Project[] = [
     ],
     webglAvailable: true,
     hidden: true,
-  },
-  {
-    id: "webgl-ui-systems",
-    title: "WebGL UI Systems Sandbox",
-    category: "Game Systems & Architecture",
-    summary:
-      "A modular Unity UI sandbox for event-driven screens, debug overlays, and WebGL-friendly interaction patterns.",
-    role: "Unity Developer",
-    platform: ["Unity", "WebGL"],
-    tech: ["Unity", "C#", "ScriptableObject architecture", "SOAP", "WebGL"],
-    thumbnail: webglThumb,
-    githubUrl: "#",
-    caseStudyUrl: "/projects/webgl-ui-systems",
-    highlights: [
-      "Organized UI flows with modular data and events.",
-      "Built debug-friendly screens for simulation projects.",
-      "Focused on maintainable patterns for browser deployment.",
-    ],
-    timeline: "Ongoing sandbox",
-    problem:
-      "Simulation projects need UI that can evolve without turning every screen into tangled references.",
-    solution:
-      "Used modular event channels and data-driven screens to keep interaction systems easier to extend.",
-    challenges: [
-      "Keeping architecture lightweight enough for prototypes.",
-      "Designing reusable UI without over-abstracting simple screens.",
-      "Maintaining responsive browser behavior in WebGL builds.",
-    ],
-    impact: [
-      "Created a cleaner starting point for future interactive tools.",
-      "Improved testing and iteration speed.",
-      "Reduced duplicated UI logic across prototypes.",
-    ],
-    webglAvailable: true,
   },
 ];
 
