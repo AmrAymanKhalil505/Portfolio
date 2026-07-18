@@ -172,14 +172,14 @@ function ProjectCard({ project }: ProjectCardProps) {
           </span>
         )}
       </div>
-      <div className="flex min-h-0 flex-col p-4 md:min-h-[30rem] md:p-5">
+      <div className="flex min-h-0 flex-col p-4 md:min-h-[33rem] md:p-6">
         <h3 className="max-h-12 overflow-hidden text-lg font-semibold leading-tight text-white md:h-16 md:max-h-none md:text-xl">
           {project.title}
         </h3>
         <p
           className={`mt-3 text-sm leading-6 text-steel ${
             isMobileExpanded ? "" : "max-h-12 overflow-hidden"
-          } md:h-24 md:max-h-none md:overflow-hidden`}
+          } md:h-28 md:max-h-none md:overflow-hidden`}
         >
           {project.summary}
         </p>
@@ -190,7 +190,7 @@ function ProjectCard({ project }: ProjectCardProps) {
             </span>
           ))}
         </div>
-        <div className="mt-4 hidden min-h-[8.75rem] md:block" aria-label={`${project.title} technical details`}>
+        <div className="mt-5 hidden min-h-[9.5rem] md:block" aria-label={`${project.title} technical details`}>
           {desktopEvidenceItems.length > 0 && (
             <div className="grid gap-2">
               {desktopEvidenceItems.map((item) => (
@@ -238,12 +238,12 @@ function ProjectCard({ project }: ProjectCardProps) {
             Open case study <ArrowUpRight size={15} />
           </span>
         </div>
-        <div className="mt-4 hidden min-h-[4.75rem] flex-wrap content-start gap-2 overflow-hidden md:flex" aria-label={`${project.title} tech stack`}>
+        <div className="mt-5 hidden min-h-[5.25rem] flex-wrap content-start gap-2 overflow-hidden md:flex" aria-label={`${project.title} tech stack`}>
           {desktopTechItems.map((tech) => (
             <TechBadge key={tech} tech={tech} compact />
           ))}
         </div>
-        <div className="mt-5 hidden h-11 shrink-0 items-start justify-start md:mt-auto md:flex">
+        <div className="mt-6 hidden h-11 shrink-0 items-start justify-start md:mt-auto md:flex">
           <ButtonLink to={project.caseStudyUrl} variant="primary" icon={<ArrowUpRight size={16} />}>
             View Case Study
           </ButtonLink>
