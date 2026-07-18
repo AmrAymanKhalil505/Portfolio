@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import PageShell from "../components/PageShell";
 import ProjectCard from "../components/ProjectCard";
 import SectionHeader from "../components/SectionHeader";
@@ -7,7 +8,9 @@ import { categories, publicProjects, type ProjectCategory } from "../data/projec
 type Filter = "All" | ProjectCategory;
 
 function ProjectsPage() {
-  const [filter, setFilter] = useState<Filter>("All");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const filter: Filter = categories.includes(categoryParam as ProjectCategory) ? (categoryParam as ProjectCategory) : "All";
 
   const filteredProjects = useMemo(
     () => (filter === "All" ? publicProjects : publicProjects.filter((project) => project.category === filter)),
@@ -21,16 +24,46 @@ function ProjectsPage() {
           <SectionHeader
             eyebrow="Projects"
             title="Filterable Unity and interactive systems portfolio"
-            description="Each project card shows the role, category, stack, and next action so visitors can quickly understand the work and explore the full case study."
+            description="Browse Unity projects across industrial simulation, engineering education, AR, VR, WebGL, and interactive systems."
           />
-          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
+          <div className="sm:hidden">
+            <label htmlFor="mobile-project-category" className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-scan">
+              Filter projects
+            </label>
+            <select
+              id="mobile-project-category"
+              value={filter}
+              onChange={(event) => {
+                const category = event.target.value as Filter;
+                if (category === "All") {
+                  setSearchParams({});
+                } else {
+                  setSearchParams({ category });
+                }
+              }}
+              className="min-h-11 w-full rounded-md border border-white/15 bg-panel px-3 py-2 text-sm font-semibold text-white outline-none transition focus:border-scan focus:ring-2 focus:ring-scan/30"
+            >
+              {(["All", ...categories] as Filter[]).map((category) => (
+                <option key={category} value={category} className="bg-panel text-white">
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="hidden flex-wrap gap-2 sm:flex" role="tablist" aria-label="Filter projects by category">
             {(["All", ...categories] as Filter[]).map((category) => (
               <button
                 key={category}
                 type="button"
                 role="tab"
                 aria-selected={filter === category}
-                onClick={() => setFilter(category)}
+                onClick={() => {
+                  if (category === "All") {
+                    setSearchParams({});
+                  } else {
+                    setSearchParams({ category });
+                  }
+                }}
                 className={`min-h-10 rounded-md border px-3 py-2 text-sm font-semibold transition ${
                   filter === category
                     ? "border-scan bg-scan text-ink"

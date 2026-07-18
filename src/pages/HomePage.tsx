@@ -2,6 +2,8 @@ import {
   ArrowRight,
   ArrowUpRight,
   Box,
+  ChevronDown,
+  ChevronUp,
   Code2,
   Download,
   Factory,
@@ -14,6 +16,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ButtonLink from "../components/ButtonLink";
 import PageShell from "../components/PageShell";
 import ProjectCard from "../components/ProjectCard";
@@ -113,6 +116,8 @@ const skillGroups = [
 
 function HomePage() {
   const [heroSettings, setHeroSettings] = useState<HeroSettings>(loadHeroSettings);
+  const [expandedExperience, setExpandedExperience] = useState<number | null>(null);
+  const [expandedSkill, setExpandedSkill] = useState<number | null>(null);
 
   useEffect(() => {
     const handleHeroSettings = (event: Event) => {
@@ -151,7 +156,7 @@ function HomePage() {
           playsInline
           preload="metadata"
           className="hero-desktop-layer pointer-events-none absolute inset-y-0 right-0 h-full w-[68%] object-cover object-right"
-          style={{ opacity: heroSettings.videoOpacity, filter: "brightness(1.2) grayscale(12%)" }}
+          style={{ opacity: heroSettings.videoOpacity, filter: "brightness(1.4) grayscale(6%)" }}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
@@ -178,7 +183,7 @@ function HomePage() {
           className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center"
           style={{
             opacity: Math.min(0.9, heroSettings.videoOpacity + 0.22),
-            filter: "brightness(1.2) grayscale(10%)",
+            filter: "brightness(1.4) grayscale(5%)",
             transform: "translateX(-50%)",
             WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
             maskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
@@ -252,28 +257,31 @@ function HomePage() {
         <SectionHeader
           eyebrow="Featured work"
           title="Simulation projects with visible technical behavior"
-          description="Recruiters can scan the role and platform quickly, while technical leads can click into the implementation details."
+          description="Explore the simulations, control logic, interaction systems, and implementation decisions behind each project."
         />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {featuredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
-          <article className="flex min-h-[36rem] flex-col justify-between rounded-lg border border-dashed border-white/15 bg-panel p-6 shadow-glow transition duration-300 hover:-translate-y-1 hover:border-scan/35">
+          <Link
+            to="/projects"
+            aria-label="See the full project archive"
+            className="group flex min-h-0 flex-col justify-between rounded-lg border border-dashed border-white/15 bg-panel p-4 shadow-glow transition duration-300 hover:-translate-y-1 hover:border-scan/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-scan/70 sm:p-5 md:min-h-[36rem] md:p-6"
+          >
             <div>
-              <span className="flex h-14 w-14 items-center justify-center rounded-md border border-scan/25 bg-scan/10 text-scan">
-                <Rows3 size={26} strokeWidth={1.9} aria-hidden="true" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-md border border-scan/25 bg-scan/10 text-scan md:h-14 md:w-14">
+                <Rows3 size={24} strokeWidth={1.9} aria-hidden="true" />
               </span>
-              <p className="mt-8 text-sm font-semibold text-scan">More work</p>
-              <h3 className="mt-3 text-2xl font-semibold text-white">See the full project archive</h3>
-              <p className="mt-4 text-sm leading-6 text-steel">
-                Browse the rest of the portfolio, including grouped simulation systems, AR work, VR booths,
-                educational labs, and game projects.
+              <p className="mt-5 text-sm font-semibold text-scan md:mt-8">More work</p>
+              <h3 className="mt-2 text-xl font-semibold text-white md:mt-3 md:text-2xl">See the full project archive</h3>
+              <p className="mt-3 max-h-12 overflow-hidden text-sm leading-6 text-steel md:mt-4 md:max-h-none">
+                Browse grouped simulation systems, AR work, VR booths, educational labs, and game projects.
               </p>
             </div>
-            <ButtonLink to="/projects" variant="primary" icon={<ArrowUpRight size={16} />} className="mt-8 self-start">
-              See More Projects
-            </ButtonLink>
-          </article>
+            <span className="mt-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-scan transition group-hover:text-white md:mt-8">
+              See More Projects <ArrowUpRight size={16} />
+            </span>
+          </Link>
         </div>
       </section>
 
@@ -282,9 +290,9 @@ function HomePage() {
           <SectionHeader
             eyebrow="Experience"
             title="Recent Unity roles across education, AR, and VR training"
-            description="A quick scan of the work history behind the projects: industrial simulations, collaborative AR visualization, and headset-based training."
+            description="My recent work covers industrial training simulations, collaborative AR and WebGL applications, and Meta Quest 2 training experiences."
           />
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="hidden gap-4 sm:grid lg:grid-cols-3">
             {experience.map((job) => (
               <article key={`${job.company}-${job.role}`} className="rounded-lg border border-white/10 bg-panel p-5">
                 <p className="text-sm font-semibold text-scan">{job.period}</p>
@@ -303,6 +311,46 @@ function HomePage() {
               </article>
             ))}
           </div>
+          <div className="grid gap-3 sm:hidden">
+            {experience.map((job, index) => {
+              const isExpanded = expandedExperience === index;
+              const additionalBullets = job.bullets.slice(1, 3);
+
+              return (
+                <article key={`${job.company}-${job.role}-mobile`} className="rounded-lg border border-white/10 bg-panel p-4">
+                  <p className="text-xs font-semibold text-scan">{job.period}</p>
+                  <h3 className="mt-2 text-lg font-semibold leading-tight text-white">{job.role}</h3>
+                  <p className="mt-1 text-sm leading-5 text-steel">
+                    {job.company} / {job.location}
+                  </p>
+                  {job.bullets[0] && (
+                    <p className="mt-4 text-sm leading-6 text-steel">{job.bullets[0]}</p>
+                  )}
+                  {isExpanded && additionalBullets.length > 0 && (
+                    <ul className="mt-3 space-y-3 border-t border-white/10 pt-3">
+                      {additionalBullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3 text-sm leading-6 text-steel">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {additionalBullets.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setExpandedExperience(isExpanded ? null : index)}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-scan transition hover:text-white"
+                      aria-expanded={isExpanded}
+                    >
+                      {isExpanded ? "Hide details" : "Show experience details"}
+                      {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                    </button>
+                  )}
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -312,15 +360,37 @@ function HomePage() {
             eyebrow="Project categories"
             title="Built around training, learning, and real-time interaction"
           />
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="hidden gap-4 sm:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             {projectCategories.map((category) => {
               const Icon = category.icon;
 
               return (
-                <div key={category.title} className="rounded-lg border border-white/10 bg-panel p-5">
+                <Link
+                  key={category.title}
+                  to={`/projects?category=${encodeURIComponent(category.title)}`}
+                  className="group rounded-lg border border-white/10 bg-panel p-5 transition hover:-translate-y-1 hover:border-scan/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-scan/70"
+                >
                   <Icon className="mb-5 text-scan" size={24} strokeWidth={1.9} aria-hidden="true" />
-                  <h3 className="text-base font-semibold text-white">{category.title}</h3>
-                </div>
+                  <h3 className="text-base font-semibold text-white transition group-hover:text-scan">{category.title}</h3>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:hidden">
+            {projectCategories.map((category) => {
+              const Icon = category.icon;
+
+              return (
+                <Link
+                  key={`${category.title}-mobile`}
+                  to={`/projects?category=${encodeURIComponent(category.title)}`}
+                  className="group flex min-h-24 flex-col justify-between rounded-lg border border-white/10 bg-panel p-3 transition hover:border-scan/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-scan/70"
+                >
+                  <Icon className="text-scan" size={20} strokeWidth={1.9} aria-hidden="true" />
+                  <span className="mt-3 text-sm font-semibold leading-5 text-white transition group-hover:text-scan">
+                    {category.title}
+                  </span>
+                </Link>
               );
             })}
           </div>
@@ -333,16 +403,59 @@ function HomePage() {
             eyebrow="Technical skills"
             title="Unity implementation skills grouped by project type"
           />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="hidden gap-4 sm:grid md:grid-cols-2 xl:grid-cols-4">
             {skillGroups.map((group) => (
               <SkillGroup key={group.title} title={group.title} skills={group.skills} icon={group.icon} />
             ))}
           </div>
+          <div className="grid gap-3 sm:hidden">
+            {skillGroups.map((group, index) => {
+              const Icon = group.icon;
+              const isExpanded = expandedSkill === index;
+              const previewSkills = group.skills.slice(0, 3);
+              const hiddenSkillCount = Math.max(group.skills.length - previewSkills.length, 0);
+
+              return (
+                <section key={`${group.title}-mobile`} className="overflow-hidden rounded-lg border border-white/10 bg-panel">
+                  <button
+                    type="button"
+                    onClick={() => setExpandedSkill(isExpanded ? null : index)}
+                    className="flex w-full items-center gap-3 p-4 text-left"
+                    aria-expanded={isExpanded}
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-scan/25 bg-scan/10 text-scan">
+                      <Icon size={20} strokeWidth={1.9} aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-base font-semibold text-white">{group.title}</span>
+                      {!isExpanded && (
+                        <span className="mt-1 block truncate text-xs text-steel">
+                          {previewSkills.join(" · ")}
+                          {hiddenSkillCount > 0 ? ` · +${hiddenSkillCount}` : ""}
+                        </span>
+                      )}
+                    </span>
+                    {isExpanded ? <ChevronUp className="text-scan" size={18} /> : <ChevronDown className="text-scan" size={18} />}
+                  </button>
+                  {isExpanded && (
+                    <ul className="grid gap-2 border-t border-white/10 px-4 py-4">
+                      {group.skills.map((skill) => (
+                        <li key={skill} className="flex items-center gap-3 text-sm text-steel">
+                          <span className="h-1.5 w-1.5 rounded-full bg-scan" aria-hidden="true" />
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="hidden gap-10 sm:grid lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <p className="mb-3 text-sm font-semibold text-scan">About</p>
             <h2 className="text-3xl font-semibold text-white sm:text-4xl">
@@ -361,22 +474,37 @@ function HomePage() {
             </p>
           </div>
         </div>
+        <div className="sm:hidden">
+          <p className="mb-3 text-sm font-semibold text-scan">About</p>
+          <h2 className="text-3xl font-semibold leading-tight text-white">
+            I build Unity systems that make technical cause and effect visible.
+          </h2>
+          <p className="mt-5 text-base leading-7 text-steel">
+            My work combines gameplay programming, educational design, industrial simulation, AR visualization, and VR training to create systems people can test and understand.
+          </p>
+          <p className="mt-4 text-sm leading-6 text-steel">
+            Computer Science Engineering and Technology graduate from {education.school}.
+          </p>
+        </div>
       </section>
 
       <section className="border-t border-white/10 bg-[linear-gradient(90deg,#101314,#0A0D0C)]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div>
-            <h2 className="text-2xl font-semibold text-white">Need a Unity simulation or prototype built?</h2>
-            <p className="mt-2 text-sm text-steel">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8">
+          <div className="max-w-3xl">
+            <p className="mb-3 text-sm font-semibold text-scan">Start a project</p>
+            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">
+              Building a Unity simulation, training application, or XR prototype?
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-steel">
               Send the project brief, target platform, and what needs to be interactive.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <ButtonLink to={profile.resumeUrl} download variant="ghost" icon={<Download size={17} />}>
-              Download Resume
-            </ButtonLink>
+          <div className="flex flex-wrap gap-3 lg:justify-end">
             <ButtonLink to={`mailto:${profile.email}`} variant="primary" icon={<Mail size={17} />}>
               Contact Me
+            </ButtonLink>
+            <ButtonLink to={profile.resumeUrl} download variant="ghost" icon={<Download size={17} />}>
+              Download Resume
             </ButtonLink>
           </div>
         </div>

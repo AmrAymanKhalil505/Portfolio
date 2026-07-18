@@ -136,9 +136,15 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
   return (
     <section id="demo" className="border-y border-white/10 bg-[#090B0B]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)] lg:items-stretch">
-          <div className="h-full overflow-hidden rounded-xl border border-white/10 bg-panel shadow-glow">
-            <div className="relative aspect-video bg-black">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)] lg:items-stretch">
+          <div className="min-w-0 w-full overflow-hidden rounded-xl border border-white/10 bg-panel shadow-glow lg:h-full">
+            <div
+              className={`relative overflow-hidden ${
+                selected.type === "image"
+                  ? "bg-panel sm:aspect-video sm:bg-black"
+                  : "h-[clamp(11rem,48vw,14rem)] bg-panel sm:h-auto sm:aspect-video sm:bg-black"
+              }`}
+            >
               <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
                 <span className="rounded-md border border-scan/25 bg-ink/75 px-3 py-1 text-xs font-semibold text-scan backdrop-blur">
                   {getMediaTypeLabel(selected.type)}
@@ -153,7 +159,7 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
                   <button
                     type="button"
                     onClick={() => selectByOffset(-1)}
-                    className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-white backdrop-blur transition hover:border-scan hover:text-scan sm:flex"
+                    className="absolute left-2 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-ink/80 text-white shadow-glow backdrop-blur transition hover:border-scan hover:text-scan sm:left-4 sm:h-11 sm:w-11"
                     aria-label="Previous media"
                   >
                     <ChevronLeft size={24} />
@@ -161,7 +167,7 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
                   <button
                     type="button"
                     onClick={() => selectByOffset(1)}
-                    className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-white backdrop-blur transition hover:border-scan hover:text-scan sm:flex"
+                    className="absolute right-2 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-ink/80 text-white shadow-glow backdrop-blur transition hover:border-scan hover:text-scan sm:right-4 sm:h-11 sm:w-11"
                     aria-label="Next media"
                   >
                     <ChevronRight size={24} />
@@ -190,7 +196,7 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
                   <img
                     src={selectedThumbnail}
                     alt={selected.alt ?? `${selected.title} thumbnail`}
-                    className="h-full w-full object-cover opacity-80"
+                    className="h-full w-full object-contain opacity-80"
                     loading="lazy"
                   />
                   <span className="absolute inset-0 bg-ink/30" aria-hidden="true" />
@@ -204,7 +210,7 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
                 <video
                   src={selected.src}
                   poster={selected.thumbnail}
-                  className="h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-contain"
                   controls
                   loop
                   muted
@@ -217,7 +223,7 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
                 <img
                   src={selected.src ?? selected.thumbnail}
                   alt={selected.alt ?? selected.title}
-                  className="h-full w-full object-contain"
+                  className="relative h-auto w-full object-contain sm:absolute sm:inset-0 sm:h-full"
                   loading="lazy"
                 />
               )}
@@ -225,29 +231,68 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
               <BedoWatermark visible={showBedoWatermark} />
             </div>
 
-            <div className="border-t border-white/10 p-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="hidden border-t border-white/10 p-5 lg:block">
+              <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-scan">Selected view</p>
                   <h3 className="mt-2 text-xl font-semibold text-white">{selected.title}</h3>
-                </div>
-                <div className="flex gap-2 sm:hidden">
-                  <MediaStepButton label="Previous media" onClick={() => selectByOffset(-1)}>
-                    <ChevronLeft size={18} />
-                  </MediaStepButton>
-                  <MediaStepButton label="Next media" onClick={() => selectByOffset(1)}>
-                    <ChevronRight size={18} />
-                  </MediaStepButton>
                 </div>
               </div>
               <p className="gallery-caption mt-2 text-sm leading-6 text-steel">{selected.caption}</p>
             </div>
           </div>
 
-          <SelectedEvidencePanel selected={selected} selectedTags={selectedTags} />
+          <div className="order-2 min-w-0 max-w-full overflow-hidden lg:hidden">
+            <div className="gallery-filmstrip flex min-w-0 max-w-full snap-x gap-2 overflow-x-auto pb-2" aria-label="Demo media thumbnails">
+              {media.map((item, index) => {
+                const isSelected = item.id === selected.id;
+                const thumbnail = getMediaThumbnail(item);
+
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => selectMedia(item)}
+                    className={`group w-24 shrink-0 snap-start overflow-hidden rounded-md border bg-panel transition ${
+                      isSelected ? "border-scan shadow-glow" : "border-white/10"
+                    }`}
+                    aria-label={`Show ${item.title}`}
+                    aria-pressed={isSelected}
+                  >
+                    <span className="relative block aspect-video bg-black">
+                      {thumbnail ? (
+                        <img
+                          src={thumbnail}
+                          alt={item.alt ?? `${item.title} thumbnail`}
+                          className="h-full w-full object-cover opacity-85"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="flex h-full w-full items-center justify-center text-steel">
+                          <ImageIcon size={20} />
+                        </span>
+                      )}
+                      <span className="absolute bottom-1 left-1 rounded bg-ink/85 px-1.5 py-0.5 text-[0.65rem] font-semibold text-white">
+                        {index + 1}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="order-3 min-w-0 lg:order-2">
+            <SelectedEvidencePanel
+              selected={selected}
+              selectedTags={selectedTags}
+              onPrevious={() => selectByOffset(-1)}
+              onNext={() => selectByOffset(1)}
+            />
+          </div>
         </div>
 
-        <div className="mt-5 flex items-center gap-3">
+        <div className="mt-5 hidden items-center gap-3 lg:flex">
           <button
             type="button"
             onClick={() => selectByOffset(-1)}
@@ -317,7 +362,7 @@ function MediaDemoViewer({ media, showBedoWatermark = false }: MediaDemoViewerPr
           </button>
         </div>
 
-        <div className="mt-3 flex items-center justify-center gap-3" aria-label="Gallery position">
+        <div className="mt-3 hidden items-center justify-center gap-3 lg:flex" aria-label="Gallery position">
           <MediaStepButton label="Previous media" onClick={() => selectByOffset(-1)}>
             <ChevronLeft size={18} />
           </MediaStepButton>
@@ -356,7 +401,17 @@ function MediaStepButton({ children, label, onClick }: { children: React.ReactNo
   );
 }
 
-function SelectedEvidencePanel({ selected, selectedTags }: { selected: MediaItem; selectedTags: string[] }) {
+function SelectedEvidencePanel({
+  selected,
+  selectedTags,
+  onPrevious,
+  onNext,
+}: {
+  selected: MediaItem;
+  selectedTags: string[];
+  onPrevious: () => void;
+  onNext: () => void;
+}) {
   const contentRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
   const [scrollMetrics, setScrollMetrics] = useState({ clientHeight: 0, scrollHeight: 0, scrollTop: 0 });
@@ -437,8 +492,29 @@ function SelectedEvidencePanel({ selected, selectedTags }: { selected: MediaItem
   };
 
   return (
-    <aside className="flex flex-col rounded-xl border border-white/10 bg-panel p-5 shadow-glow lg:h-[41rem] lg:max-h-[41rem]">
-      <div className="flex items-start justify-between gap-4">
+    <aside className="flex h-[30rem] max-h-[30rem] flex-col rounded-xl border border-white/10 bg-panel p-5 shadow-glow lg:h-[41rem] lg:max-h-[41rem]">
+      <div className="lg:hidden">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-scan">Selected view</p>
+            <h3 className="mt-2 text-xl font-semibold text-white">{selected.title}</h3>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-scan/25 bg-scan/10 px-2.5 py-1 text-xs font-semibold text-scan">
+            <MonitorPlay size={13} />
+            {getMediaTypeLabel(selected.type)}
+          </span>
+        </div>
+        <div className="mt-3 flex gap-2">
+          <MediaStepButton label="Previous media" onClick={onPrevious}>
+            <ChevronLeft size={18} />
+          </MediaStepButton>
+          <MediaStepButton label="Next media" onClick={onNext}>
+            <ChevronRight size={18} />
+          </MediaStepButton>
+        </div>
+      </div>
+
+      <div className="hidden items-start justify-between gap-4 lg:flex">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-scan">Brief</p>
           <h3 className="mt-2 text-xl font-semibold text-white">{selected.details?.title ?? selected.title}</h3>
@@ -449,9 +525,18 @@ function SelectedEvidencePanel({ selected, selectedTags }: { selected: MediaItem
         </span>
       </div>
 
-      <div className="mt-4 grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_1rem] gap-3">
-        <div ref={contentRef} onScroll={updateScrollMetrics} className="brief-scroll h-full overflow-y-auto pr-1">
+      <div className="mt-4 grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_1.25rem] gap-3">
+        <div
+          ref={contentRef}
+          onScroll={updateScrollMetrics}
+          className="brief-scroll h-full touch-pan-y overflow-y-auto overscroll-contain pr-1 [-webkit-overflow-scrolling:touch]"
+        >
           <p className="text-sm leading-6 text-steel">{selected.caption}</p>
+
+          <div className="mt-5 border-t border-white/10 pt-5 lg:hidden">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-scan">Technical brief</p>
+            <h4 className="mt-2 text-lg font-semibold text-white">{selected.details?.title ?? selected.title}</h4>
+          </div>
 
           {selectedTags.length ? (
             <div className="mt-5">
@@ -491,12 +576,17 @@ function SelectedEvidencePanel({ selected, selectedTags }: { selected: MediaItem
 
         <div
           ref={railRef}
-          className={`relative h-full rounded-full border border-white/10 bg-white/10 ${canScroll ? "cursor-pointer" : "opacity-35"}`}
-          onPointerDown={(event) => setScrollFromPointer(event.clientY)}
+          className={`relative h-full touch-none select-none rounded-full border border-white/10 bg-white/10 ${
+            canScroll ? "cursor-pointer" : "opacity-35"
+          }`}
+          onPointerDown={(event) => {
+            event.preventDefault();
+            setScrollFromPointer(event.clientY);
+          }}
         >
           <button
             type="button"
-            className={`absolute left-1/2 w-3 -translate-x-1/2 rounded-full bg-scan shadow-glow transition hover:bg-white ${
+            className={`absolute left-1/2 min-h-12 w-4 -translate-x-1/2 touch-none rounded-full bg-scan shadow-glow transition hover:bg-white ${
               canScroll ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
             }`}
             style={{ height: `${thumbHeightPercent}%`, top: `${thumbTopPercent}%` }}

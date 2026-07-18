@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Github, Mail, MonitorPlay, PlayCircle } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, ExternalLink, Github, Mail, MonitorPlay, PlayCircle } from "lucide-react";
 import BedoWatermark, { isBedoProject } from "../components/BedoWatermark";
 import ButtonLink from "../components/ButtonLink";
 import MediaDemoViewer from "../components/MediaDemoViewer";
@@ -13,7 +13,7 @@ function CaseStudyPage() {
   const { projectId } = useParams();
   const project = getProjectById(projectId);
 
-  if (!project) return <Navigate to="/projects" replace />;
+  if (!project || project.hidden) return <Navigate to="/projects" replace />;
   if (project.articleLayout === "blog") return <BlogProjectPage project={project} />;
 
   const heroVisual =
@@ -163,7 +163,7 @@ function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDeta
         playsInline
         preload="metadata"
         className="hero-desktop-layer pointer-events-none absolute inset-0 h-full w-full object-contain object-right opacity-60"
-        style={{ filter: "brightness(1.2) grayscale(8%)" }}
+        style={{ filter: "brightness(1.4) grayscale(4%)" }}
       >
         <source src={project.heroVideo} type="video/mp4" />
       </video>
@@ -177,7 +177,7 @@ function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDeta
         preload="metadata"
         className="hero-mobile-layer pointer-events-none absolute left-1/2 top-0 h-[24rem] w-[118%] object-cover object-center opacity-80"
         style={{
-          filter: "brightness(1.2) grayscale(8%)",
+          filter: "brightness(1.4) grayscale(4%)",
           transform: "translateX(-50%)",
           WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
           maskImage: "linear-gradient(180deg, #000 0%, #000 78%, transparent 100%)",
@@ -650,50 +650,30 @@ function CimProjectDetails({ project }: { project: ProjectWithCimDetails }) {
       </section>
 
       <section id="behaviors" className="border-y border-white/10 bg-[#090B0B]">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <p className="mb-3 text-sm font-semibold text-scan">Behavior / Feature Groups</p>
-          <h2 className="text-3xl font-semibold text-white">How the experience was organized</h2>
-          <div className="mt-7 grid gap-5 md:grid-cols-3">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+          <p className="mb-2 text-sm font-semibold text-scan sm:mb-3">Behavior / Feature Groups</p>
+          <h2 className="text-2xl font-semibold text-white sm:text-3xl">How the experience was organized</h2>
+          <div className="mt-5 grid gap-3 sm:mt-7 sm:gap-5 md:grid-cols-3">
             {project.simulatedBehaviors?.map((behavior) => (
-              <CaseSection key={behavior.title} title={behavior.title} items={behavior.bullets} />
+              <BehaviorFeatureCard key={behavior.title} title={behavior.title} items={behavior.bullets} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <p className="mb-3 text-sm font-semibold text-scan">Module / Feature Breakdown</p>
-        <h2 className="text-3xl font-semibold text-white">What each area covers</h2>
-        <div className="mt-7 grid gap-5 lg:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <p className="mb-2 text-sm font-semibold text-scan sm:mb-3">Module / Feature Breakdown</p>
+        <h2 className="text-2xl font-semibold text-white sm:text-3xl">What each area covers</h2>
+        <div className="mt-5 grid gap-3 sm:mt-7 sm:gap-5 lg:grid-cols-2">
           {project.stationBreakdown?.map((station) => {
             const productReference = getStationProductReference(station.title);
 
             return (
-              <section key={station.title} className="flex flex-col rounded-lg border border-white/10 bg-panel p-6">
-                <h3 className="text-xl font-semibold text-white">{station.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-steel">{station.description}</p>
-                <ul className="mt-4 flex-1 space-y-3">
-                  {station.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-3 text-sm leading-6 text-steel">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-                {productReference && (
-                  <div className="mt-5 flex justify-end">
-                    <a
-                      href={productReference.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-9 items-center gap-2 rounded-md border border-scan/35 bg-scan/10 px-3 py-1.5 text-sm font-semibold text-scan transition hover:border-scan/70 hover:bg-scan/15 hover:text-white"
-                    >
-                      {productReference.label}
-                      <ExternalLink size={14} />
-                    </a>
-                  </div>
-                )}
-              </section>
+              <StationBreakdownCard
+                key={station.title}
+                station={station}
+                productReference={productReference}
+              />
             );
           })}
         </div>
@@ -703,6 +683,124 @@ function CimProjectDetails({ project }: { project: ProjectWithCimDetails }) {
         <CaseSection title="Technical Highlights" items={project.technicalHighlights ?? project.highlights} />
       </section>
     </>
+  );
+}
+
+function BehaviorFeatureCard({ title, items }: { title: string; items: string[] }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <section className="rounded-lg border border-white/10 bg-panel p-4 md:p-6">
+      <h3 className="text-lg font-semibold text-white md:text-xl">{title}</h3>
+
+      <div className="md:hidden">
+        {items[0] && <p className="mt-3 line-clamp-2 text-sm leading-6 text-steel">{items[0]}</p>}
+        {isExpanded && (
+          <ul className="mt-3 space-y-2 border-t border-white/10 pt-3">
+            {items.slice(1).map((item) => (
+              <li key={item} className="flex gap-2.5 text-sm leading-6 text-steel">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {items.length > 1 && (
+          <button
+            type="button"
+            onClick={() => setIsExpanded((current) => !current)}
+            className="mt-3 inline-flex min-h-9 items-center gap-2 text-sm font-semibold text-scan transition hover:text-white"
+            aria-expanded={isExpanded}
+          >
+            {isExpanded ? "Hide details" : `Show ${items.length - 1} more`}
+            {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
+        )}
+      </div>
+
+      <ul className="mt-4 hidden space-y-3 md:block">
+        {items.map((item) => (
+          <li key={item} className="flex gap-3 text-sm leading-6 text-steel">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function StationBreakdownCard({
+  station,
+  productReference,
+}: {
+  station: NonNullable<ProjectWithCimDetails["stationBreakdown"]>[number];
+  productReference: ReturnType<typeof getStationProductReference>;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <section className="flex flex-col rounded-lg border border-white/10 bg-panel p-4 lg:p-6">
+      <h3 className="text-lg font-semibold text-white lg:text-xl">{station.title}</h3>
+      <p className="mt-2 text-sm leading-6 text-steel lg:mt-3">{station.description}</p>
+
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 lg:hidden">
+        <button
+          type="button"
+          onClick={() => setIsExpanded((current) => !current)}
+          className="inline-flex min-h-9 items-center gap-2 rounded-md border border-white/15 px-3 py-1.5 text-sm font-semibold text-steel transition hover:border-scan/60 hover:text-white"
+          aria-expanded={isExpanded}
+        >
+          {isExpanded ? "Hide details" : `Details (${station.bullets.length})`}
+          {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        </button>
+        {productReference && (
+          <a
+            href={productReference.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-9 items-center gap-2 rounded-md border border-scan/35 bg-scan/10 px-3 py-1.5 text-sm font-semibold text-scan transition hover:border-scan/70 hover:bg-scan/15 hover:text-white"
+          >
+            {productReference.label}
+            <ExternalLink size={14} />
+          </a>
+        )}
+      </div>
+
+      {isExpanded && (
+        <ul className="mt-3 space-y-3 border-t border-white/10 pt-3 lg:hidden">
+          {station.bullets.map((bullet) => (
+            <li key={bullet} className="flex gap-2.5 text-sm leading-6 text-steel">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <ul className="mt-4 hidden flex-1 space-y-3 lg:block">
+        {station.bullets.map((bullet) => (
+          <li key={bullet} className="flex gap-3 text-sm leading-6 text-steel">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+
+      {productReference && (
+        <div className="mt-5 hidden justify-end lg:flex">
+          <a
+            href={productReference.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-9 items-center gap-2 rounded-md border border-scan/35 bg-scan/10 px-3 py-1.5 text-sm font-semibold text-scan transition hover:border-scan/70 hover:bg-scan/15 hover:text-white"
+          >
+            {productReference.label}
+            <ExternalLink size={14} />
+          </a>
+        </div>
+      )}
+    </section>
   );
 }
 

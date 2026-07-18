@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 import { ArrowUpRight, ChevronDown, ChevronUp, PlayCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import type { Project } from "../data/projects";
 import BedoWatermark, { isBedoProject } from "./BedoWatermark";
 import ButtonLink from "./ButtonLink";
@@ -71,20 +72,17 @@ const getEvidenceItems = (project: Project) => {
 };
 
 function ProjectCard({ project }: ProjectCardProps) {
+  const navigate = useNavigate();
   const previewVideoRef = useRef<HTMLVideoElement>(null);
-  const evidenceScrollRef = useRef<HTMLDivElement>(null);
   const evidenceItems = getEvidenceItems(project);
-  const [showAllMobileEvidence, setShowAllMobileEvidence] = useState(false);
-  const [showAllMobileTech, setShowAllMobileTech] = useState(false);
-  const compactMobileEvidenceItems = evidenceItems.slice(0, 3);
-  const mobileEvidenceItems = showAllMobileEvidence ? evidenceItems : compactMobileEvidenceItems;
-  const hiddenEvidenceCount = Math.max(evidenceItems.length - compactMobileEvidenceItems.length, 0);
-  const compactMobileTechItems = project.tech.slice(0, 4);
-  const mobileTechItems = showAllMobileTech ? project.tech : compactMobileTechItems;
-  const hiddenTechCount = Math.max(project.tech.length - compactMobileTechItems.length, 0);
-  const usesDotIndicator = evidenceItems.length > 3;
-  const dotCount = usesDotIndicator ? Math.min(evidenceItems.length, 10) : 0;
-  const [activeEvidenceDot, setActiveEvidenceDot] = useState(0);
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
+  const compactMobileEvidenceItems = evidenceItems.slice(0, 1);
+  const mobileEvidenceItems = isMobileExpanded ? evidenceItems : compactMobileEvidenceItems;
+  const compactMobileTechItems = project.tech.slice(0, 2);
+  const mobileTechItems = isMobileExpanded ? project.tech : compactMobileTechItems;
+  const desktopEvidenceItems = evidenceItems.slice(0, 3);
+  const hiddenDesktopEvidenceCount = Math.max(evidenceItems.length - desktopEvidenceItems.length, 0);
+  const desktopTechItems = project.tech.slice(0, 4);
   const usesLogoThumbnail = project.id === "atmosphere-guardian";
   const previewImage = usesLogoThumbnail ? project.thumbnail : getPreviewImage(project);
   const fallbackPreviewImage = usesLogoThumbnail ? project.thumbnail : getFallbackPreviewImage(project);
@@ -106,32 +104,37 @@ function ProjectCard({ project }: ProjectCardProps) {
     video.currentTime = 0;
   };
 
-  const updateEvidenceDot = () => {
-    const reel = evidenceScrollRef.current;
-    if (!reel || dotCount <= 1) return;
+  const isInteractiveTarget = (target: EventTarget | null) =>
+    target instanceof Element && Boolean(target.closest("a, button, input, select, textarea, [role='button']"));
 
-    const scrollRange = reel.scrollHeight - reel.clientHeight;
-    const progress = scrollRange > 0 ? reel.scrollTop / scrollRange : 0;
-    setActiveEvidenceDot(Math.round(progress * (dotCount - 1)));
+  const handleCardClick = (event: MouseEvent<HTMLElement>) => {
+    if (isInteractiveTarget(event.target)) return;
+    navigate(project.caseStudyUrl);
   };
 
-  const scrollEvidenceReel = (direction: "up" | "down") => {
-    const reel = evidenceScrollRef.current;
-    if (!reel) return;
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.target !== event.currentTarget) return;
+    if (event.key !== "Enter" && event.key !== " ") return;
 
-    reel.scrollBy({ top: direction === "up" ? -48 : 48, behavior: "smooth" });
+    event.preventDefault();
+    navigate(project.caseStudyUrl);
   };
 
   return (
     <article
-      className="group overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow transition duration-300 hover:-translate-y-1 hover:border-scan/35"
+      className="group cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-panel shadow-glow transition duration-300 hover:-translate-y-1 hover:border-scan/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-scan/70"
+      role="link"
+      tabIndex={0}
+      aria-label={`Open ${project.title} case study`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
       onMouseEnter={playPreviewVideo}
       onMouseLeave={stopPreviewVideo}
       onFocus={playPreviewVideo}
       onBlur={stopPreviewVideo}
     >
       <div
-        className={`relative aspect-[16/10] overflow-hidden border-b border-white/10 ${
+        className={`relative aspect-[16/9] overflow-hidden border-b border-white/10 md:aspect-[16/10] ${
           usesLogoThumbnail ? "bg-white" : "bg-[#0B0E0D]"
         }`}
       >
@@ -169,89 +172,78 @@ function ProjectCard({ project }: ProjectCardProps) {
           </span>
         )}
       </div>
-      <div className="flex min-h-0 flex-col p-4 sm:p-5 md:min-h-[35rem]">
-        <h3 className="max-h-14 overflow-hidden text-lg font-semibold leading-tight text-white md:h-16 md:max-h-none md:text-xl">
+      <div className="flex min-h-0 flex-col p-4 md:min-h-[30rem] md:p-5">
+        <h3 className="max-h-12 overflow-hidden text-lg font-semibold leading-tight text-white md:h-16 md:max-h-none md:text-xl">
           {project.title}
         </h3>
-        <p className="mt-3 max-h-[4.5rem] overflow-hidden text-sm leading-6 text-steel md:h-[7.5rem] md:max-h-none">
+        <p
+          className={`mt-3 text-sm leading-6 text-steel ${
+            isMobileExpanded ? "" : "max-h-12 overflow-hidden"
+          } md:h-24 md:max-h-none md:overflow-hidden`}
+        >
           {project.summary}
         </p>
-        <div className="mt-4 flex flex-wrap gap-2 md:hidden" aria-label={`${project.title} key highlights`}>
+        <div className="mt-3 flex flex-wrap gap-2 md:hidden" aria-label={`${project.title} key highlights`}>
           {mobileEvidenceItems.map((item) => (
             <span key={item} className="rounded-full border border-scan/15 bg-scan/[0.055] px-3 py-1.5 text-xs font-medium text-scan/90">
               {item}
             </span>
           ))}
-          {hiddenEvidenceCount > 0 && (
-            <button
-              type="button"
-              onClick={() => setShowAllMobileEvidence((isExpanded) => !isExpanded)}
-              className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-steel transition hover:border-scan/30 hover:text-white"
-              aria-expanded={showAllMobileEvidence}
-            >
-              {showAllMobileEvidence ? "Show less" : `+${hiddenEvidenceCount} more`}
-            </button>
-          )}
         </div>
-        <div className="mt-4 hidden h-40 md:block">
-          {evidenceItems.length > 0 && (
-            <div className={`h-full ${usesDotIndicator ? "flex items-stretch gap-3" : ""}`}>
-              <div
-                ref={usesDotIndicator ? evidenceScrollRef : undefined}
-                onScroll={usesDotIndicator ? updateEvidenceDot : undefined}
-                className={`evidence-badge-scroll grid h-full flex-1 gap-2 overflow-y-auto rounded-lg border border-white/5 bg-ink/25 p-2 pr-2 ${
-                  usesDotIndicator ? "evidence-badge-scroll--dots" : ""
-                }`}
-                aria-label={`${project.title} technical details`}
-              >
-                {evidenceItems.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-md border border-scan/15 bg-scan/[0.055] px-3 py-2 text-xs font-medium text-scan/90"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-              {usesDotIndicator && dotCount > 0 && (
-                <div className="evidence-dot-rail evidence-dot-rail--vertical">
-                  <button type="button" onClick={() => scrollEvidenceReel("up")} aria-label="Scroll feature badges up">
-                    <ChevronUp size={14} />
-                  </button>
-                  <div className="evidence-dot-stack">
-                    {Array.from({ length: dotCount }).map((_, index) => (
-                      <span key={index} className={index === activeEvidenceDot ? "is-active" : ""} />
-                    ))}
-                  </div>
-                  <button type="button" onClick={() => scrollEvidenceReel("down")} aria-label="Scroll feature badges down">
-                    <ChevronDown size={14} />
-                  </button>
-                </div>
+        <div className="mt-4 hidden min-h-[8.75rem] md:block" aria-label={`${project.title} technical details`}>
+          {desktopEvidenceItems.length > 0 && (
+            <div className="grid gap-2">
+              {desktopEvidenceItems.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-md border border-scan/15 bg-scan/[0.055] px-3 py-2 text-xs font-medium leading-4 text-scan/90"
+                >
+                  {item}
+                </span>
+              ))}
+              {hiddenDesktopEvidenceCount > 0 && (
+                <span className="px-1 text-xs font-medium text-steel">
+                  +{hiddenDesktopEvidenceCount} more technical signal{hiddenDesktopEvidenceCount === 1 ? "" : "s"} in the case study
+                </span>
               )}
             </div>
           )}
         </div>
-        <div className="mt-4 flex flex-wrap gap-2 md:hidden" aria-label={`${project.title} tech stack`}>
+        <div className="mt-3 flex flex-wrap gap-2 md:hidden" aria-label={`${project.title} tech stack`}>
           {mobileTechItems.map((tech) => (
             <TechBadge key={tech} tech={tech} compact />
           ))}
-          {hiddenTechCount > 0 && (
-            <button
-              type="button"
-              onClick={() => setShowAllMobileTech((isExpanded) => !isExpanded)}
-              className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-medium text-steel transition hover:border-scan/30 hover:text-white"
-              aria-expanded={showAllMobileTech}
-            >
-              {showAllMobileTech ? "Show less" : `+${hiddenTechCount}`}
-            </button>
-          )}
         </div>
-        <div className="mt-5 hidden h-[8.25rem] flex-wrap content-start gap-2 overflow-hidden md:flex" aria-label={`${project.title} tech stack`}>
-          {project.tech.slice(0, 5).map((tech) => (
+        <div className="mt-3 flex items-center justify-between gap-3 border-t border-white/10 pt-3 md:hidden">
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              setIsMobileExpanded((isExpanded) => !isExpanded);
+            }}
+            className="flex items-center gap-1.5 text-sm font-medium text-steel transition hover:text-white"
+            aria-expanded={isMobileExpanded}
+          >
+            {isMobileExpanded ? (
+              <>
+                Hide details <ChevronUp size={15} />
+              </>
+            ) : (
+              <>
+                Show details <ChevronDown size={15} />
+              </>
+            )}
+          </button>
+          <span className="flex items-center gap-1.5 text-sm font-semibold text-scan">
+            Open case study <ArrowUpRight size={15} />
+          </span>
+        </div>
+        <div className="mt-4 hidden min-h-[4.75rem] flex-wrap content-start gap-2 overflow-hidden md:flex" aria-label={`${project.title} tech stack`}>
+          {desktopTechItems.map((tech) => (
             <TechBadge key={tech} tech={tech} compact />
           ))}
         </div>
-        <div className="mt-5 flex h-11 shrink-0 items-start justify-start md:mt-auto">
+        <div className="mt-5 hidden h-11 shrink-0 items-start justify-start md:mt-auto md:flex">
           <ButtonLink to={project.caseStudyUrl} variant="primary" icon={<ArrowUpRight size={16} />}>
             View Case Study
           </ButtonLink>

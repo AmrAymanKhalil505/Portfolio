@@ -417,7 +417,7 @@ export const projects: Project[] = [
       "Built Unity-based training simulations for multi-station industrial systems.",
       "Simulated MR110 Advanced Modular CIM and MR109 Compact Mechatronics training workflows.",
       "Visualized station motion, sensor-driven events, actuator states, and process transitions.",
-      "Created educational views that explain behavior through clear visual feedback.",
+      "Added station-level views for machine motion, sensor events, actuator states, and PLC-style process transitions.",
     ],
     timeline: "Grouped industrial training simulation work",
     problem:
@@ -426,13 +426,13 @@ export const projects: Project[] = [
       "Built Unity simulations that connect visible station behavior with PLC-style process concepts, allowing learners to observe motion, state changes, and training workflows in one environment.",
     challenges: [
       "Representing industrial behavior clearly without publishing proprietary hardware details.",
-      "Presenting technical depth clearly while keeping the showcase focused on public project visuals.",
+      "Showing enough process detail to explain each station without exposing proprietary hardware information.",
       "Keeping complex station interactions understandable through visual state feedback.",
     ],
     impact: [
-      "Demonstrates experience building serious Unity simulations for industrial education.",
-      "Shows ability to model station behavior, process flow, and training-oriented feedback.",
-      "Groups related industrial training simulations into one clear case study.",
+      "Delivered Unity simulations for MR110 and MR109 industrial training workflows.",
+      "Modeled station motion, process flow, sensor events, actuator states, and PLC-style transitions.",
+      "Allowed loading, storage, transport, laser, and drilling sequences to be reviewed in one environment.",
     ],
     featured: true,
   },
@@ -780,7 +780,7 @@ export const projects: Project[] = [
       "Built Unity/WebGL virtual labs that let learners interact with experiment variables, observe visual feedback, and understand fluid mechanics and energy-system behavior through guided simulation.",
     challenges: [
       "Designing educational interactions that are simple enough for students but useful for technical review.",
-      "Choosing screenshots and videos that show the learning experience clearly without overloading visitors with product details.",
+      "Keeping calculated measurements, graphs, and 3D experiment feedback synchronized as learners change the input variables.",
       "Balancing scientific clarity, performance, and browser-friendly presentation.",
     ],
     impact: [
@@ -832,8 +832,8 @@ export const projects: Project[] = [
       "Built Unity virtual lab scenes for fluid mechanics and energy-system education.",
       "Created visual simulations for pressure/velocity relationships, laminar flow patterns, and fuel-cell vehicle energy flow.",
       "Added interactive controls, guided experiment steps, measurement feedback, and dashboard-style educational UI.",
-      "Designed the page to show engineering-simulation ability without overloading visitors with formulas or unnecessary curriculum detail.",
-      "Kept the public presentation focused on learning behavior, visual feedback, and reusable Unity simulation patterns.",
+      "Structured each lab around experiment inputs, simulated components, measurements, and expected outcomes.",
+      "Reused common Unity patterns for guided steps, measurement feedback, graphs, dashboards, and WebGL delivery.",
     ],
     featured: true,
   },
