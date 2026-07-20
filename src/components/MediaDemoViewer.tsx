@@ -467,6 +467,8 @@ function SelectedEvidencePanel({
   };
 
   const handleThumbPointerDown = (event: React.PointerEvent<HTMLButtonElement>) => {
+    if (event.pointerType === "touch") return;
+
     event.preventDefault();
     event.stopPropagation();
     const content = contentRef.current;
@@ -529,7 +531,7 @@ function SelectedEvidencePanel({
         <div
           ref={contentRef}
           onScroll={updateScrollMetrics}
-          className="brief-scroll h-full touch-pan-y overflow-y-auto overscroll-contain pr-1 [-webkit-overflow-scrolling:touch]"
+          className="brief-scroll h-full touch-pan-y overflow-y-auto pr-1 [-webkit-overflow-scrolling:touch]"
         >
           <p className="text-sm leading-6 text-steel">{selected.caption}</p>
 
@@ -576,17 +578,19 @@ function SelectedEvidencePanel({
 
         <div
           ref={railRef}
-          className={`relative h-full touch-none select-none rounded-full border border-white/10 bg-white/10 ${
+          className={`relative h-full touch-pan-y select-none rounded-full border border-white/10 bg-white/10 lg:touch-none ${
             canScroll ? "cursor-pointer" : "opacity-35"
           }`}
           onPointerDown={(event) => {
+            if (event.pointerType === "touch") return;
+
             event.preventDefault();
             setScrollFromPointer(event.clientY);
           }}
         >
           <button
             type="button"
-            className={`absolute left-1/2 min-h-12 w-4 -translate-x-1/2 touch-none rounded-full bg-scan shadow-glow transition hover:bg-white ${
+            className={`absolute left-1/2 min-h-12 w-4 -translate-x-1/2 touch-pan-y rounded-full bg-scan shadow-glow transition hover:bg-white lg:touch-none ${
               canScroll ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
             }`}
             style={{ height: `${thumbHeightPercent}%`, top: `${thumbTopPercent}%` }}
