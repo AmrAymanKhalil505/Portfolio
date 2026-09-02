@@ -8,6 +8,7 @@ import PageShell from "../components/PageShell";
 import TechBadge from "../components/TechBadge";
 import { getProjectById } from "../data/projects";
 import { profile } from "../data/profile";
+import { mobileOverlayGradient, overlayGradient } from "../lib/heroSettings";
 
 function CaseStudyPage() {
   const { projectId } = useParams();
@@ -185,20 +186,8 @@ function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDeta
       >
         <source src={project.heroVideo} type="video/mp4" />
       </video>
-      <div
-        className="hero-desktop-layer absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(90deg, #050606 0%, rgba(5, 6, 6, 0.98) 34%, rgba(5, 6, 6, 0.78) 56%, rgba(5, 6, 6, 0.34) 78%, rgba(5, 6, 6, 0.72) 100%)",
-        }}
-      />
-      <div
-        className="hero-mobile-layer absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(5, 6, 6, 0.20) 0%, rgba(5, 6, 6, 0.54) 34%, rgba(5, 6, 6, 0.78) 72%, #050606 92%, #050606 100%), linear-gradient(90deg, rgba(5, 6, 6, 0.76) 0%, rgba(5, 6, 6, 0.20) 24%, rgba(5, 6, 6, 0.06) 50%, rgba(5, 6, 6, 0.20) 76%, rgba(5, 6, 6, 0.76) 100%)",
-        }}
-      />
+      <div className="hero-desktop-layer absolute inset-0" style={{ background: overlayGradient(1) }} />
+      <div className="hero-mobile-layer absolute inset-0" style={{ background: mobileOverlayGradient(1) }} />
       <div className="hero-mobile-layer pointer-events-none absolute inset-x-0 top-0 h-[24rem]">
         <div
           className="absolute inset-x-0 bottom-0 h-16"

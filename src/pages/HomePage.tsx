@@ -357,6 +357,38 @@ function HomePage() {
       <section className="border-b border-white/10 bg-[#080A0A]">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <SectionHeader
+            eyebrow="Education"
+            title="Academic Background"
+            description="Computer science engineering education with a strong focus on Unity simulation, reinforcement learning, and technical mentoring."
+          />
+
+          <article className="rounded-lg border border-white/10 bg-panel p-5 sm:p-6">
+            <div className="grid gap-6 lg:grid-cols-[10rem_minmax(0,1fr)] lg:gap-10">
+              <div>
+                <p className="text-sm font-semibold text-scan">{education.period}</p>
+                <p className="mt-2 text-sm leading-6 text-steel">{education.grade}</p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-white sm:text-2xl">{education.degree}</h3>
+                <p className="mt-1 text-sm font-semibold text-scan">{education.school}</p>
+                <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {education.highlights.map((highlight) => (
+                    <li key={highlight} className="flex gap-3 text-sm leading-6 text-steel">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-scan" aria-hidden="true" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="border-b border-white/10 bg-[#080A0A]">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionHeader
             eyebrow="Project categories"
             title="Built around training, learning, and real-time interaction"
           />
