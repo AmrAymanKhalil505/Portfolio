@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Download, Mail, Menu, X } from "lucide-react";
 import ButtonLink from "./ButtonLink";
 import { profile } from "../data/profile";
+import { contact } from "../lib/siteMode";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -39,12 +40,16 @@ function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <ButtonLink to={profile.resumeUrl} download variant="ghost" icon={<Download size={16} />}>
-            Resume
-          </ButtonLink>
-          <ButtonLink to={`mailto:${profile.email}`} variant="secondary" icon={<Mail size={16} />}>
-            Contact
-          </ButtonLink>
+          {contact.resumeUrl && (
+            <ButtonLink to={contact.resumeUrl} download variant="ghost" icon={<Download size={16} />}>
+              Resume
+            </ButtonLink>
+          )}
+          {contact.email && (
+            <ButtonLink to={`mailto:${contact.email}`} variant="secondary" icon={<Mail size={16} />}>
+              Contact
+            </ButtonLink>
+          )}
         </div>
 
         <button
@@ -68,14 +73,20 @@ function Header() {
               </NavLink>
             ))}
           </nav>
-          <div className="mt-4 grid grid-cols-2 gap-2">
-            <ButtonLink to={profile.resumeUrl} download variant="ghost" icon={<Download size={16} />}>
-              Resume
-            </ButtonLink>
-            <ButtonLink to={`mailto:${profile.email}`} variant="secondary" icon={<Mail size={16} />}>
-              Contact
-            </ButtonLink>
-          </div>
+          {(contact.resumeUrl || contact.email) && (
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {contact.resumeUrl && (
+                <ButtonLink to={contact.resumeUrl} download variant="ghost" icon={<Download size={16} />}>
+                  Resume
+                </ButtonLink>
+              )}
+              {contact.email && (
+                <ButtonLink to={`mailto:${contact.email}`} variant="secondary" icon={<Mail size={16} />}>
+                  Contact
+                </ButtonLink>
+              )}
+            </div>
+          )}
         </div>
       )}
     </header>

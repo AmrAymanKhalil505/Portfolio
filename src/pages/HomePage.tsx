@@ -25,6 +25,7 @@ import SkillGroup from "../components/SkillGroup";
 import TechBadge from "../components/TechBadge";
 import { featuredProjects } from "../data/projects";
 import { education, experience, profile } from "../data/profile";
+import { contact, isWorkMode } from "../lib/siteMode";
 import {
   heroSettingsEventName,
   loadHeroSettings,
@@ -225,9 +226,11 @@ function HomePage() {
               <ButtonLink to="/projects" variant="primary" icon={<ArrowRight size={17} />}>
                 View Projects
               </ButtonLink>
-              <ButtonLink to={profile.resumeUrl} download variant="ghost" icon={<Download size={17} />}>
-                Download Resume
-              </ButtonLink>
+              {contact.resumeUrl && (
+                <ButtonLink to={contact.resumeUrl} download variant="ghost" icon={<Download size={17} />}>
+                  Download Resume
+                </ButtonLink>
+              )}
             </div>
             <div className="mt-5 flex max-w-full flex-nowrap gap-2 overflow-x-auto pb-2 sm:mt-8 sm:flex-wrap sm:overflow-visible sm:pb-0">
               {skillTags.map((tag, index) => (
@@ -528,17 +531,25 @@ function HomePage() {
               Building a Unity simulation, training application, or XR prototype?
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-7 text-steel">
-              Send the project brief, target platform, and what needs to be interactive.
+              {isWorkMode
+                ? "Message me on the platform where you found this link with the project brief, target platform, and what needs to be interactive."
+                : "Send the project brief, target platform, and what needs to be interactive."}
             </p>
           </div>
-          <div className="flex flex-wrap gap-3 lg:justify-end">
-            <ButtonLink to={`mailto:${profile.email}`} variant="primary" icon={<Mail size={17} />}>
-              Contact Me
-            </ButtonLink>
-            <ButtonLink to={profile.resumeUrl} download variant="ghost" icon={<Download size={17} />}>
-              Download Resume
-            </ButtonLink>
-          </div>
+          {(contact.email || contact.resumeUrl) && (
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              {contact.email && (
+                <ButtonLink to={`mailto:${contact.email}`} variant="primary" icon={<Mail size={17} />}>
+                  Contact Me
+                </ButtonLink>
+              )}
+              {contact.resumeUrl && (
+                <ButtonLink to={contact.resumeUrl} download variant="ghost" icon={<Download size={17} />}>
+                  Download Resume
+                </ButtonLink>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </PageShell>

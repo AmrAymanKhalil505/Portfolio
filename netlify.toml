@@ -6,3 +6,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Client proposal pages are unlisted; tell crawlers not to index them.
+[[headers]]
+  for = "/proposal/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

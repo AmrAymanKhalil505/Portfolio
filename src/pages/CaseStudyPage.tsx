@@ -7,7 +7,7 @@ import MediaDemoViewer from "../components/MediaDemoViewer";
 import PageShell from "../components/PageShell";
 import TechBadge from "../components/TechBadge";
 import { getProjectById } from "../data/projects";
-import { profile } from "../data/profile";
+import { contact } from "../lib/siteMode";
 import { mobileOverlayGradient, overlayGradient } from "../lib/heroSettings";
 
 function CaseStudyPage() {
@@ -55,8 +55,8 @@ function CaseStudyPage() {
                       Play WebGL Demo
                     </ButtonLink>
                   ) : null}
-                  {project.simulatedBehaviors && (
-                    <ButtonLink to={`mailto:${profile.email}`} variant="ghost" icon={<Mail size={17} />}>
+                  {project.simulatedBehaviors && contact.email && (
+                    <ButtonLink to={`mailto:${contact.email}`} variant="ghost" icon={<Mail size={17} />}>
                       Contact Me
                     </ButtonLink>
                   )}
@@ -226,8 +226,8 @@ function ProjectVideoHero({ project, heroVisual }: { project: ProjectWithCimDeta
                 Play WebGL Demo
               </ButtonLink>
             ) : null}
-            {project.simulatedBehaviors && (
-              <ButtonLink to={`mailto:${profile.email}`} variant="ghost" icon={<Mail size={17} />}>
+            {project.simulatedBehaviors && contact.email && (
+              <ButtonLink to={`mailto:${contact.email}`} variant="ghost" icon={<Mail size={17} />}>
                 Contact Me
               </ButtonLink>
             )}
@@ -439,9 +439,11 @@ function BlogProjectPage({ project }: { project: ProjectWithCimDetails }) {
               <ButtonLink to="#behaviors" variant="secondary" icon={<MonitorPlay size={17} />}>
                 View Behaviors
               </ButtonLink>
-              <ButtonLink to={`mailto:${profile.email}`} variant="ghost" icon={<Mail size={17} />}>
-                Contact Me
-              </ButtonLink>
+              {contact.email && (
+                <ButtonLink to={`mailto:${contact.email}`} variant="ghost" icon={<Mail size={17} />}>
+                  Contact Me
+                </ButtonLink>
+              )}
             </div>
           </div>
         </header>

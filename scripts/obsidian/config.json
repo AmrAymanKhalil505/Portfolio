@@ -2,7 +2,7 @@
   "vaultDir": "obsidian-vault",
   "sourceNotesDir": "src/md files",
   "rawNoteMappings": {
-    "atmosphere_guardian_educational_game": "atmosphere-guardian",
+    "atmosphere_protector_educational_game": "atmosphere-protector",
     "cim_station_behavior_simulation": "cim-station-behavior-simulation",
     "DC Motor PID Digital Shadow": "pid-control-virtual-labs-suite",
     "dc_motor_pid_digital_shadow_mpc103": "pid-control-virtual-labs-suite",

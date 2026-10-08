@@ -3,6 +3,7 @@ import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import ButtonLink from "./ButtonLink";
 import { profile } from "../data/profile";
+import { contact } from "../lib/siteMode";
 
 function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -51,29 +52,35 @@ function Footer() {
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-2">
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex min-h-9 items-center justify-center gap-2 rounded-md border border-scan bg-scan px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-white hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-scan"
-              >
-                <Mail size={15} />
-                Contact
-              </a>
-              <a
-                href={profile.linkedinUrl}
-                className={`${compactLinkClass} hidden sm:inline-flex`}
-                aria-label="LinkedIn profile"
-              >
-                <Linkedin size={15} />
-                <span className="hidden lg:inline">LinkedIn</span>
-              </a>
-              <a
-                href={profile.githubUrl}
-                className={`${compactLinkClass} hidden sm:inline-flex`}
-                aria-label="GitHub profile"
-              >
-                <Github size={15} />
-                <span className="hidden lg:inline">GitHub</span>
-              </a>
+              {contact.email && (
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="inline-flex min-h-9 items-center justify-center gap-2 rounded-md border border-scan bg-scan px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-white hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-scan"
+                >
+                  <Mail size={15} />
+                  Contact
+                </a>
+              )}
+              {contact.linkedinUrl && (
+                <a
+                  href={contact.linkedinUrl}
+                  className={`${compactLinkClass} hidden sm:inline-flex`}
+                  aria-label="LinkedIn profile"
+                >
+                  <Linkedin size={15} />
+                  <span className="hidden lg:inline">LinkedIn</span>
+                </a>
+              )}
+              {contact.githubUrl && (
+                <a
+                  href={contact.githubUrl}
+                  className={`${compactLinkClass} hidden sm:inline-flex`}
+                  aria-label="GitHub profile"
+                >
+                  <Github size={15} />
+                  <span className="hidden lg:inline">GitHub</span>
+                </a>
+              )}
               <Link to="/projects" className={compactLinkClass}>
                 <ArrowUpRight size={15} />
                 <span className="hidden sm:inline">Projects</span>
@@ -97,19 +104,26 @@ function Footer() {
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-steel">
               Available for simulation prototypes, WebGL demos, VR training concepts, technical UI systems,
-              and interactive learning tools. Contact: {profile.email} / {profile.phone}.
+              and interactive learning tools.
+              {contact.email && contact.phone && ` Contact: ${contact.email} / ${contact.phone}.`}
             </p>
           </div>
           <div className="flex flex-wrap items-start gap-2 lg:justify-end">
-            <ButtonLink to={`mailto:${profile.email}`} icon={<Mail size={16} />}>
-              Contact Me
-            </ButtonLink>
-            <ButtonLink to={profile.linkedinUrl} variant="ghost" icon={<Linkedin size={16} />} aria-label="LinkedIn profile">
-              LinkedIn
-            </ButtonLink>
-            <ButtonLink to={profile.githubUrl} variant="ghost" icon={<Github size={16} />} aria-label="GitHub profile">
-              GitHub
-            </ButtonLink>
+            {contact.email && (
+              <ButtonLink to={`mailto:${contact.email}`} icon={<Mail size={16} />}>
+                Contact Me
+              </ButtonLink>
+            )}
+            {contact.linkedinUrl && (
+              <ButtonLink to={contact.linkedinUrl} variant="ghost" icon={<Linkedin size={16} />} aria-label="LinkedIn profile">
+                LinkedIn
+              </ButtonLink>
+            )}
+            {contact.githubUrl && (
+              <ButtonLink to={contact.githubUrl} variant="ghost" icon={<Github size={16} />} aria-label="GitHub profile">
+                GitHub
+              </ButtonLink>
+            )}
             <ButtonLink to="/projects" variant="ghost" icon={<ArrowUpRight size={16} />}>
               Projects
             </ButtonLink>

@@ -83,7 +83,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   const desktopEvidenceItems = evidenceItems.slice(0, 3);
   const hiddenDesktopEvidenceCount = Math.max(evidenceItems.length - desktopEvidenceItems.length, 0);
   const desktopTechItems = project.tech.slice(0, 4);
-  const usesLogoThumbnail = project.id === "atmosphere-guardian";
+  const usesLogoThumbnail = project.id === "atmosphere-protector";
   const previewImage = usesLogoThumbnail ? project.thumbnail : getPreviewImage(project);
   const fallbackPreviewImage = usesLogoThumbnail ? project.thumbnail : getFallbackPreviewImage(project);
 

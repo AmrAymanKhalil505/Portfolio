@@ -9,6 +9,9 @@ export const profile = {
   linkedinUrl: "https://linkedin.com/in/amr-ayman-khalil",
   githubUrl: "https://github.com/AmrAymanKhalil505",
   resumeUrl: publicAssetUrl("Amr_Khalil_CV.pdf"),
+  // Resume without contact details, shown in /work mode. Unset = no resume button there.
+  // When the file exists: publicAssetUrl("Amr_Khalil_CV_work.pdf")
+  workResumeUrl: undefined as string | undefined,
 };
 
 export const experience = [

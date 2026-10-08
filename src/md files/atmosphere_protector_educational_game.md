@@ -1,8 +1,8 @@
-# Atmosphere Guardian Educational Game
+# Atmosphere Protector Educational Game
 
 ## Project Title
 
-Atmosphere Guardian
+Atmosphere Protector
 
 ## Category
 
@@ -37,7 +37,7 @@ Unity Developer
 
 ## Project Overview
 
-Atmosphere Guardian is a mobile educational game designed to teach children about air pollution and atmosphere protection. The player controls an environmental airplane that collects harmful gas clouds before they damage the atmosphere.
+Atmosphere Protector is a mobile educational game designed to teach children about air pollution and atmosphere protection. The player controls an environmental airplane that collects harmful gas clouds before they damage the atmosphere.
 
 The game uses simple arcade interaction, visual feedback, health-based atmosphere protection, and upgrade mechanics to make environmental concepts easier for young players to understand. The instruction screens explain the core idea in Arabic, making the experience accessible for Arabic-speaking children.
 
@@ -162,7 +162,7 @@ Portfolio wording:
 ## Project Card Copy
 
 Title:
-Atmosphere Guardian
+Atmosphere Protector
 
 Description:
 Mobile educational game that teaches children about air pollution and atmosphere protection through airplane movement, pollution collection, atmosphere health, and environmental upgrades.
@@ -183,7 +183,7 @@ Watch Demo
 
 ### 1. Overview
 
-Atmosphere Guardian is a mobile educational game created to teach children about air pollution in a simple and playful way. The player controls an environmental airplane and collects harmful gas clouds to protect the atmosphere.
+Atmosphere Protector is a mobile educational game created to teach children about air pollution in a simple and playful way. The player controls an environmental airplane and collects harmful gas clouds to protect the atmosphere.
 
 The game includes Arabic instruction screens, a health-based atmosphere system, and environmental upgrades such as recycling, filters, magnets, and electric cars. Each mechanic supports the learning goal by connecting gameplay actions with environmental protection concepts.
 

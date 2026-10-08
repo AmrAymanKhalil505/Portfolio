@@ -838,8 +838,8 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "atmosphere-guardian",
-    title: "Atmosphere Guardian",
+    id: "atmosphere-protector",
+    title: "Atmosphere Protector",
     category: "Educational Games / Interactive Learning",
     summary:
       "Mobile educational game that teaches children about air pollution and atmosphere protection through airplane movement, pollution collection, atmosphere health, and environmental upgrades.",
@@ -847,11 +847,11 @@ export const projects: Project[] = [
     platform: ["Unity", "Android", "iOS"],
     tech: ["Unity", "C#", "Android", "iOS", "Mobile Game", "Educational Game", "Arabic UI", "Environmental Awareness"],
     thumbnail: atmoGreenMindsLogo,
-    previewGif: "https://youtube.com/shorts/upsJHmKdVN0",
+    previewGif: "https://youtu.be/eWFaHaYUy44",
     heroVideo: atmoProtectorHeroVideo,
     demoUrl: "#media",
     demoLabel: "View Game Demo",
-    caseStudyUrl: "/projects/atmosphere-guardian",
+    caseStudyUrl: "/projects/atmosphere-protector",
     highlights: [
       "Built a mobile-friendly Unity educational game for children.",
       "Implemented airplane movement, pollution collection, and atmosphere health logic.",
@@ -879,9 +879,9 @@ export const projects: Project[] = [
       {
         id: "atmo-gameplay-demo",
         type: "youtube",
-        title: "Atmosphere Guardian Gameplay Demo",
-        youtubeId: "https://youtube.com/shorts/upsJHmKdVN0",
-        thumbnail: "https://i.ytimg.com/vi/upsJHmKdVN0/hqdefault.jpg",
+        title: "Atmosphere Protector Gameplay Demo",
+        youtubeId: "https://youtu.be/eWFaHaYUy44",
+        thumbnail: "https://i.ytimg.com/vi/eWFaHaYUy44/hqdefault.jpg",
         caption:
           "Gameplay demo showing the mobile educational loop: flying the environmental airplane, collecting pollution targets, protecting atmosphere health, and connecting play with environmental awareness.",
         details: {
@@ -906,7 +906,7 @@ export const projects: Project[] = [
         title: "Arabic Instruction Flow",
         src: atmoInstructionImage,
         thumbnail: atmoInstructionImage,
-        alt: "Atmosphere Guardian Arabic instruction screen",
+        alt: "Atmosphere Protector Arabic instruction screen",
         caption:
           "Arabic instruction and learning screen that introduces the environmental goal before the gameplay starts.",
         details: {
@@ -931,7 +931,7 @@ export const projects: Project[] = [
         title: "Airplane Cleanup Gameplay",
         src: atmoGameplayImage,
         thumbnail: atmoGameplayImage,
-        alt: "Atmosphere Guardian airplane gameplay screen",
+        alt: "Atmosphere Protector airplane gameplay screen",
         caption:
           "Gameplay view showing the airplane, pollution clouds, and environmental objects used to turn air-pollution concepts into interactive play.",
         details: {
@@ -956,7 +956,7 @@ export const projects: Project[] = [
         title: "Atmosphere Health Feedback",
         src: atmoHealthImage,
         thumbnail: atmoHealthImage,
-        alt: "Atmosphere Guardian atmosphere health and pollution feedback screen",
+        alt: "Atmosphere Protector atmosphere health and pollution feedback screen",
         caption:
           "Game state view showing how atmosphere health and pollution feedback make air quality understandable as a visible gameplay system.",
         details: {
@@ -981,7 +981,7 @@ export const projects: Project[] = [
         title: "Environmental Upgrade Concepts",
         src: atmoUpgradesImage,
         thumbnail: atmoUpgradesImage,
-        alt: "Atmosphere Guardian environmental upgrades screen",
+        alt: "Atmosphere Protector environmental upgrades screen",
         caption:
           "Upgrade screen connecting game progression with cleaner choices such as recycling, filtering, magnet collection, and electric transportation ideas.",
         details: {
@@ -1017,7 +1017,7 @@ export const projects: Project[] = [
       "Connects simple mobile gameplay mechanics with environmental-awareness content.",
     ],
     overview: [
-      "Atmosphere Guardian is a mobile educational game created to teach children about air pollution in a simple and playful way. The player controls an environmental airplane and collects harmful gas clouds to protect the atmosphere.",
+      "Atmosphere Protector is a mobile educational game created to teach children about air pollution in a simple and playful way. The player controls an environmental airplane and collects harmful gas clouds to protect the atmosphere.",
       "The game includes Arabic instruction screens, a health-based atmosphere system, and environmental upgrades such as recycling, filters, magnets, and electric cars. Each mechanic supports the learning goal by connecting gameplay actions with environmental protection concepts.",
     ],
     simulatedBehaviors: [
