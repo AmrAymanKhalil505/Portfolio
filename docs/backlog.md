@@ -8,11 +8,11 @@ Status: ✅ done · 🔨 in progress · ⬜ open · ❓ needs a decision or fact
 
 ## In progress
 
-- 🔨 **Work-mode resume**: add a contact-free CV to `public/` and set `profile.workResumeUrl`
-  (resume buttons stay hidden in `/work` until then). ❓ file from Amr
+- (nothing in progress)
 
 ## Done
 
+- ✅ **Work-mode resume**: `public/Amr_Khalil_CV_work.pdf` (no contact, `/work/` links); public CV refreshed. LaTeX sources in `docs/resume/`.
 - ✅ **Work mode (`/work/...`)**: same site, Upwork-safe. No email, phone, LinkedIn/GitHub or
   contact-bearing resume; noindex; proposals link to `/work/` URLs.
 - ✅ Atmosphere project showed the Nescafe video → now its own video (`eWFaHaYUy44`).
@@ -46,7 +46,7 @@ Positioning and content
 - ⬜ Title inconsistent: "Senior Unity Engineer" vs "Unity Developer" (hero, og:title, BEDO case-study roles) vs CV.
 - ⬜ Experience stats strip hidden on mobile.
 - ❓ Ivris: site says Jun 2024 – Jun 2026, CV says "Present"; "Developed Ivris" overclaims — state your part.
-- ⬜ Education line "Grade A – GPA 1.79 (German B+)" contradicts itself.
+- ✅ Education line now "Bachelor Grade: A - Overall Grade: B+" (site and Upwork resume).
 - ⬜ Project order/featuring: Ivris → #2, feature Tanta, unfeature IBM (teammate's GitHub repo, vague role).
 
 Sharing / SEO

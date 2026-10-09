@@ -297,8 +297,8 @@ const proposal: Proposal = {
         body: "Cell and stack voltage, current, temperature, gas pressure and production rate, water level and quality — reacting to what the learner does, with alarms when limits are exceeded.",
       },
       {
-        title: "Assessment built in from day one",
-        body: "Every step records correct and incorrect actions, time and safety violations. That feeds the score, feedback and gamification, and works the same in VR and in the browser.",
+        title: "Prototype the logic before building in Unity",
+        body: "Before any Unity work, I build the system as an HTML prototype with 2D vector graphics, covering both guided scenarios with enforced steps and free mode where learners change values themselves. Every changing value is driven by its equation, shown next to it, so the instructional-design engineers can verify the behaviour and confirm nothing is hard-coded. The development and instructional-design teams agree on the system here, before time is spent in Unity.",
       },
       {
         title: "One codebase, two ways to interact",
@@ -316,7 +316,7 @@ const proposal: Proposal = {
     {
       when: "Months 1–2",
       title: "Functional design",
-      body: "Agree procedures, interactions, assessment rules and browser controls; one representative procedure prototyped end-to-end.",
+      body: "HTML / 2D prototype of the system, guided and free modes, reviewed with your instructional designers; agree procedures, interactions, assessment rules and browser controls.",
     },
     {
       when: "Months 2–6",

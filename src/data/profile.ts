@@ -9,9 +9,8 @@ export const profile = {
   linkedinUrl: "https://linkedin.com/in/amr-ayman-khalil",
   githubUrl: "https://github.com/AmrAymanKhalil505",
   resumeUrl: publicAssetUrl("Amr_Khalil_CV.pdf"),
-  // Resume without contact details, shown in /work mode. Unset = no resume button there.
-  // When the file exists: publicAssetUrl("Amr_Khalil_CV_work.pdf")
-  workResumeUrl: undefined as string | undefined,
+  // Resume without contact details, shown in /work mode.
+  workResumeUrl: publicAssetUrl("Amr_Khalil_CV_work.pdf"),
 };
 
 export const experience = [
@@ -56,7 +55,7 @@ export const education = {
   school: "German University in Cairo",
   period: "Sept 2014 - July 2019",
   degree: "Computer Science Engineering and Technology",
-  grade: "Bachelor Grade: A - Overall GPA: 1.79 (German Standard: B+)",
+  grade: "Bachelor Grade: A - Overall Grade: B+",
   highlights: [
     "Bachelor project: Unity-based self-driving car simulation using reinforcement learning.",
     "Mentored bachelor students on Unity simulation, reinforcement learning, and self-driving car topics.",
