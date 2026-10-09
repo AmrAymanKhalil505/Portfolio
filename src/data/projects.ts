@@ -4,7 +4,6 @@ import vrThumb from "../assets/vr-booth.svg";
 import agriThumb from "../assets/agri-tech.svg";
 import pidThumb from "../assets/pid-control.svg";
 import ivrisThumb from "../assets/ivris-ar-room.svg";
-import vrTrainingThumb from "../assets/vr-training-suite.svg";
 import cimSystemImage from "../assets/projects/cim/thumnail.jpg";
 import atmoProtectorHeroVideo from "../assets/Atmo Protector Hero.mp4";
 import atmoGreenMindsLogo from "../assets/projects/Atmo Protection/Green minds EN logo.png";
@@ -45,6 +44,12 @@ import eduEv117ParticlesImage from "../assets/projects/EduLab/EV117 Particles.jp
 import eduEv117MonitorImage from "../assets/projects/EduLab/EV117 save screen.jpg";
 import nescafeMenuImage from "../assets/projects/Nescafe/Sand Board Main Menu.jpeg";
 import nescafeSandSurfingImage from "../assets/projects/Nescafe/Nescafe Sand surfing.jpg";
+import tantaStopwatchImage from "../assets/projects/Tanta/tanta-vr-stopwatch.jpg";
+import tantaCalculatorImage from "../assets/projects/Tanta/tanta-vr-calculator.jpg";
+import tantaCalculatorFunctionsImage from "../assets/projects/Tanta/tanta-vr-calculator-functions.jpg";
+import tantaViscosityReadoutImage from "../assets/projects/Tanta/tanta-viscosity-level-readout.jpg";
+import tantaViscosityFallingImage from "../assets/projects/Tanta/tanta-viscosity-falling-object.jpg";
+import tantaSurgicalViewerImage from "../assets/projects/Tanta/tanta-360-surgical-viewer.jpg";
 import nescafeWaterBeachImage from "../assets/projects/Nescafe/Nescafe Water Beach.jpg";
 import nescafeWaterJungleImage from "../assets/projects/Nescafe/Nescafe Water Jungle.jpg";
 import {
@@ -1699,7 +1704,7 @@ export const projects: Project[] = [
     role: "Solo Unity Virtual Reality Developer",
     platform: ["Unity", "Meta Quest 2", "VR"],
     tech: ["Unity", "C#", "Meta Quest 2", "VR", "Auto Hand", "360 Video", "Android"],
-    thumbnail: vrTrainingThumb,
+    thumbnail: tantaStopwatchImage,
     previewGif: "https://youtube.com/shorts/hgh_BzUa5X0",
     heroVideo: tantaUniversityHeroVideo,
     demoUrl: "#media",
@@ -1821,6 +1826,140 @@ export const projects: Project[] = [
             "Present the training experience inside the headset",
             "Demonstrate the interactive VR workflow",
             "Show the project as a working educational simulation",
+          ],
+        },
+      },
+      {
+        id: "tanta-viscosity-falling-object",
+        type: "image",
+        title: "Viscosity Lab: Falling Object",
+        src: tantaViscosityFallingImage,
+        thumbnail: tantaViscosityFallingImage,
+        caption:
+          "A test object falling through liquid in a graduated cylinder during the VR viscosity experiment, with millilitre markings for timing its descent.",
+        details: {
+          title: "Falling-Object Measurement",
+          components: [
+            "Graduated cylinder with millilitre scale",
+            "Liquid column",
+            "Falling test object",
+            "Measurement markers",
+          ],
+          behaviors: [
+            "Release an object into the liquid",
+            "Observe its descent against the scale",
+            "Time the fall between markers",
+          ],
+        },
+      },
+      {
+        id: "tanta-viscosity-level-readout",
+        type: "image",
+        title: "Viscosity Lab: Level Readout",
+        src: tantaViscosityReadoutImage,
+        thumbnail: tantaViscosityReadoutImage,
+        caption:
+          "Multiple cylinders on the lab bench, with a live readout labelling the falling object's current level in millilitres.",
+        details: {
+          title: "Live Level Readout",
+          components: [
+            "Several graduated cylinders",
+            "Object current-level label",
+            "Start button on the bench",
+          ],
+          behaviors: [
+            "Show the object's current level while it falls",
+            "Compare cylinders side by side",
+            "Start the experiment from the bench",
+          ],
+        },
+      },
+      {
+        id: "tanta-vr-stopwatch",
+        type: "image",
+        title: "Hand-Held VR Stopwatch",
+        src: tantaStopwatchImage,
+        thumbnail: tantaStopwatchImage,
+        caption:
+          "A working stopwatch held and operated with VR hands, recording lap times while the learner times the falling object.",
+        details: {
+          title: "VR Stopwatch",
+          components: [
+            "Stopwatch panel with lap list",
+            "Lap, reset and start controls",
+            "Auto Hand finger interaction",
+          ],
+          behaviors: [
+            "Start, stop and record laps with a fingertip",
+            "Show lap and total times",
+            "Support timing during the experiment",
+          ],
+        },
+      },
+      {
+        id: "tanta-vr-calculator",
+        type: "image",
+        title: "Hand-Held VR Calculator",
+        src: tantaCalculatorImage,
+        thumbnail: tantaCalculatorImage,
+        caption:
+          "A working scientific calculator held in VR, used to compute experiment results without leaving the headset.",
+        details: {
+          title: "VR Calculator",
+          components: [
+            "Calculator panel with expression display",
+            "Number and operator keys",
+            "VR hand interaction",
+          ],
+          behaviors: [
+            "Enter expressions with VR fingers",
+            "Show the expression and result",
+            "Keep calculations inside the lab",
+          ],
+        },
+      },
+      {
+        id: "tanta-vr-calculator-functions",
+        type: "image",
+        title: "Calculator Scientific Functions",
+        src: tantaCalculatorFunctionsImage,
+        thumbnail: tantaCalculatorFunctionsImage,
+        caption:
+          "The calculator's scientific functions (log, exponent, powers, trigonometry) used inside the VR lab.",
+        details: {
+          title: "Scientific Functions",
+          components: [
+            "Log, ln, exp and power keys",
+            "Trigonometry and function modes",
+            "Expression history line",
+          ],
+          behaviors: [
+            "Evaluate scientific expressions",
+            "Switch function modes",
+            "Display long expressions and results",
+          ],
+        },
+      },
+      {
+        id: "tanta-360-surgical-viewer",
+        type: "image",
+        title: "360° Surgical-Room Viewer",
+        src: tantaSurgicalViewerImage,
+        thumbnail: tantaSurgicalViewerImage,
+        caption:
+          "Recorded 360° surgical-room footage viewed inside the headset, with VR playback controls for play, skip and navigation.",
+        details: {
+          title: "360° Viewer",
+          components: [
+            "360° video sphere",
+            "VR playback bar",
+            "Skip forward and back controls",
+            "Camera-angle navigation",
+          ],
+          behaviors: [
+            "Watch a recorded operation from inside the room",
+            "Control playback with VR hands",
+            "Switch between recorded camera angles",
           ],
         },
       },

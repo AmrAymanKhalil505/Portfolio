@@ -61,7 +61,7 @@ Content
 - ⬜ Per-project "My part" line on BEDO projects (team vs personal contribution).
 - ❓ Unverified counts ("50 sensor / PLC I/O signals", "6 control models") and "digital shadow" wording.
 - ⬜ Missing attribution notes: Tanta, Atmosphere Protector (Green Minds logo, org never named).
-- ⬜ Placeholder SVG thumbnails on Tanta and IBM; PID / Engineering Education galleries have no video;
+- ⬜ Placeholder SVG thumbnail on IBM (Tanta fixed with real screenshots); PID / Engineering Education galleries have no video;
   no playable WebGL demo anywhere.
 - ⬜ "Technical focus: YouTube gameplay demo" on Atmosphere Protector (`CaseStudyPage.tsx:348`).
 - ⬜ Typo "grabbable pedals" (`projects.ts` ~1757, 1789); misspelled asset filenames in URLs.
