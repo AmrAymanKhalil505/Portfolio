@@ -1462,240 +1462,6 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
-    id: "nescafe-surfing-vr-booth",
-    title: "Nescafe Ice Coffee VR Surfing Experience",
-    category: "VR & Interactive Booths",
-    summary:
-      "A short Unity VR booth game where visitors surf through branded sand and water environments, collect cans, and compete against a timed arcade-style score loop.",
-    role: "Unity Developer",
-    platform: ["Unity", "VR headset"],
-    tech: ["Unity", "C#", "VR", "Arcade Gameplay", "Booth Experience", "Interaction Design"],
-    thumbnail: nescafeMenuImage,
-    heroVideo: nescafeHeroVideo,
-    demoUrl: "#demo",
-    demoLabel: "Watch Booth Demo",
-    caseStudyUrl: "/projects/nescafe-surfing-vr-booth",
-    productContext: [{ label: "Nescafe / Nestle booth activation context" }],
-    attributionNote: nescafeAttributionNote,
-    technicalEvidence: {
-      badges: [
-        "Short-session VR gameplay",
-        "Visitor-friendly onboarding",
-        "Timed arcade score loop",
-        "Branded collectible objectives",
-        "Multi-route environment variation",
-      ],
-    },
-    media: [
-      {
-        id: "nescafe-booth-demo",
-        type: "youtube",
-        title: "Booth Gameplay Demo",
-        youtubeId: "https://youtube.com/shorts/upsJHmKdVN0",
-        thumbnail: "https://i.ytimg.com/vi/upsJHmKdVN0/hqdefault.jpg",
-        caption:
-          "Video demo of the VR booth gameplay, showing the timed surfing loop, collectible cans, and branded event-style presentation.",
-        details: {
-          title: "VR Booth Demo",
-          notes: [
-            "Shows the short-session flow intended for public booth use.",
-            "Demonstrates timed arcade interaction, collectible targets, and fast visual feedback.",
-            "Presented as portfolio media for the Unity implementation work.",
-          ],
-        },
-      },
-      {
-        id: "nescafe-main-menu",
-        type: "image",
-        title: "Sand Board Main Menu",
-        src: nescafeMenuImage,
-        thumbnail: nescafeMenuImage,
-        caption:
-          "Main menu screen for the branded sand-board booth experience, setting up the playful event tone before visitors enter the VR activity.",
-        details: {
-          title: "Menu and Session Start",
-          components: [
-            "Branded main menu",
-            "Start button",
-            "Event campaign visual style",
-            "Short-session entry point",
-          ],
-          behaviors: [
-            "Introduce the experience quickly for booth visitors",
-            "Start the playable session with minimal onboarding",
-            "Frame the activity as a light arcade challenge",
-          ],
-        },
-      },
-      {
-        id: "nescafe-sand-surfing",
-        type: "image",
-        title: "Sand Surfing Environment",
-        src: nescafeSandSurfingImage,
-        thumbnail: nescafeSandSurfingImage,
-        caption:
-          "Desert/sand surfing gameplay view with collectible targets, timer feedback, and score-style UI designed for a fast booth interaction.",
-        details: {
-          title: "Sand Surfing Gameplay",
-          components: [
-            "Sand/desert traversal environment",
-            "Collectible can targets",
-            "Timer display",
-            "Score/progress feedback",
-          ],
-          behaviors: [
-            "Move through the environment in a short arcade run",
-            "Collect targets while staying oriented in VR",
-            "Use timer and score feedback to create replayable booth energy",
-          ],
-        },
-      },
-      {
-        id: "nescafe-water-beach",
-        type: "image",
-        title: "Water Surfing Beach Route",
-        src: nescafeWaterBeachImage,
-        thumbnail: nescafeWaterBeachImage,
-        caption:
-          "Water-route gameplay view showing collectible targets across a beach environment, adding variety to the VR surfing challenge.",
-        details: {
-          title: "Beach Route Gameplay",
-          components: [
-            "Water surfing route",
-            "Beach/island environment",
-            "Collectible targets",
-            "Timer and progress UI",
-          ],
-          behaviors: [
-            "Guide the player through a clear forward route",
-            "Place collectibles along readable paths",
-            "Keep the session visually bright and approachable for event visitors",
-          ],
-        },
-      },
-      {
-        id: "nescafe-water-jungle",
-        type: "image",
-        title: "Water Surfing Jungle Route",
-        src: nescafeWaterJungleImage,
-        thumbnail: nescafeWaterJungleImage,
-        caption:
-          "Alternate water-route gameplay view with a greener environment and close collectible target, showing the arcade objective clearly.",
-        details: {
-          title: "Jungle Route Gameplay",
-          components: [
-            "Water traversal path",
-            "Jungle/green environment",
-            "Close collectible target",
-            "Score and timer UI",
-          ],
-          behaviors: [
-            "Create route variation inside the booth experience",
-            "Keep collectible objectives visible and easy to understand",
-            "Support quick public play sessions with immediate feedback",
-          ],
-        },
-      },
-    ],
-    highlights: [
-      "Built a short interactive VR surfing experience for public booth use.",
-      "Focused on quick onboarding and easy-to-understand controls.",
-      "Implemented timed arcade feedback, collectible targets, and multiple themed routes.",
-      "Designed the experience for a live event environment with fast session turnover.",
-    ],
-    timeline: "Freelance booth project",
-    problem:
-      "Live booth experiences need to be understandable in seconds while still feeling memorable.",
-    solution:
-      "Built a compact VR surfing loop with simple movement, collectible targets, visible score/timer feedback, and environment variety for event flow.",
-    challenges: [
-      "Reducing onboarding friction for first-time VR users.",
-      "Keeping the experience reliable during repeated public sessions.",
-      "Designing feedback that reads clearly inside a headset.",
-      "Making branded visuals feel playful without slowing down the booth flow.",
-    ],
-    impact: [
-      "Delivered an approachable interactive booth experience.",
-      "Kept sessions short enough for live event throughput.",
-      "Showed Unity's usefulness beyond traditional games.",
-    ],
-    overview: [
-      "This project was a short Unity VR booth experience for a branded Nescafe/Nestle event activation. Visitors entered a playful sand-board and water-surfing style challenge, collected branded targets, and received immediate score/timer feedback.",
-      "The portfolio focus is the Unity implementation: quick onboarding, readable VR movement, collectible placement, timed arcade feedback, and environment variation for a live public booth setting.",
-    ],
-    simulatedBehaviors: [
-      {
-        title: "Booth Gameplay Loop",
-        bullets: [
-          "Short-session VR surfing challenge.",
-          "Collectible can targets placed along the route.",
-          "Timer and score/progress feedback.",
-          "Fast start and reset behavior for live events.",
-        ],
-      },
-      {
-        title: "Visitor-Friendly VR",
-        bullets: [
-          "Simple controls for first-time users.",
-          "Readable forward routes and clear objectives.",
-          "Bright environments with low-friction onboarding.",
-          "Interaction pacing designed for booth throughput.",
-        ],
-      },
-      {
-        title: "Environment Variation",
-        bullets: [
-          "Sand/desert surfing route.",
-          "Beach water-surfing route.",
-          "Green/jungle water route.",
-          "Branded menu and campaign-style visual presentation.",
-        ],
-      },
-    ],
-    stationBreakdown: [
-      {
-        title: "Main Menu and Start Flow",
-        description:
-          "Introduces the branded booth experience and lets visitors start the short VR session quickly.",
-        bullets: [
-          "Branded title/menu presentation.",
-          "Simple start action.",
-          "Clear entry into the playable challenge.",
-        ],
-      },
-      {
-        title: "Surfing Gameplay",
-        description:
-          "Creates a light arcade loop where visitors move through sand or water routes and collect targets.",
-        bullets: [
-          "VR surfing/traversal movement.",
-          "Collectible target placement.",
-          "Score and timer feedback.",
-          "Route clarity for quick public play.",
-        ],
-      },
-      {
-        title: "Booth Reliability",
-        description:
-          "Keeps the experience understandable and repeatable for live activation conditions.",
-        bullets: [
-          "Short-session structure.",
-          "Minimal onboarding time.",
-          "Readable feedback inside the headset.",
-          "Designed for repeated public sessions.",
-        ],
-      },
-    ],
-    technicalHighlights: [
-      "Built the Unity VR booth gameplay loop.",
-      "Implemented collectible targets, score/progress feedback, and timer UI.",
-      "Created/assembled multiple themed gameplay environments.",
-      "Designed interaction pacing for public event use.",
-      "Prepared the experience for quick onboarding and repeated booth sessions.",
-    ],
-    featured: true,
-  },
-  {
     id: "meta-quest-vr-training-suite",
     title: "Tanta University Meta Quest 2 Training Suite",
     category: "VR & Interactive Booths",
@@ -1972,6 +1738,241 @@ export const projects: Project[] = [
       "Built grabbable experiment objects and liquid-placement interaction flow for the viscosity lab.",
       "Adapted available assets and modified scene elements to satisfy educational requirements.",
     ],
+    featured: true,
+  },
+  {
+    id: "nescafe-surfing-vr-booth",
+    title: "Nescafe Ice Coffee VR Surfing Experience",
+    category: "VR & Interactive Booths",
+    summary:
+      "A short Unity VR booth game where visitors surf through branded sand and water environments, collect cans, and compete against a timed arcade-style score loop.",
+    role: "Unity Developer",
+    platform: ["Unity", "VR headset"],
+    tech: ["Unity", "C#", "VR", "Arcade Gameplay", "Booth Experience", "Interaction Design"],
+    thumbnail: nescafeMenuImage,
+    heroVideo: nescafeHeroVideo,
+    demoUrl: "#demo",
+    demoLabel: "Watch Booth Demo",
+    caseStudyUrl: "/projects/nescafe-surfing-vr-booth",
+    productContext: [{ label: "Nescafe / Nestle booth activation context" }],
+    attributionNote: nescafeAttributionNote,
+    technicalEvidence: {
+      badges: [
+        "Short-session VR gameplay",
+        "Visitor-friendly onboarding",
+        "Timed arcade score loop",
+        "Branded collectible objectives",
+        "Multi-route environment variation",
+      ],
+    },
+    media: [
+      {
+        id: "nescafe-booth-demo",
+        type: "youtube",
+        title: "Booth Gameplay Demo",
+        youtubeId: "https://youtube.com/shorts/upsJHmKdVN0",
+        thumbnail: "https://i.ytimg.com/vi/upsJHmKdVN0/hqdefault.jpg",
+        caption:
+          "Video demo of the VR booth gameplay, showing the timed surfing loop, collectible cans, and branded event-style presentation.",
+        details: {
+          title: "VR Booth Demo",
+          notes: [
+            "Shows the short-session flow intended for public booth use.",
+            "Demonstrates timed arcade interaction, collectible targets, and fast visual feedback.",
+            "Presented as portfolio media for the Unity implementation work.",
+          ],
+        },
+      },
+      {
+        id: "nescafe-main-menu",
+        type: "image",
+        title: "Sand Board Main Menu",
+        src: nescafeMenuImage,
+        thumbnail: nescafeMenuImage,
+        caption:
+          "Main menu screen for the branded sand-board booth experience, setting up the playful event tone before visitors enter the VR activity.",
+        details: {
+          title: "Menu and Session Start",
+          components: [
+            "Branded main menu",
+            "Start button",
+            "Event campaign visual style",
+            "Short-session entry point",
+          ],
+          behaviors: [
+            "Introduce the experience quickly for booth visitors",
+            "Start the playable session with minimal onboarding",
+            "Frame the activity as a light arcade challenge",
+          ],
+        },
+      },
+      {
+        id: "nescafe-sand-surfing",
+        type: "image",
+        title: "Sand Surfing Environment",
+        src: nescafeSandSurfingImage,
+        thumbnail: nescafeSandSurfingImage,
+        caption:
+          "Desert/sand surfing gameplay view with collectible targets, timer feedback, and score-style UI designed for a fast booth interaction.",
+        details: {
+          title: "Sand Surfing Gameplay",
+          components: [
+            "Sand/desert traversal environment",
+            "Collectible can targets",
+            "Timer display",
+            "Score/progress feedback",
+          ],
+          behaviors: [
+            "Move through the environment in a short arcade run",
+            "Collect targets while staying oriented in VR",
+            "Use timer and score feedback to create replayable booth energy",
+          ],
+        },
+      },
+      {
+        id: "nescafe-water-beach",
+        type: "image",
+        title: "Water Surfing Beach Route",
+        src: nescafeWaterBeachImage,
+        thumbnail: nescafeWaterBeachImage,
+        caption:
+          "Water-route gameplay view showing collectible targets across a beach environment, adding variety to the VR surfing challenge.",
+        details: {
+          title: "Beach Route Gameplay",
+          components: [
+            "Water surfing route",
+            "Beach/island environment",
+            "Collectible targets",
+            "Timer and progress UI",
+          ],
+          behaviors: [
+            "Guide the player through a clear forward route",
+            "Place collectibles along readable paths",
+            "Keep the session visually bright and approachable for event visitors",
+          ],
+        },
+      },
+      {
+        id: "nescafe-water-jungle",
+        type: "image",
+        title: "Water Surfing Jungle Route",
+        src: nescafeWaterJungleImage,
+        thumbnail: nescafeWaterJungleImage,
+        caption:
+          "Alternate water-route gameplay view with a greener environment and close collectible target, showing the arcade objective clearly.",
+        details: {
+          title: "Jungle Route Gameplay",
+          components: [
+            "Water traversal path",
+            "Jungle/green environment",
+            "Close collectible target",
+            "Score and timer UI",
+          ],
+          behaviors: [
+            "Create route variation inside the booth experience",
+            "Keep collectible objectives visible and easy to understand",
+            "Support quick public play sessions with immediate feedback",
+          ],
+        },
+      },
+    ],
+    highlights: [
+      "Built a short interactive VR surfing experience for public booth use.",
+      "Focused on quick onboarding and easy-to-understand controls.",
+      "Implemented timed arcade feedback, collectible targets, and multiple themed routes.",
+      "Designed the experience for a live event environment with fast session turnover.",
+    ],
+    timeline: "Freelance booth project",
+    problem:
+      "Live booth experiences need to be understandable in seconds while still feeling memorable.",
+    solution:
+      "Built a compact VR surfing loop with simple movement, collectible targets, visible score/timer feedback, and environment variety for event flow.",
+    challenges: [
+      "Reducing onboarding friction for first-time VR users.",
+      "Keeping the experience reliable during repeated public sessions.",
+      "Designing feedback that reads clearly inside a headset.",
+      "Making branded visuals feel playful without slowing down the booth flow.",
+    ],
+    impact: [
+      "Delivered an approachable interactive booth experience.",
+      "Kept sessions short enough for live event throughput.",
+      "Showed Unity's usefulness beyond traditional games.",
+    ],
+    overview: [
+      "This project was a short Unity VR booth experience for a branded Nescafe/Nestle event activation. Visitors entered a playful sand-board and water-surfing style challenge, collected branded targets, and received immediate score/timer feedback.",
+      "The portfolio focus is the Unity implementation: quick onboarding, readable VR movement, collectible placement, timed arcade feedback, and environment variation for a live public booth setting.",
+    ],
+    simulatedBehaviors: [
+      {
+        title: "Booth Gameplay Loop",
+        bullets: [
+          "Short-session VR surfing challenge.",
+          "Collectible can targets placed along the route.",
+          "Timer and score/progress feedback.",
+          "Fast start and reset behavior for live events.",
+        ],
+      },
+      {
+        title: "Visitor-Friendly VR",
+        bullets: [
+          "Simple controls for first-time users.",
+          "Readable forward routes and clear objectives.",
+          "Bright environments with low-friction onboarding.",
+          "Interaction pacing designed for booth throughput.",
+        ],
+      },
+      {
+        title: "Environment Variation",
+        bullets: [
+          "Sand/desert surfing route.",
+          "Beach water-surfing route.",
+          "Green/jungle water route.",
+          "Branded menu and campaign-style visual presentation.",
+        ],
+      },
+    ],
+    stationBreakdown: [
+      {
+        title: "Main Menu and Start Flow",
+        description:
+          "Introduces the branded booth experience and lets visitors start the short VR session quickly.",
+        bullets: [
+          "Branded title/menu presentation.",
+          "Simple start action.",
+          "Clear entry into the playable challenge.",
+        ],
+      },
+      {
+        title: "Surfing Gameplay",
+        description:
+          "Creates a light arcade loop where visitors move through sand or water routes and collect targets.",
+        bullets: [
+          "VR surfing/traversal movement.",
+          "Collectible target placement.",
+          "Score and timer feedback.",
+          "Route clarity for quick public play.",
+        ],
+      },
+      {
+        title: "Booth Reliability",
+        description:
+          "Keeps the experience understandable and repeatable for live activation conditions.",
+        bullets: [
+          "Short-session structure.",
+          "Minimal onboarding time.",
+          "Readable feedback inside the headset.",
+          "Designed for repeated public sessions.",
+        ],
+      },
+    ],
+    technicalHighlights: [
+      "Built the Unity VR booth gameplay loop.",
+      "Implemented collectible targets, score/progress feedback, and timer UI.",
+      "Created/assembled multiple themed gameplay environments.",
+      "Designed interaction pacing for public event use.",
+      "Prepared the experience for quick onboarding and repeated booth sessions.",
+    ],
+    featured: true,
   },
   {
     id: "ibm-call-for-code-agri-tech",
@@ -2142,7 +2143,6 @@ export const projects: Project[] = [
       "Contributed in a competition environment where technical choices had to be explained clearly to judges and public audiences.",
       "Linked the portfolio page to the public demo, repository, IBM newsroom context, and StartupScene coverage for transparency.",
     ],
-    featured: true,
   },
   {
     id: "pid-control-station",
