@@ -14,6 +14,7 @@ const INCLUDE_COMPANIES = !args || args.includeCompanies !== false
 const RUN_SCOUT = !args || args.runScout !== false
 const KNOWN_URLS = (args && Array.isArray(args.knownUrls)) ? args.knownUrls : []
 const REGIONS_HINT = (args && args.regionsHint) || ''
+const RECHECK = (args && Array.isArray(args.recheck)) ? args.recheck : []
 
 const PROFILE = `CANDIDATE: Amr Khalil, based in Egypt (UTC+2/+3), remote only.
 - Senior Unity Engineer at BEDO Innovating Education (Oct 2024-present): Unity simulations of real engineering equipment (PLC-driven industrial stations, PID control labs, fluid mechanics, hydrogen fuel-cell lab), digital twins/shadows, WebGL delivery, ScriptableObject architecture, dependency injection, migrating to Unity 6.
@@ -81,9 +82,23 @@ const SCOUT_SCHEMA = {
       },
     },
     searchTerms: { type: 'array', items: { type: 'string' } },
+    talentNetworks: {
+      type: 'array',
+      description: 'Vetted talent networks / marketplaces worth joining (e.g. Proxify, Lemon.io, Arc, Turing, Toptal)',
+      items: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          url: { type: 'string' },
+          egyptEligible: { type: 'string', enum: ['yes', 'no', 'unclear'] },
+          notes: { type: 'string', description: 'How they hire, rates if published, vetting process' },
+        },
+        required: ['name', 'url', 'egyptEligible', 'notes'],
+      },
+    },
     notes: { type: 'string' },
   },
-  required: ['regions', 'searchTerms', 'notes'],
+  required: ['regions', 'searchTerms', 'talentNetworks', 'notes'],
 }
 
 const RULES = `RULES:
@@ -91,6 +106,7 @@ const RULES = `RULES:
 - OPEN every posting you include (WebFetch the posting URL). Never include something you only saw in a search-result snippet. The url must be the posting itself.
 - Read-only: never sign in, apply, bid, register or message anyone. If a page needs login, note it in sourcesTried and move on.
 - Never invent pay, dates or applicant counts: null / "not stated" when not shown.
+- Hands-on engineering only: skip AI-training-data, annotation, model-evaluation or 'expert' gigs (e.g. micro1, Outlier, Mercor-style tasks), QA testing, pure art/animation, and teaching roles.
 - Relevance: Unity or Unity-adjacent real-time 3D (simulation, training, XR/VR/AR, digital twin, WebGL, EdTech, serious games, games). Skip Unreal-only, pure web/mobile without Unity, and senior lead roles demanding 7+ years unless otherwise a strong fit.
 - Mark egyptEligible "no" when the posting restricts to specific countries that exclude Egypt; still include it only if exceptional, otherwise skip it.
 - Aim for depth: try at least 4 sources/queries, and return up to 15 good postings.
@@ -98,7 +114,7 @@ const RULES = `RULES:
 
 phase('Scout')
 const scout = !RUN_SCOUT ? null : await agent(
-  `${PROFILE}\n\nYou are scouting the remote job market for this candidate. Research (web search + read real pages) which countries/regions currently hire remote Unity / XR / simulation developers who live in Egypt, how they hire (contractor, EOR, B2B), time-zone fit, and which job boards / freelance sites / company career pages those employers actually post on. Also list 10-15 effective search terms (role titles + keywords) for this candidate. Be concrete; cite real site names.`,
+  `${PROFILE}\n\nYou are scouting the remote job market for this candidate. Research (web search + read real pages) which countries/regions currently hire remote Unity / XR / simulation developers who live in Egypt, how they hire (contractor, EOR, B2B), time-zone fit, and which job boards / freelance sites / company career pages those employers actually post on. Also list 10-15 effective search terms (role titles + keywords) for this candidate, and 4-8 vetted talent networks he should join (verify on their own pages whether Egypt-based developers are accepted). Be concrete; cite real site names.`,
   { label: 'scout: regions & sources', phase: 'Scout', schema: SCOUT_SCHEMA },
 )
 const scoutText = scout ? JSON.stringify(scout) : (REGIONS_HINT || 'No scout this run; use your own judgment.')
@@ -189,7 +205,35 @@ const companyTask = () =>
       )
     : Promise.resolve(null)
 
-const [searchResults, companyResult] = await Promise.all([parallel(searchTasks), companyTask()])
+const RECHECK_SCHEMA = {
+  type: 'object',
+  properties: {
+    results: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          url: { type: 'string' },
+          status: { type: 'string', enum: ['open', 'closed', 'unknown'] },
+          evidence: { type: 'string', description: 'What on the page showed it, e.g. "No longer accepting applications"' },
+        },
+        required: ['url', 'status', 'evidence'],
+      },
+    },
+  },
+  required: ['results'],
+}
+const recheckTask = () =>
+  RECHECK.length
+    ? agent(
+        `Check whether each job posting below is still open. Open every URL (WebFetch). "closed" only with clear evidence: page removed/404, "no longer accepting applications", "position filled", project awarded/closed, or a past deadline. If the page cannot be loaded or is ambiguous, use "unknown". Read-only; never apply or log in.
+
+${JSON.stringify(RECHECK)}`,
+        { label: 'recheck: still open?', phase: 'Score', schema: RECHECK_SCHEMA },
+      )
+    : Promise.resolve(null)
+
+const [searchResults, companyResult, recheckResult] = await Promise.all([parallel(searchTasks), companyTask(), recheckTask()])
 const results = searchResults.filter(Boolean)
 const allJobs = results.flatMap((r) => r.jobs.map((j) => ({ ...j, searcher: r.key })))
 const sourcesTried = results.flatMap((r) => r.sourcesTried.map((x) => ({ ...x, searcher: r.key })))
@@ -230,7 +274,8 @@ const SCORE_SCHEMA = {
 
 const scoring = unique.length
   ? await agent(
-      `${PROFILE}\n\nScore every posting below for this candidate, 0-100:\n- Skill fit (40): Unity simulation/training/XR/WebGL/EdTech highest; general Unity games lower; non-Unity lowest.\n- Eligibility from Egypt (20): yes=full, unclear=half, no=0.\n- Pay vs minimum $1,500/month (15): unknown pay = 7.\n- Employment preference (10): full-time remote 10, part-time 7, contract 6, freelance project 5.\n- Freshness (8): posted in last 7 days full.\n- Competition (7): fewer applicants better; unknown = 3.\nSpot-check any posting that looks stale or doubtful by opening its URL. Set keep=false for duplicates (same role posted on two sites: keep the one with more information), closed postings, irrelevant roles, or roles that exclude Egypt. Be calibrated: most postings should land 40-80.\n\nPOSTINGS:\n${JSON.stringify(unique)}`,
+      `${PROFILE}\n\nScore every posting below for this candidate, 0-100:\n- Skill fit (40): Unity simulation/training/XR/WebGL/EdTech highest; general Unity games lower; non-Unity lowest.\n- Eligibility from Egypt (20): yes=full, unclear=half, no=0.\n- Pay vs minimum $1,500/month (15): unknown pay = 7.\n- Employment preference (10): full-time remote 10, part-time 7, contract 6, freelance project 5.\n- Freshness (8): posted in last 7 days full.\n- Competition (7): fewer applicants better; unknown = 3.\nGATE FIRST: a posting only qualifies if the work is hands-on software development in Unity or Unity-adjacent real-time 3D (C# gameplay/systems/tools, simulation, XR, WebGL). AI-training-data / annotation / model-evaluation / 'expert task' gigs (micro1, Outlier, Mercor and similar), QA testing, pure 3D art or animation, and teaching do NOT qualify: set keep=false for them regardless of pay.
+Spot-check any posting that looks stale or doubtful by opening its URL. Set keep=false for duplicates (same role posted on two sites: keep the one with more information), closed postings, irrelevant roles, or roles that exclude Egypt. Be calibrated: most postings should land 40-80.\n\nPOSTINGS:\n${JSON.stringify(unique)}`,
       { label: 'score & verify', phase: 'Score', schema: SCORE_SCHEMA },
     )
   : null
@@ -247,4 +292,4 @@ const companies = companyResult
   ? companyResult.found.map((c) => ({ ...c, ...(companyResult.checked.find((x) => x.name === c.name) || {}) }))
   : []
 
-return { scout, jobs: kept, dropped: scoredJobs.filter((j) => !j.keep), sourcesTried, companies }
+return { scout, jobs: kept, dropped: scoredJobs.filter((j) => !j.keep), sourcesTried, companies, recheck: recheckResult ? recheckResult.results : [] }
