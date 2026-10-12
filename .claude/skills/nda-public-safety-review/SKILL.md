@@ -1,3 +1,8 @@
+---
+name: nda-public-safety-review
+description: Review portfolio pages, proposals, resumes or vault notes before publishing or sending: no private client data, credentials, internal paths or local URLs, and no overclaimed ownership of company products or hardware.
+---
+
 # NDA Public Safety Review
 
 ## Purpose

@@ -1,3 +1,8 @@
+---
+name: unity-project-documenter
+description: Document Unity, WebGL, VR, AR, simulation, digital twin or educational lab projects for the portfolio case studies and the vault.
+---
+
 # Unity Project Documenter
 
 ## Purpose

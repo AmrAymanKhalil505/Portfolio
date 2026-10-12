@@ -1,3 +1,8 @@
+---
+name: portfolio-design-system
+description: Use when changing the portfolio's visual design, layout, components, case-study pages or recruiter-facing presentation, to keep the established design language.
+---
+
 # Portfolio Design System
 
 ## Purpose

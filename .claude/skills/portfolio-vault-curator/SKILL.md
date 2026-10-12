@@ -1,3 +1,8 @@
+---
+name: portfolio-vault-curator
+description: Improve the Obsidian second-brain vault notes generated from portfolio project data and src/md files: notes, MOCs, tags, links and metadata.
+---
+
 # Portfolio Vault Curator
 
 ## Purpose

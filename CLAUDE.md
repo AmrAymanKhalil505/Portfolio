@@ -17,7 +17,7 @@ every push to main. netlify.toml / public/_redirects are not used by the live si
 - Never overclaim ownership of company products, hardware, or private systems. Keep the
   attribution blocks intact. Frame work as "my Unity implementation of...".
 - Before publishing anything about client/NDA work, run the nda-public-safety-review skill
-  (.agents/skills/).
+  (.claude/skills/).
 - Card badges describe what kind of system the work proves I can build; detailed technical
   evidence belongs on the case-study page.
 
@@ -66,5 +66,14 @@ every push to main. netlify.toml / public/_redirects are not used by the live si
 - Bash tool is Git Bash: redirect to /dev/null, never `> nul` (that creates a stray `nul` file).
 - Asset filenames contain spaces. Always quote paths.
 
+## Skills (.claude/skills/, shared by every chat on this repo)
+- `/proposal`: job post -> proposal page + PDF + cover letter. Amr's confirmed rate, availability,
+  experience dates and process are in `.claude/skills/proposal/facts.md`; use them, don't re-ask.
+- `/handoff`: end-of-session note, backlog update, unpushed work.
+- `/job-radar`: run the deep job search and update the Job Radar board
+  (script: `.claude/workflows/job-hunt.js`; also runs every 3 days as a cloud routine).
+- Also: nda-public-safety-review, portfolio-design-system, unity-project-documenter, vault skills.
+
 ## Session continuity
-- At the end of substantial work, add a handoff note in docs/session-notes/YYYY-MM-DD-topic.md.
+- At the end of substantial work, run `/handoff` (session note in docs/session-notes/YYYY-MM-DD-topic.md,
+  backlog update, new facts saved).

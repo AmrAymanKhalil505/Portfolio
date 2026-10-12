@@ -1,3 +1,8 @@
+---
+name: codebase-to-second-brain
+description: Turn an undocumented or weakly documented codebase into an Obsidian-style technical knowledge base. Use when asked to document a codebase as linked notes.
+---
+
 # Codebase to Second Brain
 
 ## Purpose

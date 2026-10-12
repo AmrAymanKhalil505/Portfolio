@@ -1,3 +1,8 @@
+---
+name: obsidian-vault-qa
+description: Check the generated Obsidian vault for structure, broken links, weak or duplicate notes and orphans. Use after running npm run vault or when asked to QA the vault.
+---
+
 # Obsidian Vault QA
 
 ## Purpose

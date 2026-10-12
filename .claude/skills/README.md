@@ -1,5 +1,7 @@
 # Portfolio Agent Skills
 
+Claude Code loads every `<name>/SKILL.md` here; run one with `/<name>` or let Claude pick it from its description.
+
 This folder contains project-local agent skills for maintaining the portfolio website and its Obsidian second-brain vault.
 
 Use these skills when working on:
@@ -14,6 +16,9 @@ Use these skills when working on:
 
 | Skill | Use when |
 | --- | --- |
+| `proposal` | A job post arrives: build the proposal page, PDF and cover letter (facts in `proposal/facts.md`). |
+| `handoff` | Ending a session: write the session note, update the backlog, list unpushed work. |
+| `job-radar` | Run the deep job search now and update the Job Radar board. |
 | `portfolio-vault-curator` | Improving generated project notes, MOCs, tags, links, and metadata. |
 | `unity-project-documenter` | Documenting Unity projects, simulations, scenes, systems, and WebGL behavior. |
 | `obsidian-vault-qa` | Checking vault structure, broken links, weak notes, duplicates, and orphan notes. |
