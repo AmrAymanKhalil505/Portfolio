@@ -4,6 +4,21 @@ import type { Proposal } from "./types";
 // To add a company: create <slug>.ts exporting a default Proposal and register it here.
 export const proposalLoaders: Record<string, () => Promise<{ default: Proposal }>> = {
   utopivr: () => import("./utopivr"),
+  clarisign: () => import("./clarisign"),
+  naphora: () => import("./naphora"),
+  north: () => import("./north"),
+  hypervr: () => import("./hypervr"),
+  vrchat: () => import("./vrchat"),
+  empiresbattle: () => import("./empiresbattle"),
+  dragonslake: () => import("./dragonslake"),
+  bairesdev: () => import("./bairesdev"),
+  truphysics: () => import("./truphysics"),
+  estoty: () => import("./estoty"),
+  "survival-unity": () => import("./survival-unity"),
+  "folklore-horror": () => import("./folklore-horror"),
+  matrplotr: () => import("./matrplotr"),
+  "accident-reconstruction": () => import("./accident-reconstruction"),
+  "animal-multiplayer": () => import("./animal-multiplayer"),
 };
 
 // Proposals go out through job platforms, so they link to the contact-free /work mode.
