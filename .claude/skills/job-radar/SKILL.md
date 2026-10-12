@@ -6,20 +6,23 @@ description: Run Amr's deep job search now and update his Job Radar board (jobs,
 # Job Radar run
 
 Board (private artifact, only Amr can open it): https://claude.ai/artifact/3NScXvVVESx1YdHy9qcpTU
-This file is the single source of truth: the cloud routine "Job Radar — job hunt every 3 days" (claude.ai/code/routines) just follows it, and a manual run here does the same thing.
+This file is the single source of truth. Two cloud routines follow it (claude.ai/code/routines):
+- **Job Radar — full weekly** (Monday 7:00 Cairo, Opus): MODE = full. 11 searchers incl. regional / local-language markets and outsourcing firms, country scout, companies to watch, talent networks.
+- **Job Radar — light midweek** (Thursday 7:00 Cairo, Sonnet): MODE = light. The 5 core searchers only.
+The routine's prompt states the MODE. In a manual chat, use full unless Amr asks for a quick run.
 Never apply, bid, message, sign up or log in anywhere. Do not edit or commit repo files during a run.
 
 ## 1. Read the board (ArtifactData tool; load it with ToolSearch "select:ArtifactData,Workflow,PushNotification")
 - get `meta/latest` (keep its `version`).
 - list `jobs`, `companies` and `marks` (query.limit 1000, follow next_cursor). Keep each doc's id, version, url, score, foundAt, closed.
 - `marks` is Amr's Save/Applied/Not interested/notes data. **Never write to it.**
-- Today: `date -u +%F`. WEEKLY = meta.companiesRunAt missing or 6+ days before today.
+- Today: `date -u +%F`. WEEKLY = (MODE is full).
 - RECHECK = up to 25 job docs with score >= 55, not closed, foundAt at least 2 days ago, whose mark status is not "not_interested" or "applied": `[{url, title}]`.
 
 ## 2. Run the search
 Workflow tool with `scriptPath: ".claude/workflows/job-hunt.js"` and args:
-`{"today": "<today>", "includeCompanies": WEEKLY, "runScout": WEEKLY, "knownUrls": [<urls of all existing job docs>], "regionsHint": "<if not WEEKLY: compact JSON of meta.regions (region, hiringModel, boardsAndSites); else \"\">", "recheck": RECHECK}`
-It costs roughly 1M tokens. In a manual chat, tell Amr before starting; the scheduled routine runs without asking.
+`{"today": "<today>", "mode": "<full|light>", "includeCompanies": WEEKLY, "runScout": WEEKLY, "knownUrls": [<urls of all existing job docs>], "regionsHint": "<if not WEEKLY: compact JSON of meta.regions (region, hiringModel, boardsAndSites); else \"\">", "recheck": RECHECK}`
+A light run costs roughly 1M tokens, a full run 3-4M. In a manual chat, tell Amr before starting; the scheduled routine runs without asking.
 If the returned summary is truncated, read the full result from the task output file or the run's journal.jsonl.
 
 ## 3. Prepare documents (python for hashing / JSON files)

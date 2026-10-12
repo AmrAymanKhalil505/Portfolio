@@ -10,8 +10,12 @@ export const meta = {
 }
 
 const TODAY = (args && args.today) || 'unknown'
-const INCLUDE_COMPANIES = !args || args.includeCompanies !== false
-const RUN_SCOUT = !args || args.runScout !== false
+// mode "full" (weekly): regional + outsourcing searchers, scout, companies, 25 postings per searcher.
+// mode "light" (midweek): the 5 core searchers only, 15 postings each.
+const FULL = !args || args.mode !== 'light'
+const CAP = FULL ? 25 : 15
+const INCLUDE_COMPANIES = args && typeof args.includeCompanies === 'boolean' ? args.includeCompanies : FULL
+const RUN_SCOUT = args && typeof args.runScout === 'boolean' ? args.runScout : FULL
 const KNOWN_URLS = (args && Array.isArray(args.knownUrls)) ? args.knownUrls : []
 const REGIONS_HINT = (args && args.regionsHint) || ''
 const RECHECK = (args && Array.isArray(args.recheck)) ? args.recheck : []
@@ -44,8 +48,9 @@ const JOB_ITEM = {
     applicantsLabel: { type: ['string', 'null'], description: 'Applicant info exactly as shown, e.g. "10 to 15 proposals", "23 bids"' },
     skills: { type: 'array', items: { type: 'string' } },
     summary: { type: 'string', description: 'One or two sentences: what the work is' },
+    hiringReason: { type: 'string', description: 'Why this company/country hires remote contractors, if evident (e.g. outsourcing firm, relocated studio, wartime disruption, local talent shortage, distributed team); else "not stated"' },
   },
-  required: ['title', 'company', 'url', 'source', 'kind', 'employment', 'country', 'remoteScope', 'egyptEligible', 'pay', 'payMonthlyUsd', 'postedAt', 'applicants', 'applicantsLabel', 'skills', 'summary'],
+  required: ['title', 'company', 'url', 'source', 'kind', 'employment', 'country', 'remoteScope', 'egyptEligible', 'pay', 'payMonthlyUsd', 'postedAt', 'applicants', 'applicantsLabel', 'skills', 'summary', 'hiringReason'],
 }
 
 const SEARCH_RESULT = {
@@ -109,7 +114,8 @@ const RULES = `RULES:
 - Hands-on engineering only: skip AI-training-data, annotation, model-evaluation or 'expert' gigs (e.g. micro1, Outlier, Mercor-style tasks), QA testing, pure art/animation, and teaching roles.
 - Relevance: Unity or Unity-adjacent real-time 3D (simulation, training, XR/VR/AR, digital twin, WebGL, EdTech, serious games, games). Skip Unreal-only, pure web/mobile without Unity, and senior lead roles demanding 7+ years unless otherwise a strong fit.
 - Mark egyptEligible "no" when the posting restricts to specific countries that exclude Egypt; still include it only if exceptional, otherwise skip it.
-- Aim for depth: try at least 4 sources/queries, and return up to 15 good postings.
+- Aim for depth: try at least ${FULL ? 6 : 4} sources/queries (including deeper result pages), and return up to ${CAP} good postings.
+- When a board is in another language, search in that language too, and write title/summary in English (keep the original title in parentheses).
 - Skip anything already on the board (these URLs are known): ${KNOWN_URLS.length ? KNOWN_URLS.join(' ') : 'none yet'}`
 
 phase('Scout')
@@ -120,13 +126,22 @@ const scout = !RUN_SCOUT ? null : await agent(
 const scoutText = scout ? JSON.stringify(scout) : (REGIONS_HINT || 'No scout this run; use your own judgment.')
 log(`Scout found ${scout ? scout.regions.length : 0} regions`)
 
-const SEARCHERS = [
+const CORE_SEARCHERS = [
   { key: 'linkedin-remote-boards', kind: 'job', task: 'Search LinkedIn public guest job search pages (no login; remote filter; locations Worldwide, EMEA, Egypt, European Union, United Arab Emirates), plus Himalayas, Arc.dev, Remotive and Working Nomads. LinkedIn guest pages show applicant counts: capture them. LinkedIn often labels on-site jobs as remote: open each posting and confirm. Full-time and part-time roles.' },
   { key: 'games-xr-boards', kind: 'job', task: 'Search games/XR/real-time-3D boards: Work With Indies (homepage list), Hitmarker (unity and remote pages), GameJobs.co, remotegamejobs.com, InGame Job, and Unity Discussions (Commercial > Job Offering). Full-time, part-time and contract roles.' },
   { key: 'sim-edtech-regional', kind: 'job', task: 'Find open remote Unity roles at simulation, training, EdTech, digital twin, industrial/medical training and serious-games companies via their career pages and ATS boards (Greenhouse, Lever, Ashby, Workable, Recruitee, Breezy), plus regional boards: Djinni (keyword Unity, Worldwide filter; shows views/applications), GulfTalent and Bayt (remote Unity roles in UAE/KSA), Wuzzuf (remote filter). Prioritise the regions in the scout report.' },
   { key: 'freelancer-com', kind: 'freelance', task: 'Search public project listings on Freelancer.com (categories unity-3d, virtual-reality, augmented-reality, game-development, and keyword searches for unity simulation / webgl / digital twin). Bid counts are public: capture them. Skip projects with a budget under about $300 USD equivalent unless the scope is tiny and clearly matches Unity simulation or VR.' },
   { key: 'twine-reddit-indies', kind: 'freelance', task: 'Search Twine game-developer jobs, Reddit r/gameDevClassifieds and r/forhire [Hiring] posts (use the Atom RSS feeds such as https://www.reddit.com/r/gameDevClassifieds/new/.rss; old.reddit.com and JSON are usually blocked), and Work With Indies contract listings, for Unity / XR / simulation freelance or contract work. For Reddit use the comment count as applicantsLabel and leave applicants null.' },
 ]
+const REGIONAL_SEARCHERS = [
+  { key: 'ukraine-relocated', kind: 'job', task: 'Ukrainian- and Russian-language markets, where wartime disruption (power cuts, mobilisation, relocation) and relocated studios drive remote hiring: Djinni (Unity, remote/worldwide), DOU.ua vacancies (Unity, remote), Habr Career (Unity, remote), relocate.me, and career pages of studios relocated to Cyprus, Serbia, Armenia, Georgia or Kazakhstan. Search in Ukrainian and Russian as well as English (e.g. "Unity розробник віддалено", "Unity разработчик удаленно"). Note how contractors are paid (B2B, Deel) when shown. Jobs and contracts.' },
+  { key: 'central-europe', kind: 'job', task: 'Central European outsourcing and simulation markets: Poland (justjoin.it, nofluffjobs.com, theprotocol.it, pracuj.pl), Czechia (jobs.cz, startupjobs.cz, Bohemia Interactive Simulations careers), Romania (ejobs.ro, bestjobs.eu), Hungary (profession.hu). Remote or contractor Unity roles; search in local languages too (e.g. "Unity programista zdalnie", "Unity vývojář remote"). Prioritise simulation/training companies.' },
+  { key: 'dach', kind: 'job', task: 'Germany, Austria, Switzerland (developer shortage; industrial simulation, digital twins, automation): StepStone, XING Jobs, Get in IT, German games job boards, freelance.de and freelancermap.de (Unity projects), and career pages of industrial simulation / digital twin / automation-training companies. Search in German too (e.g. "Unity Entwickler remote", "Unity Simulation Freelancer"). Remote or contractor roles open outside the EU.' },
+  { key: 'france-nordics', kind: 'job', task: 'France (serious games, defense and industrial simulation): Welcome to the Jungle, AFJV (games/simulation board), Indeed France; search in French too (e.g. "développeur Unity télétravail", "simulation serious game Unity"). Nordics (Sweden, Finland, Denmark, Norway; XR and simulation): The Hub (thehub.io), company career pages of XR/simulation firms. Remote or contractor roles open outside the EU.' },
+  { key: 'gulf-turkey', kind: 'job', task: 'Gulf (state-funded gaming, XR and digital-twin programmes; Arabic is an advantage): Bayt, GulfTalent, NaukriGulf, Akhtaboot, Wuzzuf (remote filter), plus Saudi/UAE gaming and XR company career pages; search in Arabic too (e.g. "مطور يونتي عن بعد"). Turkey (mobile game hub): kariyer.net and the career pages of Turkish studios. Keep only roles that are genuinely remote from Egypt (no relocation required).' },
+  { key: 'outsourcing-firms', kind: 'job', task: 'Outsourcing and staff-augmentation firms that place remote developers with clients across EMEA and often accept contractors from Egypt: EPAM Anywhere, N-iX, SoftServe, Innovecs, Program-Ace, Kevuru Games, Andersen, Itransition, Room 8 Group, Virtuos, Keywords Studios and similar. Search their career pages for remote Unity / XR / simulation roles and confirm which countries are eligible.' },
+]
+const SEARCHERS = FULL ? [...CORE_SEARCHERS, ...REGIONAL_SEARCHERS] : CORE_SEARCHERS
 
 const COMPANY_SCHEMA = {
   type: 'object',
@@ -274,7 +289,8 @@ const SCORE_SCHEMA = {
 
 const scoring = unique.length
   ? await agent(
-      `${PROFILE}\n\nScore every posting below for this candidate, 0-100:\n- Skill fit (40): Unity simulation/training/XR/WebGL/EdTech highest; general Unity games lower; non-Unity lowest.\n- Eligibility from Egypt (20): yes=full, unclear=half, no=0.\n- Pay vs minimum $1,500/month (15): unknown pay = 7.\n- Employment preference (10): full-time remote 10, part-time 7, contract 6, freelance project 5.\n- Freshness (8): posted in last 7 days full.\n- Competition (7): fewer applicants better; unknown = 3.\nGATE FIRST: a posting only qualifies if the work is hands-on software development in Unity or Unity-adjacent real-time 3D (C# gameplay/systems/tools, simulation, XR, WebGL). AI-training-data / annotation / model-evaluation / 'expert task' gigs (micro1, Outlier, Mercor and similar), QA testing, pure 3D art or animation, and teaching do NOT qualify: set keep=false for them regardless of pay.
+      `${PROFILE}\n\nScore every posting below for this candidate, 0-100:\n- Skill fit (40): Unity simulation/training/XR/WebGL/EdTech highest; general Unity games lower; non-Unity lowest.\n- Eligibility from Egypt (20): yes=full, unclear=half, no=0.\n- Pay vs minimum $1,500/month (15): unknown pay = 7.\n- Employment preference (10): full-time remote 10, part-time 7, contract 6, freelance project 5.\n- Freshness (8): posted in last 7 days full.\n- Competition (7): fewer applicants better; unknown = 3.
+Use hiringReason as evidence for eligibility when the posting itself is vague.\nGATE FIRST: a posting only qualifies if the work is hands-on software development in Unity or Unity-adjacent real-time 3D (C# gameplay/systems/tools, simulation, XR, WebGL). AI-training-data / annotation / model-evaluation / 'expert task' gigs (micro1, Outlier, Mercor and similar), QA testing, pure 3D art or animation, and teaching do NOT qualify: set keep=false for them regardless of pay.
 Spot-check any posting that looks stale or doubtful by opening its URL. Set keep=false for duplicates (same role posted on two sites: keep the one with more information), closed postings, irrelevant roles, or roles that exclude Egypt. Be calibrated: most postings should land 40-80.\n\nPOSTINGS:\n${JSON.stringify(unique)}`,
       { label: 'score & verify', phase: 'Score', schema: SCORE_SCHEMA },
     )
