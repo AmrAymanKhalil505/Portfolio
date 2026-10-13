@@ -19,6 +19,12 @@ export const proposalLoaders: Record<string, () => Promise<{ default: Proposal }
   matrplotr: () => import("./matrplotr"),
   "accident-reconstruction": () => import("./accident-reconstruction"),
   "animal-multiplayer": () => import("./animal-multiplayer"),
+  syncvr: () => import("./syncvr"),
+  magicmedia: () => import("./magicmedia"),
+  gsw: () => import("./gsw"),
+  "apartment-vr-tour": () => import("./apartment-vr-tour"),
+  freemind: () => import("./freemind"),
+  artifexmundi: () => import("./artifexmundi"),
 };
 
 // Proposals go out through job platforms, so they link to the contact-free /work mode.
