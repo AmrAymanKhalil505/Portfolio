@@ -69,8 +69,8 @@ const proposal: Proposal = {
       title: "Salary and start date",
       original: "Full-time",
       body: [
-        "Salary expectation: [[TODO: salary expectation]].",
-        "I am currently employed with a one-month notice period. When you make an offer I give notice and start full-time one month later. During the notice month I can already work part-time, about 15 hours per week, on onboarding and a first small task. Full-time hours after the notice month: [[TODO: confirm 40 h/week full-time availability for an employment role]].",
+        "Salary expectation: EUR 2,700 gross per month.",
+        "I am currently employed with a one-month notice period. When you make an offer I give notice and start full-time one month later. During the notice month I can already work part-time, about 15 hours per week, on onboarding and a first small task. After the notice month I work full-time, 40 hours per week.",
       ],
     },
   ],
@@ -212,7 +212,7 @@ const proposal: Proposal = {
         {
           need: "Research and integrate AI tools for development speed and dynamic scenarios",
           status: "partial",
-          proof: "[[TODO: AI tools you have used in development or in a product, if any]].",
+          proof: "I use AI coding tools, Codex and Claude Code, in my development work to speed it up. Using AI for dynamic scenarios inside a product would be new to me.",
         },
         {
           need: "xAPI telemetry for learner progress, connected to LMS and data systems",

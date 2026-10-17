@@ -10,8 +10,15 @@ Reuse these in every proposal. Do not re-ask unless a job needs different terms.
 ## Availability
 - Currently employed at BEDO with a **one-month notice period**: starts full engagement one month after an award.
 - During the notice month: part-time, about **15 hours/week** (~60 hours that month).
-- After: **30 hours/week** (~120-130 hours/month), up to **40 hours/week** in busy phases.
+- After (freelance/contract): **30 hours/week** (~120-130 hours/month), up to **40 hours/week** in busy phases.
+- After (full-time employment role): **40 hours/week** (confirmed 2026-10-17).
 - Time zone: Egypt, 1 hour ahead of Poland / CET.
+
+## Tools
+- AI coding tools: uses **Codex** and **Claude Code** in development (confirmed 2026-10-17). AI features inside a shipped product: not confirmed, ask.
+
+## Salary asks (per job, confirmed)
+- SyncVR Medical (Medior 3D XR Developer): EUR 2,700 gross per month.
 
 ## Equipment
 - Owns a **Meta Quest 2** (Oculus Quest 2) for development and testing.
