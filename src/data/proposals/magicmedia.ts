@@ -46,8 +46,8 @@ const proposal: Proposal = {
       title: "Shipped work",
       original: "Worked on at least one shipped game title",
       body: [
-        "Games: the Nescafe Ice Coffee VR surfing game ran with visitors at an event booth (2025), and I was the Unity developer of Atmosphere Protector, a mobile educational game for Android and iOS. [[TODO: was Atmosphere Protector released to players (store, schools)? If yes, say where]]",
-        "Other Unity work in users' hands: the Ivris production app (WebGL editor plus Android / iOS AR), the Tanta University Quest 2 suite (three experiences, sole developer) and BEDO's training labs delivered as Unity WebGL.",
+        "Games: the Nescafe Ice Coffee VR surfing game ran with visitors at an event booth (2025), and I was the Unity developer of Atmosphere Protector, a mobile educational game for Android and iOS that has not been released yet.",
+        "Shipped commercial software: the training simulations I build in Unity at BEDO are commercial products sold to universities and companies (B2B, through BEDO rather than a public store). Also in users' hands: the Ivris production app (WebGL editor plus Android / iOS AR) and the Tanta University Quest 2 suite (three experiences, sole developer).",
       ],
     },
     {
@@ -62,7 +62,7 @@ const proposal: Proposal = {
       original: "Strong skills in Unity and C#. Unity 6 and URP are a plus",
       body: [
         "Every project below is Unity / C#, with ScriptableObject architecture and dependency injection in team projects at BEDO. Unity 6 is in production use: the Ivris app was built in Unity 6, and I have been migrating BEDO projects to Unity 6 since mid-2026.",
-        "URP: [[TODO: whether any of your projects used URP, and which]]",
+        "URP: used on the Nescafe VR booth game (2025). My BEDO and Ivris projects use the built-in render pipeline, so most of my production rendering work is outside URP.",
       ],
     },
     {
@@ -104,8 +104,8 @@ const proposal: Proposal = {
       title: "Salary and start date",
       original: "Full-time · permanently remote",
       body: [
-        "Salary expectation: [[TODO: salary expectation]].",
-        "I am currently employed with a one-month notice period. When you make an offer I give notice and start one month later; during the notice month I can already work about 15 hours per week on onboarding. Full-time hours after the notice month: [[TODO: confirm 40 h/week full-time availability for an employment role]].",
+        "Salary expectation: USD 2,500–3,000 per month, open to discussing the full package and the contract form.",
+        "I am currently employed with a one-month notice period. When you make an offer I give notice and start one month later; during the notice month I can already work about 15 hours per week on onboarding. After the notice month I work full-time, 40 hours per week.",
       ],
     },
   ],
@@ -270,7 +270,7 @@ const proposal: Proposal = {
         {
           need: "At least one shipped game title",
           status: "partial",
-          proof: "Nescafe booth game used by event visitors (2025); Atmosphere Protector mobile game. No store release of my own listed.",
+          proof: "Shipped commercial Unity products: BEDO training simulations sold to universities and companies (B2B). Games: the Nescafe booth game used by event visitors (2025); Atmosphere Protector is built but not released yet. No consumer game store release yet.",
         },
         {
           need: "Daily overlap with Helsinki (EET/EEST)",

@@ -47,7 +47,7 @@ const proposal: Proposal = {
       original: "Web development experience, especially JavaScript and React.js",
       body: [
         "On the web side of Unity: production Unity WebGL builds at BEDO and Ivris, including a real-time multiplayer room editor running in the browser. Before Unity work on a simulation I build an HTML prototype with 2D vector graphics, so browser-side logic is part of my normal process.",
-        "[[TODO: confirm the concrete JavaScript / React.js work to cite here (e.g. Unity WebGL JS bridges, React projects, this React + TypeScript portfolio) and how long]]",
+        "JavaScript / React: I completed the Coursera specialization Full-Stack Web Development with React (HKUST, 2021: React, React Native, Node.js, Express, MongoDB). At Ivris I used OneJS (JavaScript / TypeScript UI inside Unity), and this portfolio is a React + TypeScript site. I build that web code with heavy help from AI coding tools, so I would not present myself as a React specialist.",
       ],
     },
     {
@@ -60,7 +60,7 @@ const proposal: Proposal = {
     {
       title: "English",
       original: "Intermediate+ English",
-      body: ["[[TODO: English level, e.g. B2 / C1]]"],
+      body: ["I work in English every day; my B.Sc. studies and my bachelor thesis were in English. I have no formal test score."],
     },
     {
       title: "Start date and salary expectation",
@@ -207,7 +207,7 @@ const proposal: Proposal = {
         {
           need: "Web development, especially JavaScript and React.js",
           status: "partial",
-          proof: "Unity WebGL in production (BEDO, Ivris) and HTML prototypes before Unity work. [[TODO: confirm JS / React.js projects to cite]]",
+          proof: "Unity WebGL in production (BEDO, Ivris) and HTML prototypes before Unity work. Coursera React specialization (2021), OneJS UI in Unity at Ivris and this React + TypeScript portfolio, all AI-assisted; not front-end specialist work.",
         },
         {
           need: "UI development",
@@ -227,7 +227,7 @@ const proposal: Proposal = {
         {
           need: "Intermediate+ English",
           status: "direct",
-          proof: "[[TODO: English level]]",
+          proof: "I work in English every day; my B.Sc. studies and my bachelor thesis were in English. I have no formal test score.",
         },
         {
           need: "Collaborative work in multidisciplinary teams",

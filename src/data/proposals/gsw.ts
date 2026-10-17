@@ -47,7 +47,7 @@ const proposal: Proposal = {
       original: "Use Timeline to drive scripted sequences, object animation and environmental effects",
       body: [
         "Animated sequences are a regular part of my work: exploded-view equipment animations and particle explanations in the BEDO labs, and robot arms, conveyors and pneumatics animated from their process states in the MR109 / MR110 industrial stations.",
-        "[[TODO: confirm whether any of these used Unity Timeline (and which project), or say that Timeline-driven sequences would be new in production]]",
+        "Unity Timeline: I use it at BEDO to build short intro sequences for the marketing team. Larger Timeline-driven scenes with many tracks would be new to me.",
       ],
     },
     {

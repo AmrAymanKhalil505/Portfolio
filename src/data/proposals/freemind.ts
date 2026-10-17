@@ -83,7 +83,7 @@ const proposal: Proposal = {
   ],
   candidNote: {
     title: "A transparent note on commercial games, location and language",
-    body: "I have not yet shipped a commercial PC game on Steam or worked on a game in Early Access. My production work is training simulations (BEDO, Tanta University), a cross-platform Unity app (Ivris), a mobile learning game and a one-week VR event game. I also live in Egypt rather than Poland and I am writing to you in English. What I bring: almost three years of continuous professional Unity and C# where the job is to make equipment behave correctly and to teach through interaction, which is the core of a simulator like Electrician Life. I would expect to learn your Steam release process and your game-design habits from the team, and I prefer you know this now.",
+    body: "I have not yet shipped a commercial PC game on Steam or worked on a game in Early Access. My production work is training simulations (at BEDO these are commercial products sold to universities and companies; plus the Tanta University suite), a cross-platform Unity app (Ivris), a mobile learning game and a one-week VR event game. I also live in Egypt rather than Poland and I am writing to you in English. What I bring: almost three years of continuous professional Unity and C# where the job is to make equipment behave correctly and to teach through interaction, which is the core of a simulator like Electrician Life. I would expect to learn your Steam release process and your game-design habits from the team, and I prefer you know this now.",
   },
   experience: [
     {
@@ -251,7 +251,7 @@ const proposal: Proposal = {
         {
           need: "A shipped commercial PC game",
           status: "partial",
-          proof: "Delivered to real users: the Nescafe booth game ran at a live event, the Tanta Quest 2 suite as sole developer, and the Ivris app on WebGL, Android and iOS. No Steam or PC game release yet — see the note above.",
+          proof: "Shipped commercial simulations: BEDO's Unity labs are sold to universities and companies (B2B). Delivered to real users: the Nescafe booth game ran at a live event, the Tanta Quest 2 suite as sole developer, and the Ivris app on WebGL, Android and iOS. No Steam or PC game release yet — see the note above.",
         },
         {
           need: "Gameplay systems: tasks, progression, feedback",

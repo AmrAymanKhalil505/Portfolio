@@ -45,7 +45,7 @@ const proposal: Proposal = {
       title: "Shipped Unity work",
       original: "Experience shipping Unity-based titles",
       body: [
-        "Shipped to real users: the Quest 2 training suite (three experiences), the Nescafe VR booth game used by event visitors, the Ivris production app (WebGL editor plus Android / iOS AR) and BEDO's training labs delivered as Unity WebGL. Each one links to a video and a case study below that states what I built versus the wider team.",
+        "Shipped to real users: the Quest 2 training suite (three experiences), the Nescafe VR booth game used by event visitors, the Ivris production app (WebGL editor plus Android / iOS AR) and BEDO's Unity WebGL training labs, which are commercial products sold to universities and companies. Each one links to a video and a case study below that states what I built versus the wider team.",
       ],
     },
     {
@@ -282,8 +282,8 @@ const proposal: Proposal = {
         },
         {
           need: "Animation tools (DoTween / PrimeTween)",
-          status: "partial",
-          proof: "[[TODO: confirm whether you have used DOTween or PrimeTween in production]].",
+          status: "direct",
+          proof: "DOTween in almost every BEDO project; PrimeTween not used yet.",
         },
         {
           need: "Meta Horizon SDK or remote config systems",

@@ -37,7 +37,7 @@ const proposal: Proposal = {
       title: "Education",
       original: "Studium, Ausbildung in Informatik, Robotik (Selbstlerner auch erwünscht!)",
       body: [
-        "[[TODO: confirm the education line to use — profile.ts lists B.Sc. Computer Science Engineering and Technology, German University in Cairo, 2014–2019]]",
+        "B.Sc. Computer Science Engineering and Technology, German University in Cairo (2014–2019). For my bachelor thesis I used Python to train a model that drives a car in a Unity simulation.",
         "Robotics itself I learned on the job: the robot arm kinematics, the robot program interpreter and the automation-station logic below were all built in production at BEDO.",
       ],
     },
@@ -74,7 +74,7 @@ const proposal: Proposal = {
   ],
   candidNote: {
     title: "A transparent note on ROS, Python, Linux, real controllers and German",
-    body: "I have not used ROS, Python or Linux in production, and my controller work so far is simulation: robot and station behaviour driven by PLC-style logic for training, not software running on or commanding a real robot cell. I would start on ROS 2 on Linux right away, including the Unity side of a ROS bridge, and expect to need your team's guidance on your controllers and hardware interfaces in the first months. [[TODO: any Python / Linux use outside production worth naming, or confirm none]] German: [[TODO: Amr's German level]]. I am also outside Germany, so the remote setup is something to clarify first. I prefer you know all of this now rather than discover it later.",
+    body: "I have not used ROS, Python or Linux in production, and my controller work so far is simulation: robot and station behaviour driven by PLC-style logic for training, not software running on or commanding a real robot cell. I would start on ROS 2 on Linux right away, including the Unity side of a ROS bridge, and expect to need your team's guidance on your controllers and hardware interfaces in the first months. Outside production, my bachelor thesis used Python to train a model that drives a car in Unity. German: A1 (beginner), so I would work in English. I am also outside Germany, so the remote setup is something to clarify first. I prefer you know all of this now rather than discover it later.",
   },
   experience: [
     {
@@ -208,7 +208,7 @@ const proposal: Proposal = {
         {
           need: "Degree or training in computer science or robotics (self-taught welcome)",
           status: "direct",
-          proof: "[[TODO: confirm education line]]; robotics skills learned in production.",
+          proof: "B.Sc. Computer Science Engineering and Technology, German University in Cairo (2014–2019); robotics skills learned in production.",
         },
         { need: "C# (required)", status: "direct", proof: "Daily language in every project since Dec 2023." },
         { need: "Unity", status: "direct", proof: "Production since Dec 2023, including Unity 6, WebGL, Android, Quest 2 and AR." },
@@ -245,7 +245,7 @@ const proposal: Proposal = {
         {
           need: "Team and posting language (German)",
           status: "partial",
-          proof: "[[TODO: Amr's German level]]",
+          proof: "German A1 (beginner); I would work in English.",
         },
       ],
     },

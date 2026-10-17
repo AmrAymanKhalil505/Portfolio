@@ -204,7 +204,7 @@ const proposal: Proposal = {
         {
           need: "AI-generated playables and video workflows; internal production tools",
           status: "commitment",
-          proof: "[[TODO: confirm any AI-assisted production or tooling experience Amr can cite]]",
+          proof: "I use AI coding tools (Codex, Claude Code) daily in development. AI-generated playables or video workflows would be new to me.",
         },
         {
           need: "Work with Marketing, UA, Product, Design, Art, AI and Engineering",
@@ -269,7 +269,7 @@ const proposal: Proposal = {
         {
           need: "AI-assisted creative production or automation",
           status: "partial",
-          proof: "[[TODO: confirm whether Amr has AI-assisted production work to cite]]",
+          proof: "AI-assisted coding every day (Codex, Claude Code); no AI-generated creative assets yet.",
         },
         {
           need: "Portfolio, playable examples or video creatives",

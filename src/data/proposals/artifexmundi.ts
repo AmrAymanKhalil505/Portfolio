@@ -67,13 +67,13 @@ const proposal: Proposal = {
         "doświadczenie we współpracy z designerami, artystami, QA oraz innymi programistami; umiejętność prowadzenia code review i mentoringu",
       body: [
         "Day to day at BEDO I work with instructional-design, art and mechatronics teams. Before Unity work on a system, I build an HTML prototype with 2D vector graphics where every changing value is driven by its real equation, shown next to it, so the designers can check the behaviour and agree the rules before Unity time is spent. For a game, that is the same conversation as agreeing combat and progression formulas with game designers.",
-        "[[TODO: confirm code review and mentoring done at BEDO (whose code, how often) so this can be stated as experience]]",
+        "Since August 2026 I have mentored an intern at BEDO and reviewed his work. That is my code-review and mentoring experience so far: one person, not a team.",
       ],
     },
     {
       title: "AI tools for code generation",
       original: "umiejętność korzystania z narzędzi AI do generacji kodu (codex, claude code)",
-      body: ["[[TODO: which AI coding tools Amr uses in his work (e.g. Claude Code, Codex) and for what]]"],
+      body: ["I use Codex and Claude Code in my daily work to speed up development, and I review and test what they generate."],
     },
     {
       title: "Work mode, start date and salary",
@@ -341,7 +341,7 @@ const proposal: Proposal = {
         {
           need: "Shipped at least one title to market",
           status: "partial",
-          proof: "Delivered the Tanta University Quest 2 suite, the Nescafe booth game and production apps for BEDO and Ivris; no commercial game store release with a studio.",
+          proof: "Shipped to market: BEDO's Unity training simulations are commercial products sold to universities and companies (B2B). Also delivered the Tanta University Quest 2 suite, the Nescafe booth game and the Ivris app. No commercial game store release with a studio yet.",
         },
       ],
     },

@@ -233,8 +233,8 @@ const proposal: Proposal = {
         },
         {
           need: "Unreal Engine and C++ proficiency",
-          status: "partial",
-          proof: "Not in production. [[TODO: add any Unreal or C++ work from study or personal projects, or leave as a gap]]",
+          status: "commitment",
+          proof: "A gap: I have only explored Unreal Engine briefly, without a project.",
         },
         {
           need: "REST APIs and JSON",
@@ -244,7 +244,7 @@ const proposal: Proposal = {
         {
           need: "Unit and integration testing",
           status: "commitment",
-          proof: "[[TODO: confirm whether you have written automated tests (Unity Test Framework / NUnit) on any project]]",
+          proof: "Not a strength yet: where I add automated tests, AI coding tools (Codex, Claude Code) write most of them and I review them. A disciplined test practice would be something I build with your team.",
         },
         {
           need: "Git and CI/CD",
@@ -254,7 +254,7 @@ const proposal: Proposal = {
         {
           need: "Advanced English",
           status: "direct",
-          proof: "[[TODO: confirm your English level for the application]]",
+          proof: "I work in English every day; my B.Sc. studies and my bachelor thesis were in English. I have no formal test score.",
         },
       ],
     },

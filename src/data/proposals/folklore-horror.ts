@@ -190,7 +190,7 @@ const proposal: Proposal = {
         {
           need: "Shipped portfolio",
           status: "partial",
-          proof: "Shipped Unity apps and two short games with videos; none is a horror or narrative title.",
+          proof: "Shipped Unity apps, the Nescafe event game and an unreleased mobile game, with videos; none is a horror or narrative title.",
         },
       ],
     },

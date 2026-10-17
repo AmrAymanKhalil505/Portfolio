@@ -244,7 +244,7 @@ const proposal: Proposal = {
         {
           need: "Unity URP",
           status: "partial",
-          proof: "[[TODO: say whether any of your projects used URP]]",
+          proof: "Used URP on the Nescafe VR booth game (2025); my BEDO and Ivris projects use the built-in render pipeline.",
         },
         {
           need: "Mobile releases",
@@ -254,7 +254,7 @@ const proposal: Proposal = {
         {
           need: "3D content creation tools",
           status: "partial",
-          proof: "Adapted 3D assets for Unity at Tanta. [[TODO: name the 3D tools you use, e.g. Blender, if any]]",
+          proof: "Blender, to fix and adjust models in Unity projects without needing the 3D artist for every detail; a six-month modelling and texturing specialization at Nayzak animation school; beginner Substance Painter and ZBrush. Adapted 3D assets for Unity at Tanta.",
         },
       ],
     },

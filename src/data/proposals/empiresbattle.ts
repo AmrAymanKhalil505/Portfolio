@@ -71,7 +71,7 @@ const proposal: Proposal = {
     },
     {
       title: "Language",
-      body: ["I write this application in English. [[TODO: Russian language level, and whether English-only communication works for the team]]"],
+      body: ["I write this application in English. I do not speak Russian, so I would need English-only communication with the team."],
     },
   ],
   candidNote: {
@@ -237,8 +237,8 @@ const proposal: Proposal = {
         },
         {
           need: "1+ year on one production project with a 30k+ line C# codebase",
-          status: "partial",
-          proof: "Two years on the Ivris production app (Jun 2024 – Jun 2026); BEDO since Oct 2024. [[TODO: approximate C# size of the largest codebase you worked on]]",
+          status: "direct",
+          proof: "At BEDO since Oct 2024 on a shared team codebase of roughly 80,000 lines of in-house C# (about 390 files, not counting third-party packages). Two years on the Ivris production app (Jun 2024 – Jun 2026).",
         },
         {
           need: "WebGL build and optimisation, DllImport(\"__Internal\"), Application.ExternalEval (critical)",

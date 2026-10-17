@@ -55,7 +55,7 @@ const proposal: Proposal = {
       title: "Shipping features and improving existing systems",
       original: "Strong Unity skills, including shipping features and improving existing systems",
       body: [
-        "Shipped to real users: the Quest 2 training suite (three experiences), the Ivris production app (WebGL editor plus Android / iOS AR), the Nescafe VR booth game and BEDO's training labs delivered as Unity WebGL. Improving existing systems: since mid-2026 I have been migrating BEDO's Unity projects to Unity 6, and I extend a shared state backbone that many training stations already depend on.",
+        "Shipped to real users: the Quest 2 training suite (three experiences), the Ivris production app (WebGL editor plus Android / iOS AR), the Nescafe VR booth game and BEDO's Unity WebGL training labs, which are commercial products sold to universities and companies. Improving existing systems: since mid-2026 I have been migrating BEDO's Unity projects to Unity 6, and I extend a shared state backbone that many training stations already depend on.",
       ],
     },
     {

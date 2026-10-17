@@ -44,7 +44,7 @@ const proposal: Proposal = {
       title: "Shipped work",
       original: "Experience contributing to at least one shipped game",
       body: [
-        "Delivered to real users: the Nescafe Ice Coffee VR surfing game ran at an event booth (2025), I delivered the Tanta University Quest 2 suite (three experiences) as sole developer, and I built the Unity app for Ivris across WebGL, Android and iOS. I was also the Unity developer of Atmosphere Protector, a mobile game for children with Arabic instruction screens. I have not yet shipped a title through a console or VR-store release; see the note below.",
+        "Shipped commercial software: the Unity training simulations I build at BEDO are commercial products sold to universities and companies (B2B). Delivered to real users: the Nescafe Ice Coffee VR surfing game ran at an event booth (2025), I delivered the Tanta University Quest 2 suite (three experiences) as sole developer, and I built the Unity app for Ivris across WebGL, Android and iOS. I was also the Unity developer of Atmosphere Protector, a mobile game for children with Arabic instruction screens (not released yet). I have not yet shipped a title through a console or VR-store release; see the note below.",
       ],
     },
     {
@@ -246,7 +246,7 @@ const proposal: Proposal = {
         {
           need: "Contributed to at least one shipped game",
           status: "partial",
-          proof: "Nescafe VR game ran at a live event; Atmosphere Protector mobile game; Ivris cross-platform app. No console or VR-store game release yet.",
+          proof: "BEDO's commercial Unity simulations sold to universities and companies (B2B); Nescafe VR game ran at a live event; Atmosphere Protector mobile game (not released yet); Ivris cross-platform app. No console or VR-store game release yet.",
         },
         {
           need: "Work in an existing codebase without breaking it",
