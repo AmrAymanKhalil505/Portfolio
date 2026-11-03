@@ -395,7 +395,19 @@ function flatDistance(x, y, a, b) {
 
 export const shareOf = (item, state) => (typeof state === "number" ? state : state.shares[item.ride ?? item.piece] ?? 0);
 
-export const offsetOf = (item, state) => mul3(item.move ?? [0, 0, 0], shareOf(item, state));
+// A part may also fan out along its own axis inside its assembly: `fan` is a second vector that follows a
+// smoothstep window of the ride's share (`window: [start, end]`), so one share drives chain and part level.
+export const easeOf = (share, window) => {
+  const [a, b] = window ?? [0, 1];
+  const t = Math.min(1, Math.max(0, (share - a) / Math.max(1e-6, b - a)));
+  return t * t * (3 - 2 * t);
+};
+export const offsetOf = (item, state) => {
+  const share = shareOf(item, state);
+  const base = mul3(item.move ?? [0, 0, 0], share);
+  return item.fan ? add3(base, mul3(item.fan, easeOf(share, item.window))) : base;
+};
+export const isLive = (thing) => Boolean(thing.move || thing.fan);
 
 export const labelOf = (state) => (typeof state === "number" ? `share ${Math.round(state * 1000) / 1000}` : state.label);
 
@@ -651,8 +663,9 @@ export function overlapsOf(items, P, { step = 0.25, tolerance = 0.3, least = 0.2
 }
 
 const liftOf = (item, V) => dot3(item.move ?? [0, 0, 0], V);
+const liftAt = (item, state, V) => dot3(offsetOf(item, state), V);
 
-export const keyAt = (item, state, V) => item.key + liftOf(item, V) * shareOf(item, state);
+export const keyAt = (item, state, V) => item.key + liftAt(item, state, V);
 
 export function orderKeys(items, overlaps, { gap = 0.02, rounds = 0 } = {}) {
   const { pairs, least, V } = overlaps;
@@ -668,7 +681,7 @@ export function orderKeys(items, overlaps, { gap = 0.02, rounds = 0 } = {}) {
     }
     const [front, back] = aFront ? [pair.a, pair.b] : [pair.b, pair.a];
     const weight = pair.front[aFront ? 0 : 1].area;
-    const need = gap + shareOf(items[back], pair.state) * liftOf(items[back], V) - shareOf(items[front], pair.state) * liftOf(items[front], V);
+    const need = gap + liftAt(items[back], pair.state, V) - liftAt(items[front], pair.state, V);
     const id = `${front}|${back}`;
     const prior = strongest.get(id);
     if (!prior) strongest.set(id, { front, back, weight, pair, need });
@@ -810,9 +823,9 @@ const matches = (list, name) =>
 
 const sameOffset = (a, b) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) < 1e-6;
 
-const placed = (shape, state) => (state === undefined || !shape.move ? shape : moved(shape, offsetOf(shape, state)));
+const placed = (shape, state) => (state === undefined || !isLive(shape) ? shape : moved(shape, offsetOf(shape, state)));
 
-const offsetAt = (shape, state) => (state === undefined || !shape.move ? [0, 0, 0] : offsetOf(shape, state));
+const offsetAt = (shape, state) => (state === undefined || !isLive(shape) ? [0, 0, 0] : offsetOf(shape, state));
 
 function tipDistance(other, p) {
   if (other.kind === "tube") {
@@ -1230,7 +1243,7 @@ const belongs = (entry, name, bundle) => Boolean(entry) && (entry.owner === name
 export function slenderOf(solids, { ratio = 4, least = 0.3 } = {}) {
   const out = [];
   const axisLine = (centre, axis, half, r, shape) => {
-    out.push({ name: shape.owner ?? shape.name, solid: shape.name, owners: new Set([shape.name, shape.owner].filter(Boolean)), points: [add3(centre, mul3(axis, -half)), add3(centre, mul3(axis, half))], r, move: shape.move, ride: shape.ride, piece: shape.piece, rod: true });
+    out.push({ name: shape.owner ?? shape.name, solid: shape.name, owners: new Set([shape.name, shape.owner].filter(Boolean)), points: [add3(centre, mul3(axis, -half)), add3(centre, mul3(axis, half))], r, move: shape.move, fan: shape.fan, window: shape.window, ride: shape.ride, piece: shape.piece, rod: true });
   };
   for (const shape of solids) {
     if (!shape || shape.kind === "tube" || shape.kind === "ball" || shape.fitting) continue;
@@ -1619,7 +1632,7 @@ export function selfOverlaps(items, P, { entries: given = null, fold = 0.25, lea
 export function solidClearances(solids, { state, sunk = 0.5, spacing = 0.6, cell = 4 } = {}) {
   const stretched = new Set();
   const list = solids.filter((shape) => shape.kind !== "tube").map((shape) => {
-    if (!(shape.slide && state !== undefined && shape.move)) return shape;
+    if (!(shape.slide && state !== undefined && isLive(shape))) return shape;
     const next = { ...moved(shape, offsetOf(shape, state)), move: undefined };
     if (next.slide.to !== shape.slide.to) stretched.add(next);
     return next;
@@ -1727,8 +1740,8 @@ export function seats(solids) {
   for (const shape of solids) {
     if (!shape.seated || !shape.cut) continue;
     for (const host of [shape.cut].flat()) {
-      const mine = mul3(shape.move ?? [0, 0, 0], 1);
-      const theirs = mul3(host.move ?? [0, 0, 0], 1);
+      const mine = offsetOf(shape, 1);
+      const theirs = offsetOf(host, 1);
       if ((shape.ride ?? shape.piece) === (host.ride ?? host.piece) && sameOffset(mine, theirs)) continue;
       out.push({ name: shape.name, host: host.name, piece: shape.ride ?? shape.piece, hostPiece: host.ride ?? host.piece });
     }
@@ -1827,9 +1840,9 @@ export function recorder(P, { order = [], spring = {}, ground = grounded } = {})
     R.solids.push(shape);
     return shape;
   };
-  R.put = ({ at = null, bias = 0, key, name, piece = "", move = [0, 0, 0], ride, shapes = [], ...rest } = {}) => {
-    const item = { ...rest, piece, ride: ride ?? piece, key: key ?? (at ? dot3(at, V) : 0) + bias, move, shapes, name: name ?? R.nameFor(`${piece || "item"}.item`) };
-    for (const shape of shapes) (shape.move = item.move), (shape.ride = item.ride), (shape.piece = piece);
+  R.put = ({ at = null, bias = 0, key, name, piece = "", move = [0, 0, 0], fan, window, ride, shapes = [], ...rest } = {}) => {
+    const item = { ...rest, piece, ride: ride ?? piece, key: key ?? (at ? dot3(at, V) : 0) + bias, move, fan, window, shapes, name: name ?? R.nameFor(`${piece || "item"}.item`) };
+    for (const shape of shapes) (shape.move = item.move), (shape.fan = item.fan), (shape.window = item.window), (shape.ride = item.ride), (shape.piece = piece);
     R.items.push(item);
     return item;
   };
