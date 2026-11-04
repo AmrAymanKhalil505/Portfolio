@@ -34,8 +34,10 @@ Reuse these in every proposal. Do not re-ask unless a job needs different terms.
 | Oct 2024 - present | Senior Unity Engineer, BEDO Innovating Education | Unity/WebGL simulations of engineering trainers (EV117 fuel-cell lab, MR109/MR110 stations, PID labs, fluid labs); migrating projects to Unity 6 since ~July 2026 |
 | Jun 2024 - Jun 2026 | Unity & AR developer, Ivris (freelance) | Built the Unity app (not the whole product): runtime 3D loading, Photon WebGL multiplayer editing, AR Foundation + AR Foundation Remote 2, PlayFab; Unity 6 |
 | Dec 2023 - Oct 2024 | Unity VR developer, Tanta University (sole developer) | Meta Quest 2 suite: onboarding, 360 surgical viewer, viscosity lab with hand-held calculator/stopwatch; Auto Hand |
+| Dec 2019 - Dec 2020 | Software Developer during Egyptian military service (full-time, Cairo) | Chosen for the role based on his CS degree. Maintained an existing in-house production system, built new features, supported end users. C#/.NET, SQL/Oracle (PL/SQL, Toad), PowerBuilder/PowerScript, HTML/CSS/Razor, IIS. Coached four team members on the stack. Not Unity. Never describe the system itself (name, purpose, location). |
 | 2025, one week | Nescafe Ice Coffee VR surfing booth (freelance) | Short-session VR game |
 
+- **Total experience (confirmed 2026-11-04):** about 4 years of professional C# software development (Dec 2019 - Dec 2020 + Dec 2023 - present), of which about 3 years are Unity. Say "4 years of professional C# development, 3 in Unity"; never "4 years of Unity".
 - **No VR work before Tanta University.** Dedicated VR = about 11 months + the one-week booth. Be candid when a job asks for more.
 - **OpenXR / XR Interaction Toolkit: not used in production.** VR interactions used Auto Hand; AR used AR Foundation. Mark as "Related experience", never "Done".
 - **Unity 6: done in production** (Ivris; BEDO migration).
@@ -46,7 +48,7 @@ Reuse these in every proposal. Do not re-ask unless a job needs different terms.
 ## Skills and background (confirmed 2026-10-17)
 - **English:** works in English daily; B.Sc. studies and bachelor thesis were in English. No formal test score. **German: A1. Russian: none.**
 - **Education:** B.Sc. Computer Science Engineering and Technology, German University in Cairo (2014-2019). Thesis used Python to train a model that drives a car in a Unity simulation (his only Python work).
-- **Mentoring / code review:** mentors one intern at BEDO and reviews his work since 1 Aug 2026. One person, not a team lead.
+- **Mentoring / code review:** mentors one intern at BEDO and reviews his work since 1 Aug 2026. One person, not a team lead. Earlier, during military service (2019-2020), coached four team members on the .NET/Oracle stack (confirmed 2026-11-04).
 - **AI coding tools:** Codex and Claude Code, daily, to speed up development; he reviews and tests the output. No AI-generated creative assets or AI inside a shipped product.
 - **Automated tests:** not a strength; AI tools write most tests he adds. Never claim a test practice.
 - **Unreal / C++:** only explored Unreal briefly, no projects.
