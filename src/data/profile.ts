@@ -49,6 +49,17 @@ export const experience = [
       "Developed a multi-angle 360 surgical operation viewer with camera switching.",
     ],
   },
+  {
+    role: "Software Developer",
+    company: "Military Service (Egypt)",
+    location: "Cairo",
+    period: "Dec 2019 - Dec 2020",
+    bullets: [
+      "Maintained an in-house production system and built new features in C#/.NET with an Oracle (SQL, PL/SQL) backend.",
+      "Supported end users and resolved issues in the live system.",
+      "Coached four team members on the .NET, Oracle, and PowerBuilder stack.",
+    ],
+  },
 ];
 
 export const education = {

@@ -292,10 +292,10 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Experience"
-            title="Recent Unity roles across education, AR, and VR training"
-            description="My recent work covers industrial training simulations, collaborative AR and WebGL applications, and Meta Quest 2 training experiences."
+            title="Unity roles across education, AR, and VR training"
+            description="My recent work covers industrial training simulations, collaborative AR and WebGL applications, and Meta Quest 2 training experiences. Before Unity, I worked as a C#/.NET developer on a production system."
           />
-          <div className="hidden gap-4 sm:grid lg:grid-cols-3">
+          <div className="hidden gap-4 sm:grid lg:grid-cols-2">
             {experience.map((job) => (
               <article key={`${job.company}-${job.role}`} className="rounded-lg border border-white/10 bg-panel p-5">
                 <p className="text-sm font-semibold text-scan">{job.period}</p>
