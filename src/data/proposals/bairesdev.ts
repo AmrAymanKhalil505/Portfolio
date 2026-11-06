@@ -66,7 +66,7 @@ const proposal: Proposal = {
     {
       title: "Availability and start date",
       body: [
-        "I am currently employed with a one-month notice period, so I can start one month after an offer. [[TODO: confirm full-time 40 h/week availability after the notice month and the working-hours overlap you can offer with US / LATAM teams]]",
+        "I am currently employed with a one-month notice period, so I can start one month after an offer. After the notice month I work full-time, 40 hours per week. Overlap with US / LATAM teams: [[TODO: which US / LATAM hours you can overlap each day]].",
       ],
     },
     {

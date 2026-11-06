@@ -319,7 +319,7 @@ const proposal: Proposal = {
   ],
   closing: {
     title: "Next step",
-    body: "Reply on Djinni and I will gladly walk you through the demos in a short call and go through any part of this in more detail. [[TODO: confirm you would take this full-time (40 h/week) role after your BEDO notice month]]",
+    body: "Reply on Djinni and I will gladly walk you through the demos in a short call and go through any part of this in more detail. After the notice month I work full-time, 40 hours per week.",
   },
   signature: {
     name: "Amr Khalil",

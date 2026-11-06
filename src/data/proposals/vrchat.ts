@@ -55,7 +55,7 @@ const proposal: Proposal = {
     {
       title: "Start date",
       body: [
-        "I have a one-month notice period at my current job, so I can start full-time one month after accepting an offer. [[TODO: confirm you would leave BEDO for a full-time employee role at 40 h/week]]",
+        "I have a one-month notice period at my current job, so I can start full-time one month after accepting an offer. After the notice month I work full-time, 40 hours per week.",
       ],
     },
     {

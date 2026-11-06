@@ -25,6 +25,21 @@ export const proposalLoaders: Record<string, () => Promise<{ default: Proposal }
   "apartment-vr-tour": () => import("./apartment-vr-tour"),
   freemind: () => import("./freemind"),
   artifexmundi: () => import("./artifexmundi"),
+  "naphora-gameplay": () => import("./naphora-gameplay"),
+  "kazakh-vr": () => import("./kazakh-vr"),
+  "animal-repair-shop": () => import("./animal-repair-shop"),
+  "yoyo-gameplay": () => import("./yoyo-gameplay"),
+  voodoo: () => import("./voodoo"),
+  "24bitgames": () => import("./24bitgames"),
+  maliyo: () => import("./maliyo"),
+  ironbird: () => import("./ironbird"),
+  playcus: () => import("./playcus"),
+  dreamteam: () => import("./dreamteam"),
+  "umrah-hajj": () => import("./umrah-hajj"),
+  "hdrp-optimization": () => import("./hdrp-optimization"),
+  "logic-puzzle": () => import("./logic-puzzle"),
+  "business-sim": () => import("./business-sim"),
+  "space-mmo": () => import("./space-mmo"),
 };
 
 // Proposals go out through job platforms, so they link to the contact-free /work mode.

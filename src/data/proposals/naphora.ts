@@ -62,7 +62,7 @@ const proposal: Proposal = {
     },
     {
       title: "Salary expectation",
-      body: ["[[TODO: monthly salary expectation for this full-time role (USD)]]"],
+      body: ["USD 2,500–3,500 per month for the full-time role, open to discussing the full package and the contract form."],
     },
   ],
   candidNote: {

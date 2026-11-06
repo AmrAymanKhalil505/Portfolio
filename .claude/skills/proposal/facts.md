@@ -19,6 +19,9 @@ Reuse these in every proposal. Do not re-ask unless a job needs different terms.
 
 ## Salary asks (per job, confirmed)
 - SyncVR Medical (Medior 3D XR Developer): EUR 2,700 gross per month.
+- Arc.dev profile, full-time desired salary: USD 30,000 per year (confirmed 2026-11-05).
+- Andela profile, minimum rate: USD 2,500 per month gross (Andela rates are monthly; confirmed 2026-11-05).
+- Delovye Informatsionnye Sistemy, Kazakhstan (Unity VR Developer Middle+, kazakh-vr): USD 1,500-1,800 per month (confirmed 2026-11-06).
 
 ## Equipment
 - Owns a **Meta Quest 2** (Oculus Quest 2) for development and testing.
@@ -33,7 +36,7 @@ Reuse these in every proposal. Do not re-ask unless a job needs different terms.
 |---|---|---|
 | Oct 2024 - present | Senior Unity Engineer, BEDO Innovating Education | Unity/WebGL simulations of engineering trainers (EV117 fuel-cell lab, MR109/MR110 stations, PID labs, fluid labs); migrating projects to Unity 6 since ~July 2026 |
 | Jun 2024 - Jun 2026 | Unity & AR developer, Ivris (freelance) | Built the Unity app (not the whole product): runtime 3D loading, Photon WebGL multiplayer editing, AR Foundation + AR Foundation Remote 2, PlayFab; Unity 6 |
-| Dec 2023 - Oct 2024 | Unity VR developer, Tanta University (sole developer) | Meta Quest 2 suite: onboarding, 360 surgical viewer, viscosity lab with hand-held calculator/stopwatch; Auto Hand |
+| Dec 2023 - Oct 2024 | Unity VR developer, Tanta University (sole developer, full-time; confirmed 2026-11-05) | Meta Quest 2 suite: onboarding, 360 surgical viewer, viscosity lab with hand-held calculator/stopwatch; Auto Hand |
 | 2025, one week | Nescafe Ice Coffee VR surfing booth (freelance) | Short-session VR game |
 
 - **No VR work before Tanta University.** Dedicated VR = about 11 months + the one-week booth. Be candid when a job asks for more.
@@ -44,7 +47,7 @@ Reuse these in every proposal. Do not re-ask unless a job needs different terms.
 - **URP: only the Nescafe VR booth game (2025).** BEDO and Ivris projects use the built-in render pipeline.
 
 ## Skills and background (confirmed 2026-10-17)
-- **English:** works in English daily; B.Sc. studies and bachelor thesis were in English. No formal test score. **German: A1. Russian: none.**
+- **English:** works in English daily; B.Sc. studies and bachelor thesis were in English. No formal test score; self-assessed **Advanced (C1)** when a form asks for a CEFR level (confirmed 2026-11-05). **German: A1. Russian: none.**
 - **Education:** B.Sc. Computer Science Engineering and Technology, German University in Cairo (2014-2019). Thesis used Python to train a model that drives a car in a Unity simulation (his only Python work).
 - **Mentoring / code review:** mentors one intern at BEDO and reviews his work since 1 Aug 2026. One person, not a team lead.
 - **AI coding tools:** Codex and Claude Code, daily, to speed up development; he reviews and tests the output. No AI-generated creative assets or AI inside a shipped product.
@@ -53,8 +56,10 @@ Reuse these in every proposal. Do not re-ask unless a job needs different terms.
 - **JavaScript / React:** Coursera specialization "Full-Stack Web Development with React" (HKUST, Aug 2021: React, React Native, Node.js/Express, MongoDB). OneJS (JS/TS UI inside Unity) at Ivris; the portfolio is React + TypeScript. Built with heavy AI help, so not a React specialist.
 - **3D tools:** Blender to fix and adjust models without the 3D artist; a six-month modelling and texturing specialization at Nayzak animation school; beginner Substance Painter and ZBrush.
 - **Unity Timeline:** short intro sequences for BEDO's marketing team. **DOTween:** almost every BEDO project. PrimeTween: not used.
+- **BEDO project timing (confirmed 2026-11-05):** Industrial Training Simulation Systems (MR109/MR110) built Jan-Sep 2025; PID Virtual Labs Suite built Oct-Dec 2025.
 - **Largest codebase:** BEDO lab project, about 80,000 lines of in-house C# (~390 files, excluding third-party packages), shared by the team.
-- **Full-time roles:** willing to work 40 h/week after the notice month (confirmed for Magic Media, 2026-10-17). Salary is set per client: Magic Media (mid-level, remote, Europe pay) = USD 2,500-3,000/month.
+- **Full-time roles:** 40 h/week after the notice month (confirmed 2026-10-18 for all full-time roles).
+- **Salary is set per region:** look at where the company hires and what that market pays, then propose a range for Amr to approve. Example: Magic Media (mid-level, remote, Eastern/Southern Europe pay) = USD 2,500-3,000/month.
 - **Still unknown:** concrete optimisation examples (what was slow, what changed, result).
 
 ## How he works (his real process, use it)

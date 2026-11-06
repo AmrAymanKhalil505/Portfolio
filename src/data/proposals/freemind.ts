@@ -70,7 +70,7 @@ const proposal: Proposal = {
       original: "Praca stała",
       body: [
         "I am employed at BEDO with a one-month notice period. During that month I can already work part-time, about 15 hours per week, for onboarding and first tasks.",
-        "After the notice month: [[TODO: Amr — full-time 40 h/week for this permanent role, or 30 h/week (up to 40 in busy phases)?]]",
+        "After the notice month I work full-time, 40 hours per week.",
       ],
     },
     {
